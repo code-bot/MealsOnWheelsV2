@@ -10,9 +10,6 @@ pod ‘GoogleMaps’
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
-pod 'EVReflection', '~> 2.6'
-pod 'SAConfettiView'
-pod 'KCFloatingActionButton', '~> 1.3’
 pod 'SwiftLoader'
 pod 'SwiftyJSON'
 end
