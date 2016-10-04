@@ -24,7 +24,7 @@ class LoginView: UIView {
     var forgotPasswordBtn = UIButton()
     
     func configureImageViews() {
-        logoImgView.image = MWConstants.logoImg
+        logoImgView.image = MWConstants.titleImg
         logoImgView.contentMode = .scaleAspectFit
     }
     

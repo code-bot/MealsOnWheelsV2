@@ -24,7 +24,7 @@ class CurrentRouteView: UIView {
     var forgotPassBtn = UIButton()
     
     func configureImageViews() {
-        logoImgView.image = MWConstants.logoImg
+        logoImgView.image = MWConstants.titleImg
         logoImgView.contentMode = .scaleAspectFit
     }
     
