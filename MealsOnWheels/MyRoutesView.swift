@@ -45,7 +45,7 @@ class MyRoutesView: UIView {
     }
     
     func configureView() {
-        self.backgroundColor = MWConstants.colors.loginBackground
+        self.backgroundColor = MWConstants.colors.loginDarkGradient
         
         configureImageViews()
         configureTextFields()
@@ -71,7 +71,7 @@ class MyRoutesView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        configureView()
         
     }
     
