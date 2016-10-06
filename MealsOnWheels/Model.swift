@@ -15,7 +15,7 @@ class Model {
     
     init() {
         //Default data
-        let waypoints = [Waypoint(address: "Address", phoneNumber: "Phone num", info: "info", title: "TITLE", streetImg: MWConstants.noImg!)]
-        self.routes = [Route(name: "Route Name", desc: "Route desc", waypoints: waypoints, miles: 10.0, time: "0:25")]
+        let waypoints = [Waypoint(address: "Address", phoneNumber: "Phone num", info: "info", title: "TITLE", latitude: 0.0, longitude: 0.0, priority: 0)]
+        self.routes = [Route(name: "Route Name", desc: "Route desc", waypoints: waypoints, miles: 1, time: "a while")]
     }
 }

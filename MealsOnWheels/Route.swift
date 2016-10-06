@@ -7,20 +7,23 @@
 //
 
 import Foundation
+import SwiftPriorityQueue
 
 class Route {
     var name: String
     var description: String
-    var waypoints: [Waypoint]
+    var waypoints = PriorityQueue<Waypoint>(ascending: true)
     var totalMiles: Double
     var estimatedTime: String
-    
+
     init(name: String, desc: String, waypoints: [Waypoint], miles: Double, time: String) {
         self.name = name
         self.description = desc
-        self.waypoints = waypoints
-        self.totalMiles = miles
+        for waypoint in waypoints {
+            self.waypoints.push(waypoint)
+        }
         self.estimatedTime = time
+        self.totalMiles = miles
     }
     
 }
