@@ -30,6 +30,7 @@
 		877021B21DA46C52003F3FC4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021B11DA46C52003F3FC4 /* User.swift */; };
 		877021B41DA46C5B003F3FC4 /* CurrentRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */; };
 		A390881EE561903AFC702B3D /* Pods_MealsOnWheels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9119DF85FF584DF6CA7E69 /* Pods_MealsOnWheels.framework */; };
+		CD9AD2971DA6B75E003C8A10 /* MyRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		877021AF1DA46BE1003F3FC4 /* RegistrationEmailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationEmailController.swift; sourceTree = "<group>"; };
 		877021B11DA46C52003F3FC4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentRouteView.swift; sourceTree = "<group>"; };
+		CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRoutesView.swift; sourceTree = "<group>"; };
 		FBA3529086D9763193E317C0 /* Pods-MealsOnWheels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsOnWheels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +149,7 @@
 				877021981DA46AEF003F3FC4 /* RegistrationView.swift */,
 				877021991DA46AEF003F3FC4 /* TitleView.swift */,
 				8770219A1DA46AEF003F3FC4 /* TitleViewButtonHub.swift */,
+				CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				8770219C1DA46AEF003F3FC4 /* MainTabView.swift in Sources */,
 				877021AE1DA46B10003F3FC4 /* UIView+Extensions.swift in Sources */,
 				877021AC1DA46B10003F3FC4 /* UIColor+Extensions.swift in Sources */,
+				CD9AD2971DA6B75E003C8A10 /* MyRoutesView.swift in Sources */,
 				877021AA1DA46B10003F3FC4 /* MWConstants.swift in Sources */,
 				877021A01DA46AEF003F3FC4 /* RegistrationView.swift in Sources */,
 				877021AB1DA46B10003F3FC4 /* NSLayoutConstraint+Extensions.swift in Sources */,
