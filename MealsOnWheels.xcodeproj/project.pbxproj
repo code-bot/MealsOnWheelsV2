@@ -187,12 +187,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8734A51B1DA4653F006637E1 /* Build configuration list for PBXNativeTarget "MealsOnWheels" */;
 			buildPhases = (
-				90965A3E066484BBEBB49E17 /* 📦 Check Pods Manifest.lock */,
+				90965A3E066484BBEBB49E17 /* [CP] Check Pods Manifest.lock */,
 				8734A5051DA4653F006637E1 /* Sources */,
 				8734A5061DA4653F006637E1 /* Frameworks */,
 				8734A5071DA4653F006637E1 /* Resources */,
-				866073B5E2F43FCCDBC04CE4 /* 📦 Embed Pods Frameworks */,
-				35D540CC57AA2652510807D2 /* 📦 Copy Pods Resources */,
+				866073B5E2F43FCCDBC04CE4 /* [CP] Embed Pods Frameworks */,
+				35D540CC57AA2652510807D2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,14 +252,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		35D540CC57AA2652510807D2 /* 📦 Copy Pods Resources */ = {
+		35D540CC57AA2652510807D2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,14 +267,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		866073B5E2F43FCCDBC04CE4 /* 📦 Embed Pods Frameworks */ = {
+		866073B5E2F43FCCDBC04CE4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,14 +282,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		90965A3E066484BBEBB49E17 /* 📦 Check Pods Manifest.lock */ = {
+		90965A3E066484BBEBB49E17 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +362,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -412,6 +413,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -441,6 +443,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4DC65213847D4718E78A6825 /* Pods-MealsOnWheels.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U9X42PLV7V;
 				INFOPLIST_FILE = MealsOnWheels/Info.plist;
@@ -455,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FBA3529086D9763193E317C0 /* Pods-MealsOnWheels.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U9X42PLV7V;
 				INFOPLIST_FILE = MealsOnWheels/Info.plist;
