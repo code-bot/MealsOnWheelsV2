@@ -13,6 +13,8 @@ import UIKit
 class MainViewController: UIViewController {
     
     var mainView = MainView();
+    let currentView = CurrentRouteView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight))
+    let myRoutesView = MyRoutesView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight))
     
     func configureButtons() {
         mainView.tabView.currentRoute.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
@@ -23,6 +25,7 @@ class MainViewController: UIViewController {
     func configureView() {
         configureButtons()
         
+        mainView.addSubview(currentView)
         self.view = mainView
         
     }
@@ -38,8 +41,12 @@ class MainViewController: UIViewController {
     func switchPage(_ sender: UIButton) {
         if sender == mainView.tabView.currentRoute {
             mainView.tabView.currentPage = Page.currentRoute
+            mainView.addSubview(currentView)
+            myRoutesView.removeFromSuperview()
         } else if sender == mainView.tabView.myRoutes {
             mainView.tabView.currentPage = Page.myRoutes
+            mainView.addSubview(myRoutesView)
+            currentView.removeFromSuperview()
         }
     }
 }
