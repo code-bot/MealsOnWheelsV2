@@ -32,7 +32,7 @@ class CurrentRouteView: UIView {
     }
     
     func configureLabels() {
-        routeTitleLbl.font = UIFont.systemFont(ofSize: 40.0)
+        routeTitleLbl.font = UIFont.systemFont(ofSize: 35.0)
         routeTitleLbl.text = route.name
         routeTitleLbl.textColor = UIColor.white
         routeTitleLbl.textAlignment = .center
@@ -79,7 +79,7 @@ class CurrentRouteView: UIView {
         self.prepareViewsForAutoLayout(viewsDict)
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[title]-10-[desc]-20-[mapView(==\(String(describing: MWConstants.mapViewHeight)))]-20-[miles]-15-[time]", views: viewsDict))
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:[mapView(==300)]-20-[start(==\(String(describing: MWConstants.startBtnHeight)))]", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:[mapView(==\(String(describing: MWConstants.mapViewHeight)))]-20-[start(==\(String(describing: MWConstants.startBtnHeight)))]", views: viewsDict))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[desc]|", views: viewsDict))

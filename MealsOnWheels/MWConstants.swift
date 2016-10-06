@@ -27,7 +27,7 @@ struct MWConstants {
     
     static let tabBtnHeight = CGFloat(50.0)
     static let navBarHeight = CGFloat(50.0)
-    static let mapViewHeight = screenHeight
+    static let mapViewHeight = screenWidth - 10.0
     
     static let startBtnWidth = screenWidth/2 - 40.0
     static let startBtnHeight = CGFloat(55)
