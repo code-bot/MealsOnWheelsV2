@@ -12,4 +12,5 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'SwiftLoader'
 pod 'SwiftyJSON'
+pod 'SwiftPriorityQueue'
 end

@@ -12,11 +12,13 @@ class Route {
     var name: String
     var description: String
     var waypoints: [Waypoint]
+    var totalMiles: Double
     
-    init(name: String, desc: String, waypoints: [Waypoint]) {
+    init(name: String, desc: String, waypoints: [Waypoint], miles: Double) {
         self.name = name
         self.description = desc
         self.waypoints = waypoints
+        self.totalMiles = miles
     }
     
 }

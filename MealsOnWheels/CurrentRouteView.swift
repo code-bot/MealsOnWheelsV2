@@ -33,8 +33,11 @@ class CurrentRouteView: UIView {
     func configureLabels() {
         routeTitleLbl.text = route.name
         routeTitleLbl.textColor = UIColor.white
+        routeTitleLbl.textAlignment = .center
+        
         routeDescLbl.text = route.description
         routeDescLbl.textColor = UIColor.white
+        routeDescLbl.textAlignment = .center
     }
     
     func configureButtons() {
