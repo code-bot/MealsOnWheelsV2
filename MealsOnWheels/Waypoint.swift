@@ -15,12 +15,14 @@ class Waypoint {
     var phoneNumber: String!
     var info: String!
     var title: String!
+    var streetImg: UIImage
     
-    init(address: String, phoneNumber: String, info: String, title: String) {
+    init(address: String, phoneNumber: String, info: String, title: String, streetImg: UIImage) {
         self.address = address
         self.info = info
         self.phoneNumber = phoneNumber
         self.title = title
+        self.streetImg = streetImg
     }
     
     init(dict: NSDictionary) {
@@ -28,6 +30,7 @@ class Waypoint {
         self.phoneNumber = dict["phone"]! as! String
         self.info = dict["info"]! as! String
         self.title = dict["title"]! as! String
+        self.streetImg = dict["image"] as! UIImage
     }
     
     func toDict() -> NSDictionary {

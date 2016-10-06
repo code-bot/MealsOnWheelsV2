@@ -12,16 +12,15 @@ import UIKit
 class CurrentRouteView: UIView {
     
     //Image Views
-    var logoImgView = UIImageView()
+    var streetImage = UIImageView()
     
-    //Text Fields
-    var emailTF = UITextField()
-    var passTF = UITextField()
+    //Labels
+    var routeTitleLbl = UILabel()
+    var routeDescLbl = UILabel()
+    var totalMilesLbl = UILabel()
     
     //Buttons
-    var loginBtn = UIButton()
-    var signUpBtn = UIButton()
-    var forgotPassBtn = UIButton()
+    var startRoute = UIButton()
     
     func configureImageViews() {
         logoImgView.image = MWConstants.titleImg
