@@ -12,66 +12,86 @@ import UIKit
 class CurrentRouteView: UIView {
     
     //Image Views
-    var logoImgView = UIImageView()
+    var mapImage = UIImageView()
     
-    //Text Fields
-    var emailTF = UITextField()
-    var passTF = UITextField()
+    //Labels
+    var routeTitleLbl = UILabel()
+    var routeDescLbl = UILabel()
+    var totalMilesLbl = UILabel()
+    var estTimeLbl = UILabel()
     
     //Buttons
-    var loginBtn = UIButton()
-    var signUpBtn = UIButton()
-    var forgotPassBtn = UIButton()
+    var startBtn = UIButton()
+    
+    var route = Model.sharedInstance.routes.first!
     
     func configureImageViews() {
-        logoImgView.image = MWConstants.titleImg
-        logoImgView.contentMode = .scaleAspectFit
+        mapImage.image = MWConstants.noImg
+        mapImage.contentMode = .scaleAspectFill
+        mapImage.clipsToBounds = true
     }
     
-    func configureTextFields() {
-        emailTF.placeholder = "Email"
+    func configureLabels() {
+        routeTitleLbl.font = UIFont.systemFont(ofSize: 35.0)
+        routeTitleLbl.text = route.name
+        routeTitleLbl.textColor = UIColor.white
+        routeTitleLbl.textAlignment = .center
         
-        passTF.placeholder = "Pass"
+        routeDescLbl.text = route.description
+        routeDescLbl.textColor = UIColor.white
+        routeDescLbl.textAlignment = .center
+        
+        totalMilesLbl.text = "Total Miles: " + String(describing: route.totalMiles)
+        totalMilesLbl.textColor = UIColor.white
+        totalMilesLbl.textAlignment = .left
+        
+        estTimeLbl.text = "Estimated Time: " + route.estimatedTime
+        estTimeLbl.textColor = UIColor.white
+        estTimeLbl.textAlignment = .left
     }
     
     func configureButtons() {
-        loginBtn.setTitle("Login", for: .normal)
-        loginBtn.setTitleColor(UIColor.white, for: .normal)
-        loginBtn.backgroundColor = UIColor.clear
-        
-        signUpBtn.setTitle("Sign Up", for: .normal)
-        signUpBtn.setTitleColor(UIColor.white, for: .normal)
-        signUpBtn.backgroundColor = UIColor.clear
+        startBtn.setTitle("Start Route", for: .normal)
+        startBtn.setTitleColor(MWConstants.colors.darkBackground, for: .normal)
+        startBtn.backgroundColor = UIColor.white
+        startBtn.layer.cornerRadius = 20.0
+        startBtn.layer.borderColor = MWConstants.colors.lightBackground.cgColor
+        startBtn.layer.borderWidth = 2
     }
     
     func configureView() {
-        self.backgroundColor = MWConstants.colors.loginBackground
+        self.backgroundColor = MWConstants.colors.darkBackground
         
         configureImageViews()
-        configureTextFields()
+        configureLabels()
         configureButtons()
         
         //Auto Layout
         let viewsDict = [
-            "logo"  :   logoImgView,
-            "emTF"  :   emailTF,
-            "psTF"  :   passTF,
-            "login" :   loginBtn,
-            "signup":   signUpBtn
-        ] as [String : Any]
+            "title"     :   routeTitleLbl,
+            "desc"      :   routeDescLbl,
+            "mapView"   :   mapImage,
+            "miles"     :   totalMilesLbl,
+            "time"      :   estTimeLbl,
+            "start"     :   startBtn
+        ] as [String : UIView]
         
-        self.prepareViewsForAutoLayout(viewsDict as! [String : UIView])
+        self.prepareViewsForAutoLayout(viewsDict)
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[logo]-20-[login]", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[title]-10-[desc]-20-[mapView(==\(String(describing: MWConstants.mapViewHeight)))]-20-[miles]-15-[time]", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:[mapView(==\(String(describing: MWConstants.mapViewHeight)))]-20-[start(==\(String(describing: MWConstants.startBtnHeight)))]", views: viewsDict))
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[logo]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
-        
-        
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[desc]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[mapView]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-20-[miles]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-20-[time]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:[start(==\(String(describing: MWConstants.startBtnWidth)))]-20-|", views: viewsDict))
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        configureView()
         
     }
     

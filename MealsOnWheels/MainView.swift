@@ -12,24 +12,25 @@ import UIKit
 class MainView: UIView {
     
     //Views
-    var tabView = MainTabView();
-    var currentRouteView = CurrentRouteView();
+    var tabView = MainTabView()
+    var navBar = MainNavBar()
     
     func configureView() {
-        self.backgroundColor = MWConstants.colors.loginBackground
+        self.backgroundColor = MWConstants.colors.lightBackground
         
         //Auto Layout
         let viewsDict = [
-            "tabView"  :   tabView,
-            "currView"  :   currentRouteView
-        ] as [String : Any]
+            "navBar"    :   navBar,
+            "tabView"   :   tabView
+        ] as [String : UIView]
         
-        self.prepareViewsForAutoLayout(viewsDict as! [String : UIView])
+        self.prepareViewsForAutoLayout(viewsDict)
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|[currView]-[tabView(==\(String(describing: MWConstants.tabBtnHeight)))]|", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[navBar(==\(String(describing: MWConstants.navBarHeight)))]", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:[tabView(==\(String(describing: MWConstants.tabBtnHeight)))]|", views: viewsDict))
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[tabView]|", views: viewsDict as [String : AnyObject]))
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[currView]|", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[navBar]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[tabView]|", views: viewsDict))
         
         
     }

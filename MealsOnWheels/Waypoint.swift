@@ -10,17 +10,22 @@ import Foundation
 import GoogleMaps
 
 
-class Waypoint {
+class Waypoint: Comparable {
     var address: String!
     var phoneNumber: String!
     var info: String!
     var title: String!
+    var latitude: Float!
+    var longitude: Float!
+    var priority: Int!
     
-    init(address: String, phoneNumber: String, info: String, title: String) {
+    init(address: String, phoneNumber: String, info: String, title: String, latitude: Float, longitude: Float, priority: Int) {
         self.address = address
         self.info = info
         self.phoneNumber = phoneNumber
         self.title = title
+        self.latitude = latitude
+        self.longitude = longitude
     }
     
     init(dict: NSDictionary) {
@@ -37,5 +42,13 @@ class Waypoint {
         dict.setObject(info!, forKey: "info" as NSCopying)
         dict.setObject(title!, forKey: "title" as NSCopying)
         return dict
+    }
+    
+    static func < (lhs: Waypoint, rhs: Waypoint) -> Bool {
+        return lhs.priority < rhs.priority
+    }
+    
+    static func == (lhs: Waypoint, rhs: Waypoint) -> Bool {
+        return lhs.priority == rhs.priority
     }
 }
