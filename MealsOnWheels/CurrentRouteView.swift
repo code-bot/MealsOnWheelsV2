@@ -22,13 +22,19 @@ class CurrentRouteView: UIView {
     //Buttons
     var startRoute = UIButton()
     
+    var route = Model.sharedInstance.routes.first!
+    
     func configureImageViews() {
         mapImage.image = MWConstants.noImg
         mapImage.contentMode = .scaleAspectFill
+        mapImage.clipsToBounds = true
     }
     
     func configureLabels() {
-        
+        routeTitleLbl.text = route.name
+        routeTitleLbl.textColor = UIColor.white
+        routeDescLbl.text = route.description
+        routeDescLbl.textColor = UIColor.white
     }
     
     func configureButtons() {
@@ -42,26 +48,26 @@ class CurrentRouteView: UIView {
     }
     
     func configureView() {
-        self.backgroundColor = MWConstants.colors.loginBackground
+        self.backgroundColor = MWConstants.colors.darkBackground
         
         configureImageViews()
         configureLabels()
         configureButtons()
         
         //Auto Layout
-//        let viewsDict = [
-//            "logo"  :   logoImgView,
-//            "emTF"  :   emailTF,
-//            "psTF"  :   passTF,
-//            "login" :   loginBtn,
-//            "signup":   signUpBtn
-//        ] as [String : Any]
-//        
-//        self.prepareViewsForAutoLayout(viewsDict as! [String : UIView])
-//        
-//        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[logo]-20-[login]", views: viewsDict as [String : AnyObject]))
-//        
-//        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[logo]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        let viewsDict = [
+            "title"     :   routeTitleLbl,
+            "desc"      :   routeDescLbl,
+            "mapView"   :   mapImage
+        ] as [String : UIView]
+        
+        self.prepareViewsForAutoLayout(viewsDict)
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[title]-10-[desc]-20-[mapView]", views: viewsDict))
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[desc]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[mapView]|", views: viewsDict))
         
         
     }

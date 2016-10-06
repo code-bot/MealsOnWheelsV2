@@ -26,11 +26,14 @@ struct MWConstants {
     static let noImg = UIImage(named: "NoImage")
     
     static let tabBtnHeight = CGFloat(50.0)
+    static let navBarHeight = CGFloat(50.0)
     
     struct colors {
         static let loginBackground = UIColor.blue
         static let loginDarkGradient = UIColor(r: 24, g: 51, b: 78, a: 1.0)
         static let loginLightGradient = UIColor(r: 42, g: 89, b: 137, a: 1.0)
+        static let darkBackground = UIColor(r: 24, g: 51, b: 78, a: 1.0)
+        static let lightBackground = UIColor(r: 42, g: 89, b: 137, a: 1.0)
         
         static let titleBtnTitle = UIColor(r: 36, g: 77, b: 117, a: 1.0)
     }
