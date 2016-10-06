@@ -21,7 +21,6 @@ class MainViewController: UIViewController {
     }
     
     func configureView() {
-        
         configureButtons()
         
         self.view = mainView
@@ -30,6 +29,10 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         configureView()
+    }
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     func switchPage(_ sender: UIButton) {
