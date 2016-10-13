@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftLoader
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -69,7 +70,15 @@ class LoginController: UIViewController {
     
     func buttonAction(sender: UIButton!){
         var animateBtn: UIButton = sender
-        
+        FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passField.text!) { (user, error) in
+            if error == nil {
+                
+                // display
+            } else {
+                User.uid = user?.uid
+                // Segue to main page
+            }
+        }
         if animateBtn.isTouchInside == true {
             animateBtn.backgroundColor = UIColor.lightGray
             }
