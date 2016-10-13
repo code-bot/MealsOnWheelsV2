@@ -24,28 +24,6 @@ class MapTasks : NSObject {
     
     static func getDirections(_ origin: String!, destination: String!, waypointStrings: Array<String>!, travelMode: AnyObject!, completionHandler: @escaping ((_ status: String, _ success: Bool, _ route: Route?) -> Void)) {
         
-//        
-//        let htmlDestination = destination.addingPercentEscapes(using: String.Encoding.utf8)!
-//        
-//
-//        let directionsRequest = "comgooglemaps-x-callback:" +
-//        "?daddr=" + htmlDestination +
-//        "&x-success=MOWapp:?resume=true&x-source=MOW"
-//        let directionsURL = URL(string:directionsRequest);
-//        if (UIApplication.shared.canOpenURL( URL(string: "comgooglemaps-x-callback:")!)) {
-//            UIApplication.shared.openURL(directionsURL!)
-//        } else {
-//            print("Can't use comgooglemaps:");
-//        }
-//        if(customPath != nil) {
-//            customPath.removeAllCoordinates()
-//        }
-//        if (UIApplication.shared.canOpenURL( URL(string: "comgooglemaps-x-callback:")!)) {
-//            UIApplication.shared.openURL(directionsURL!)
-//        } else {
-//            print("Can't use comgooglemaps:");
-//        }
-//
         if let originLocation = origin {
             if let destinationLocation = destination {
                 var directionsURLString = baseURLDirections + "origin=" + originLocation + "&destination=" + destinationLocation

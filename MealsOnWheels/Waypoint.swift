@@ -8,6 +8,7 @@
 
 import Foundation
 import GoogleMaps
+import SwiftyJSON
 
 
 class Waypoint: Comparable {
@@ -28,19 +29,23 @@ class Waypoint: Comparable {
         self.longitude = longitude
     }
     
-    init(dict: NSDictionary) {
-        self.address = dict["address"] as! String
-        self.phoneNumber = dict["phone"]! as! String
-        self.info = dict["info"]! as! String
-        self.title = dict["title"]! as! String
+    init(dict: JSON) {
+        self.address = dict["address"].stringValue
+        self.phoneNumber = dict["phoneNumber"].stringValue
+        self.info = dict["info"].stringValue
+        self.title = dict["title"].stringValue
+        self.latitude = dict["latitude"].floatValue
+        self.longitude = dict["longitude"].floatValue
     }
     
     func toDict() -> NSDictionary {
         let dict = NSMutableDictionary()
-        dict.setObject(address!, forKey: "address" as NSCopying)
-        dict.setObject(phoneNumber!, forKey: "phone" as NSCopying)
-        dict.setObject(info!, forKey: "info" as NSCopying)
-        dict.setObject(title!, forKey: "title" as NSCopying)
+        dict["address"] = address
+        dict["phoneNumber"] = phoneNumber
+        dict["info"] = info
+        dict["title"] = title
+        dict["latitude"] = latitude
+        dict["longitude"] = longitude
         return dict
     }
     

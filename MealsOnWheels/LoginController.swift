@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftLoader
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -21,7 +22,7 @@ class LoginController: UIViewController {
     
     func configureButtons() {
         loginView.loginBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
+        loginView.signUpBtn.addTarget(self, action: #selector(switchToSignIn), for: .touchUpInside)
     }
     
     
@@ -44,6 +45,7 @@ class LoginController: UIViewController {
 //        }
 //
         configureView()
+        //loginView.emailTF.becomeFirstResponder()
     }
     
     
@@ -66,11 +68,28 @@ class LoginController: UIViewController {
     
     func buttonAction(sender: UIButton!){
         var animateBtn: UIButton = sender
+        FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passField.text!) { (user, error) in
+            if error == nil {
+                
+                // display
+            } else {
+                User.uid = user?.uid
+                // Segue to main page
+            }
+        }
         if animateBtn.isTouchInside == true {
             animateBtn.backgroundColor = UIColor.lightGray
-        }
+            }
     
     }
+    
+    func switchToSignIn(sender: UIButton){
+        
+//        var signupView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
+//        self.view.addSubview(signupView)
+//        loginView.removeFromSuperview()
+//        
+}
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if (identifier == "login") {
