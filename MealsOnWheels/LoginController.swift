@@ -20,7 +20,7 @@ class LoginController: UIViewController {
     var loginView = LoginView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-        loginView.loginBtn.addTarget(self, action: #selector(buttonAction), forControlEvents: .touchUpInside)
+        loginView.loginBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
     }
     

@@ -15,7 +15,6 @@
 		8734A50D1DA4653F006637E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8734A50C1DA4653F006637E1 /* AppDelegate.swift */; };
 		8734A5141DA4653F006637E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8734A5131DA4653F006637E1 /* Assets.xcassets */; };
 		8734A5171DA4653F006637E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8734A5151DA4653F006637E1 /* LaunchScreen.storyboard */; };
-		875619561DA6B19E00A8701A /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875619551DA6B19E00A8701A /* Waypoint.swift */; };
 		877021901DA46AA8003F3FC4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8770218D1DA46AA8003F3FC4 /* LoginController.swift */; };
 		877021911DA46AA8003F3FC4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8770218E1DA46AA8003F3FC4 /* MainViewController.swift */; };
 		8770219B1DA46AEF003F3FC4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021931DA46AEF003F3FC4 /* LoginView.swift */; };
@@ -52,7 +51,6 @@
 		8734A5131DA4653F006637E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8734A5161DA4653F006637E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8734A5181DA4653F006637E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		875619551DA6B19E00A8701A /* Waypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		8770218D1DA46AA8003F3FC4 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		8770218E1DA46AA8003F3FC4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		877021931DA46AEF003F3FC4 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
