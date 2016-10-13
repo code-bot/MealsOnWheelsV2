@@ -32,10 +32,11 @@ class RegistrationEmailController : UIViewController {
     override func viewDidLoad() {
         let prefs = UserDefaults.standard
         if (prefs.value(forKey: "email") != nil && prefs.value(forKey: "password") != nil && prefs.value(forKey: "confirmPass") != nil) {
-            confirmPasswords(sender: AnyObject.self as AnyObject)
-            }
+            User.init(email: prefs.value(forKey: "email") as! String, password: prefs.value(forKey: "password") as! String, errorCase: {() -> Void in}, closure: {() -> Void in
+                    self.performSegue(withIdentifier: "Sign Up", sender: self)
+            })
             
-        
+        }
         configureView()
     }
     

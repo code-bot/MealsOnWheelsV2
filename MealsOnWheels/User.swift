@@ -12,7 +12,7 @@ import Firebase
 class User: NSObject {
     static var email: String!
     static var uid: String!
-    //static var routes: Array<RouteSpec> = Array<RouteSpec>()
+//    static var routes: Array<RouteSpec> = Array<RouteSpec>()
     static var routeDic: Array<NSDictionary> = Array<NSDictionary>()
     var ref = FIRDatabase.database().reference()
     
@@ -21,6 +21,17 @@ class User: NSObject {
     
     init(email: String, password: String, errorCase: @escaping () -> Void, closure: @escaping () -> Void) {
         super.init()
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if let user = user {
+                // User is signed in.
+            } else {
+                // No user is signed in.
+            }
+        }
+        
+        
+        
+        
         User.email = email
         DispatchQueue.main.async(execute: {() -> Void in
             FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error)-> Void in
@@ -66,6 +77,8 @@ class User: NSObject {
             })
         })
     }
+    
+    
     
     
     

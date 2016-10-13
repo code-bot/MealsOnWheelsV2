@@ -18,11 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //FIRApp.configure()
+        FIRApp.configure()
         //GMSServices.provideAPIKey("AIzaSyBbhXDRdgDPl4H5ivZfvP9U_B0wsvAtQpc")
         
         window = UIWindow()
-        window?.rootViewController = LoginController()
+        window?.rootViewController = RegistrationController()
         window?.makeKeyAndVisible()
         
         return true
