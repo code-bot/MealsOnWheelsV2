@@ -20,7 +20,9 @@ class LoginController: UIViewController {
     var loginView = LoginView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-        loginView.loginBtn.addTarget(self, action: #selector(buttonAction), forControlEvents: .touchUpInside)
+        loginView.loginBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
+        loginView.signUpBtn.addTarget(self, action: #selector(switchToSignIn), for: .touchUpInside)
         
     }
     
@@ -44,6 +46,7 @@ class LoginController: UIViewController {
 //        }
 //
         configureView()
+        //loginView.emailTF.becomeFirstResponder()
     }
     
     
@@ -66,10 +69,15 @@ class LoginController: UIViewController {
     
     func buttonAction(sender: UIButton!){
         var animateBtn: UIButton = sender
+        
         if animateBtn.isTouchInside == true {
             animateBtn.backgroundColor = UIColor.lightGray
-        }
+            }
     
+    }
+    
+    func switchToSignIn(sender: UIButton!){
+        performSegue(withIdentifier: "RegistrationView", sender: self)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
