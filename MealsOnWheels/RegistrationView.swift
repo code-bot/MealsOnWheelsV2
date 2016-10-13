@@ -16,6 +16,8 @@ class RegistrationView: UIView {
     var emailTF = UITextField()
     var passTF = UITextField()
     var passConfirmTF = UITextField()
+    
+    //Buttons
     var nextButton = UIButton()
     
     func configureTextFields() {
@@ -39,7 +41,10 @@ class RegistrationView: UIView {
     }
     
     func configureView() {
-        self.backgroundColor = UIColor.init(r: 209, g: 217, b: 233, a: 1.0)
+        self.backgroundColor = MWConstants.colors.loginDarkGradient
+        
+        configureTextFields()
+        configureButtons()
         
         
         configureTextFields()

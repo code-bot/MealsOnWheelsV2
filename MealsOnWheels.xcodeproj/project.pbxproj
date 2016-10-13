@@ -15,7 +15,8 @@
 		8734A50D1DA4653F006637E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8734A50C1DA4653F006637E1 /* AppDelegate.swift */; };
 		8734A5141DA4653F006637E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8734A5131DA4653F006637E1 /* Assets.xcassets */; };
 		8734A5171DA4653F006637E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8734A5151DA4653F006637E1 /* LaunchScreen.storyboard */; };
-		877021901DA46AA8003F3FC4 /* LoginConroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8770218D1DA46AA8003F3FC4 /* LoginConroller.swift */; };
+		875619561DA6B19E00A8701A /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875619551DA6B19E00A8701A /* Waypoint.swift */; };
+		877021901DA46AA8003F3FC4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8770218D1DA46AA8003F3FC4 /* LoginController.swift */; };
 		877021911DA46AA8003F3FC4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8770218E1DA46AA8003F3FC4 /* MainViewController.swift */; };
 		8770219B1DA46AEF003F3FC4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021931DA46AEF003F3FC4 /* LoginView.swift */; };
 		8770219C1DA46AEF003F3FC4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021941DA46AEF003F3FC4 /* MainTabView.swift */; };
@@ -51,7 +52,8 @@
 		8734A5131DA4653F006637E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8734A5161DA4653F006637E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8734A5181DA4653F006637E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8770218D1DA46AA8003F3FC4 /* LoginConroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginConroller.swift; sourceTree = "<group>"; };
+		875619551DA6B19E00A8701A /* Waypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
+		8770218D1DA46AA8003F3FC4 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		8770218E1DA46AA8003F3FC4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		877021931DA46AEF003F3FC4 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		877021941DA46AEF003F3FC4 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -173,7 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				877021A31DA46AFC003F3FC4 /* TitleViewController.swift */,
-				8770218D1DA46AA8003F3FC4 /* LoginConroller.swift */,
+				8770218D1DA46AA8003F3FC4 /* LoginController.swift */,
 				8770218E1DA46AA8003F3FC4 /* MainViewController.swift */,
 				877021AF1DA46BE1003F3FC4 /* RegistrationEmailController.swift */,
 			);
@@ -196,15 +198,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8734A51B1DA4653F006637E1 /* Build configuration list for PBXNativeTarget "MealsOnWheels" */;
 			buildPhases = (
-				1A287AE1A2C11469DB0A981B /* [CP] Check Pods Manifest.lock */,
 				90965A3E066484BBEBB49E17 /* [CP] Check Pods Manifest.lock */,
 				8734A5051DA4653F006637E1 /* Sources */,
 				8734A5061DA4653F006637E1 /* Frameworks */,
 				8734A5071DA4653F006637E1 /* Resources */,
 				866073B5E2F43FCCDBC04CE4 /* [CP] Embed Pods Frameworks */,
 				35D540CC57AA2652510807D2 /* [CP] Copy Pods Resources */,
-				4CB277051E6835B17DF49B2B /* 📦 Embed Pods Frameworks */,
-				0C60948C6E20842294CF8C09 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -264,36 +263,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0C60948C6E20842294CF8C09 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1A287AE1A2C11469DB0A981B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		35D540CC57AA2652510807D2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,21 +276,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4CB277051E6835B17DF49B2B /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		866073B5E2F43FCCDBC04CE4 /* [CP] Embed Pods Frameworks */ = {
@@ -366,7 +320,7 @@
 				49E37CB81DA6D4140022FF1C /* Waypoint.swift in Sources */,
 				877021AD1DA46B10003F3FC4 /* UILabel+Extensions.swift in Sources */,
 				8770219F1DA46AEF003F3FC4 /* RegistrationProfileView.swift in Sources */,
-				877021901DA46AA8003F3FC4 /* LoginConroller.swift in Sources */,
+				877021901DA46AA8003F3FC4 /* LoginController.swift in Sources */,
 				8770219E1DA46AEF003F3FC4 /* RegistrationEmailView.swift in Sources */,
 				877021B41DA46C5B003F3FC4 /* CurrentRouteView.swift in Sources */,
 				8770219B1DA46AEF003F3FC4 /* LoginView.swift in Sources */,
@@ -422,6 +376,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -472,6 +427,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -501,6 +457,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4DC65213847D4718E78A6825 /* Pods-MealsOnWheels.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U9X42PLV7V;
 				INFOPLIST_FILE = MealsOnWheels/Info.plist;
@@ -515,6 +472,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FBA3529086D9763193E317C0 /* Pods-MealsOnWheels.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U9X42PLV7V;
 				INFOPLIST_FILE = MealsOnWheels/Info.plist;
