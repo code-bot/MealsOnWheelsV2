@@ -85,9 +85,13 @@ class LoginController: UIViewController {
     
     }
     
-    func switchToSignIn(sender: UIButton!){
-        performSegue(withIdentifier: "RegistrationView", sender: self)
-    }
+    func switchToSignIn(sender: UIButton){
+        
+//        var signupView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
+//        self.view.addSubview(signupView)
+//        loginView.removeFromSuperview()
+//        
+}
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if (identifier == "login") {
