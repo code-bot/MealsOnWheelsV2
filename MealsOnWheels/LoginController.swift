@@ -69,14 +69,17 @@ class LoginController: UIViewController {
 //    }
     
     func buttonAction(sender: UIButton!){
-        var animateBtn: UIButton = sender
-        FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passField.text!) { (user, error) in
+        SwiftLoader.show(title: "Signing in", animated: true)
+        let animateBtn: UIButton = sender
+        FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.emailTF.text!) { (user, error) in
+            SwiftLoader.hide()
             if error == nil {
-                
-                // display error
-            } else {
                 User.uid = user?.uid
-                // Segue to main page
+            } else {
+                print(error.customMirror)
+                let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+                self.present(signInAlert, animated: true, completion: nil)
             }
         }
         if animateBtn.isTouchInside == true {

@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //GMSServices.provideAPIKey("AIzaSyBbhXDRdgDPl4H5ivZfvP9U_B0wsvAtQpc")
         
         window = UIWindow()
-        window?.rootViewController = RegistrationController()
+        window?.rootViewController = LoginController()
         window?.makeKeyAndVisible()
         
         return true
