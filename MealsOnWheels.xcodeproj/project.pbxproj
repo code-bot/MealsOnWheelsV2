@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491959521DB253C800C32723 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 491959511DB253C800C32723 /* GoogleService-Info.plist */; };
 		49E37CB81DA6D4140022FF1C /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CB71DA6D4140022FF1C /* Waypoint.swift */; };
 		49E37CBA1DA6D41D0022FF1C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CB91DA6D41D0022FF1C /* Model.swift */; };
 		49E37CBC1DA6D4250022FF1C /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CBB1DA6D4250022FF1C /* Route.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		491959511DB253C800C32723 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49E37CB71DA6D4140022FF1C /* Waypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		49E37CB91DA6D41D0022FF1C /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		49E37CBB1DA6D4250022FF1C /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				8734A50C1DA4653F006637E1 /* AppDelegate.swift */,
 				8734A5131DA4653F006637E1 /* Assets.xcassets */,
 				8734A5151DA4653F006637E1 /* LaunchScreen.storyboard */,
+				491959511DB253C800C32723 /* GoogleService-Info.plist */,
 				8734A5181DA4653F006637E1 /* Info.plist */,
 			);
 			path = MealsOnWheels;
@@ -254,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8734A5171DA4653F006637E1 /* LaunchScreen.storyboard in Resources */,
+				491959521DB253C800C32723 /* GoogleService-Info.plist in Resources */,
 				8734A5141DA4653F006637E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

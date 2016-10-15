@@ -73,7 +73,7 @@ class LoginController: UIViewController {
         FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passField.text!) { (user, error) in
             if error == nil {
                 
-                // display
+                // display error
             } else {
                 User.uid = user?.uid
                 // Segue to main page
