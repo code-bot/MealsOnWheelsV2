@@ -45,7 +45,7 @@ class RegistrationController : UIViewController {
         SwiftLoader.show(title: "Signing Up", animated: true)
         FIRAuth.auth()?.createUser(withEmail: registrationView.emailTF.text!, password: registrationView.passTF.text!) { (user, error) in
             SwiftLoader.hide()
-            if error != nil {
+            if error == nil {
                 
                 let ref = FIRDatabase.database().reference()
                 ref.child(user!.uid).child("email").setValue(self.emailTF.text)

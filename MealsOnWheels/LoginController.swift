@@ -75,8 +75,10 @@ class LoginController: UIViewController {
             SwiftLoader.hide()
             if error == nil {
                 User.uid = user?.uid
+//                self.performSegue(withIdentifier: "login", sender: self)
+//                SEGUE TO MAIN VIEW GOES HERE
+
             } else {
-                print(error.customMirror)
                 let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                 signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
                 self.present(signInAlert, animated: true, completion: nil)
@@ -84,7 +86,7 @@ class LoginController: UIViewController {
         }
         if animateBtn.isTouchInside == true {
             animateBtn.backgroundColor = UIColor.lightGray
-            }
+        }
     
     }
     

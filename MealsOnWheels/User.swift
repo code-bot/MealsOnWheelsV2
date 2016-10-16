@@ -23,7 +23,6 @@ class User: NSObject {
                 User.uid = user.uid
                 User.email = user.email
                 self.ref.child(User.uid!).child("paths").observeSingleEvent(of: .value, with: { (snapshot) in
-    
                     let routes = JSON(snapshot.value as? NSDictionary)
                     for route in routes.array! {
                         User.routes.append(Route(dict: route))
