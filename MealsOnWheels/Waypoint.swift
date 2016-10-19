@@ -27,6 +27,7 @@ class Waypoint: Comparable {
         self.title = title
         self.latitude = latitude
         self.longitude = longitude
+        self.priority = priority
     }
     
     init(dict: JSON) {
@@ -36,6 +37,7 @@ class Waypoint: Comparable {
         self.title = dict["title"].stringValue
         self.latitude = dict["latitude"].floatValue
         self.longitude = dict["longitude"].floatValue
+        self.priority = dict["priority"].intValue
     }
     
     func toDict() -> NSDictionary {
@@ -46,6 +48,7 @@ class Waypoint: Comparable {
         dict["title"] = title
         dict["latitude"] = latitude
         dict["longitude"] = longitude
+        dict["priority"] = priority
         return dict
     }
     

@@ -23,10 +23,20 @@ class User: NSObject {
                 User.uid = user.uid
                 User.email = user.email
                 self.ref.child(User.uid!).child("paths").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let routes = JSON(snapshot.value as? NSDictionary)
-                    for route in routes.array! {
-                        User.routes.append(Route(dict: route))
+                    if snapshot.exists() {
+                        
+                        print((snapshot.value as? NSDictionary)?.allKeys)
+                        let routes = snapshot.value as? NSDictionary
+                        for (_, route) in routes! {
+                            User.routes.append(Route(dict: JSON(route)))
+                        }
                     }
+//                    commented out section is used to manually poppulate testing data
+                    
+//                    MapTasks.getDirections("671 10th St NW, Atlanta, GA 30318", destination: "548 Northside Dr NW, Atlanta, GA 30318", waypointStrings: ["746 Marietta St NW, Atlanta, GA 30318", "539 10th St NW, Atlanta, GA 30318", "388 Luckie St NW, Atlanta, GA 30313"], travelMode: nil) { (str, success, route) in
+//                        print(route?.toDict())
+//                        self.ref.child(user.uid).child("paths").childByAutoId().setValue(route?.toDict())
+//                    }
                 }) { (error) in
                     print(error.localizedDescription)
                 }
@@ -37,4 +47,5 @@ class User: NSObject {
             }
         }
     }
+
 }

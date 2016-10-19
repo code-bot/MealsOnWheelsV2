@@ -71,13 +71,15 @@ class LoginController: UIViewController {
     func buttonAction(sender: UIButton!){
         SwiftLoader.show(title: "Signing in", animated: true)
         let animateBtn: UIButton = sender
-        FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.emailTF.text!) { (user, error) in
+        FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
             SwiftLoader.hide()
             if error == nil {
+                
+                _ = User()
                 User.uid = user?.uid
-//                self.performSegue(withIdentifier: "login", sender: self)
-//                SEGUE TO MAIN VIEW GOES HERE
-
+                self.present(MainViewController(), animated: true, completion: {
+                    
+                })
             } else {
                 let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                 signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))

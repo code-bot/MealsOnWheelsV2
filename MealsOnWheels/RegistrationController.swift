@@ -49,6 +49,7 @@ class RegistrationController : UIViewController {
                 
                 let ref = FIRDatabase.database().reference()
                 ref.child(user!.uid).child("email").setValue(self.emailTF.text)
+                _ = User()
                 
             } else {
                 let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
