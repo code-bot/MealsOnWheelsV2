@@ -31,6 +31,7 @@ class User: NSObject {
                                 User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
                             })
                         }
+                        User.route = User.routes.first
                     }
 //                    commented out section is used to manually poppulate testing data
                     

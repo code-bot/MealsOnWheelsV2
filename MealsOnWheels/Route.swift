@@ -19,7 +19,8 @@ class Route {
     var estimatedTime: String
     var overviewPolyline: String
     var currentWaypoint: Waypoint?
-    init(name: String, desc: String, waypoints: [Waypoint], miles: Double, time: String, overviewPolyline: String) {
+    var uid: String
+    init(name: String, desc: String, waypoints: [Waypoint], miles: Double, time: String, overviewPolyline: String, uid: String) {
         self.name = name
         self.description = desc
         for waypoint in waypoints {
@@ -28,6 +29,7 @@ class Route {
         self.estimatedTime = time
         self.totalMiles = miles
         self.overviewPolyline = overviewPolyline
+        self.uid = uid
     }
     
     init(dict: JSON) {
@@ -40,6 +42,7 @@ class Route {
         for waypoint in dict["waypoints"].array! {
             waypoints.push(Waypoint(dict: waypoint))
         }
+        uid = dict["uid"].stringValue
     }
     
     func toDict() -> NSDictionary {
@@ -54,6 +57,7 @@ class Route {
             temp.append(waypoint.toDict())
         }
         dict["waypoints"] = temp
+        dict["uid"] = uid
         return dict
     }
     
