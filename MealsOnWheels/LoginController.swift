@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftLoader
 import Firebase
+import SwiftyJSON
 
 class LoginController: UIViewController {
     
@@ -17,6 +18,9 @@ class LoginController: UIViewController {
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var login: UIButton!
     @IBOutlet weak var signUp: UIButton!
+    var ref = FIRDatabase.database().reference()
+    
+    
     var loginSuccess = false
     var loginView = LoginView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
@@ -76,6 +80,25 @@ class LoginController: UIViewController {
                 
                 _ = User()
                 User.uid = user?.uid
+                self.ref.child("users").child(User.uid!).child("paths").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if snapshot.exists() {
+                        let routes = snapshot.value as? NSArray
+                        for (route) in routes! {
+                            self.ref.child("paths").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                                User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
+                            })
+                        }
+                        User.route = User.routes.first
+                    }
+                    //                    commented out section is used to manually poppulate testing data
+                    
+                    //                    MapTasks.getDirections("671 10th St NW, Atlanta, GA 30318", destination: "548 Northside Dr NW, Atlanta, GA 30318", waypointStrings: ["746 Marietta St NW, Atlanta, GA 30318", "539 10th St NW, Atlanta, GA 30318", "388 Luckie St NW, Atlanta, GA 30313"], travelMode: nil) { (str, success, route) in
+                    //                        print(route?.toDict())
+                    //                        self.ref.child(user.uid).child("paths").childByAutoId().setValue(route?.toDict())
+                    //                    }
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
                 self.present(MainViewController(), animated: true, completion: {
                     
                 })
