@@ -15,7 +15,6 @@ class User: NSObject {
     static var uid: String?
     static var routes: Array<Route> = Array<Route>()
     static var route: Route?
-    
     override init() {
         super.init()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
