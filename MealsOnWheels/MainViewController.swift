@@ -69,6 +69,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         //switch to waypoints view
         let myWaypointsController = WaypointsController()
+        print("Move to next view")
         myWaypointsController.route = Model.sharedInstance.routes[indexPath.row]
         self.present(myWaypointsController, animated: true, completion: nil)
     }
