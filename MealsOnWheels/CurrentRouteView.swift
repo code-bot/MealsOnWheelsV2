@@ -12,9 +12,6 @@ import UIKit
 
 class CurrentRouteView: UIView {
     
-    //Image Views
-    var mapImage = UIImageView()
-    
     //Map View
     var mapView : GMSMapView!
     
@@ -29,17 +26,11 @@ class CurrentRouteView: UIView {
     
     var route = Model.sharedInstance.routes.last!
     
-    func configureImageViews() {
-        mapImage.image = MWConstants.noImg
-        mapImage.contentMode = .scaleAspectFill
-        mapImage.clipsToBounds = true
-    }
-    
     func configureMapView() {
         mapView = GMSMapView()
         let routePath = route.path.getPath()
         let bounds = GMSCoordinateBounds(path: routePath)
-        let camera = mapView.camera(for: bounds, insets: UIEdgeInsets())
+        let camera = mapView.camera(for: bounds, insets: UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0))
         mapView.camera = camera!
         mapView.animate(toZoom: 14.0)
         let pathPolyline = GMSPolyline(path: route.path.getPath())

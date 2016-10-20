@@ -18,15 +18,16 @@ class LoginController: UIViewController {
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var login: UIButton!
     @IBOutlet weak var signUp: UIButton!
+    @IBOutlet weak var forgotPassword: UIButton!
     var ref = FIRDatabase.database().reference()
-    
-    
     var loginSuccess = false
     var loginView = LoginView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
         loginView.loginBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         loginView.signUpBtn.addTarget(self, action: #selector(switchToSignIn), for: .touchUpInside)
+        
+        loginView.forgotPasswordBtn.addTarget(self, action: #selector(switchToForgotPassword), for: .touchUpInside)
     }
     
     
@@ -40,36 +41,11 @@ class LoginController: UIViewController {
     }
     
     override func viewDidLoad() {
-//        let prefs = UserDefaults.standard
-//        if (prefs.value(forKey: "email") != nil && prefs.value(forKey: "pass") != nil) {
-//            User.init(email: prefs.value(forKey: "email") as! String, password: prefs.value(forKey: "pass")as! String, errorCase: {() -> Void in
-//                }, closure: {() -> Void in
-//                    self.performSegue(withIdentifier: "login", sender: self)
-//            })
-//        }
-//
+
         configureView()
         self.dismissKeyboardAtTap()
-        //loginView.emailTF.becomeFirstResponder()
     }
     
-    
-//    @IBAction func signIn(_: AnyObject) {
-////        SwiftLoader.show(title: "Loading...", animated: true)
-////        User.init(email: emailField.text!, password: passField.text!, errorCase: {() -> Void in
-////            SwiftLoader.hide()
-////            let nameAlert = UIAlertController(title: "Failed Sign Up", message: "Incorrect Username or password", preferredStyle: UIAlertControllerStyle.alert)
-////            nameAlert
-////            nameAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-////            self.present(nameAlert, animated: true, completion: nil)
-////            self.loginSuccess = false
-////        }, closure: {() -> Void in
-////            SwiftLoader.hide()
-////            self.loginSuccess = true
-////            self.performSegue(withIdentifier: "login", sender: self)
-////        })
-//    
-//    }
     
     func buttonAction(sender: UIButton!){
         SwiftLoader.show(title: "Signing in", animated: true)
@@ -103,16 +79,15 @@ class LoginController: UIViewController {
                 }) { (error) in
                     print(error.localizedDescription)
                 }
+            self.present(MainViewController(), animated: true, completion: {
+                    
+                })
             } else {
                 let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                 signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
                 self.present(signInAlert, animated: true, completion: nil)
             }
         }
-        if animateBtn.isTouchInside == true {
-            animateBtn.backgroundColor = UIColor.lightGray
-        }
-    
     }
     
     func switchToSignIn(sender: UIButton){
@@ -120,6 +95,14 @@ class LoginController: UIViewController {
         dismiss(animated: false, completion: nil)
         present(RegistrationController(), animated: true, completion: nil)
 }
+    
+    func switchToForgotPassword(sender: UIButton){
+        
+        dismiss(animated: false, completion: nil)
+        present(ForgotPasswordController(), animated: true, completion: nil)
+            
+        
+    }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if (identifier == "login") {

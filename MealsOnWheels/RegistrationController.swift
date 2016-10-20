@@ -1,5 +1,5 @@
 //
-//  RegistrationEmailController.swift
+//  RegistrationController.swift
 //  MealsOnWheels
 //
 //  Created by Taabish Kathawala on 9/15/16.
@@ -18,17 +18,21 @@ class RegistrationController : UIViewController {
     @IBOutlet weak var passConfirmTF: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var welLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     var passConfirm = false
     var registrationView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-        
+         registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
     func configureView() {
         configureButtons()
         self.view.addSubview(registrationView)
+        
     }
+    
+
     
     
     override func viewDidLoad() {
@@ -92,7 +96,15 @@ class RegistrationController : UIViewController {
 //    override var preferredStatusBarStyle : UIStatusBarStyle {
 //        return UIStatusBarStyle.lightContent
 //    }
+        
     }
+    
+    func goBack(sender: UIButton){
+        
+        dismiss(animated: false, completion: nil)
+        present(LoginController(), animated: true, completion: nil)
+    }
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if (identifier == "Sign Up") {
             return passConfirm

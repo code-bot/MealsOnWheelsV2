@@ -13,7 +13,7 @@ import UIKit
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var mainView = MainView();
-    let currentView = CurrentRouteView(frame: CGRect(x: 0, y: MWConstants.navBarHeight + 20.0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight - MWConstants.navBarHeight - 20.0))
+    let currentView = CurrentWaypointView(frame: CGRect(x: 0, y: MWConstants.navBarHeight + 20.0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight - MWConstants.navBarHeight - 20.0))
     let myRoutesView = MyRoutesView(frame: CGRect(x: 0, y: MWConstants.navBarHeight + 20.0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight - MWConstants.navBarHeight - 20.0))
     
     func configureButtons() {
@@ -35,6 +35,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         myRoutesView.tableView.delegate = self;
         myRoutesView.tableView.dataSource = self;
         myRoutesView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -59,8 +60,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = myRoutesView.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        let routes = Model.sharedInstance.routes[indexPath.row];
-        cell.textLabel?.text = routes.path.name
+        let route = Model.sharedInstance.routes[indexPath.row];
+        let cellText = "\(route.path.name)\t\(route.date)\nUsers: \(route.user1) & \(route.user2)"
+        cell.textLabel?.text = cellText
         return cell
+    }
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        //switch to waypoints view
+        let myWaypointsController = WaypointsController()
+        print("Move to next view")
+        myWaypointsController.route = Model.sharedInstance.routes[indexPath.row]
+        self.present(myWaypointsController, animated: true, completion: nil)
     }
 }

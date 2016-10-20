@@ -11,6 +11,9 @@ import UIKit
 
 class LoginView: UIView {
     
+    // Labels
+    var underlineLabel = UILabel()
+    
     //Image Views
     var logoImgView = UIImageView()
     
@@ -33,27 +36,52 @@ class LoginView: UIView {
     func configureTextFields() {
      // Setting text field item properties
         emailTF.layer.cornerRadius = 10.0
-        emailTF.layer.borderWidth = 1
+        //emailTF.layer.borderWidth = 1
         
         passwordTF.layer.cornerRadius = 10.0
-        passwordTF.layer.borderWidth = 1
+        //passwordTF.layer.borderWidth = 1
         
     // Setting text properties
         
-        emailTF.placeholder = " Email"
+        emailTF.placeholder = "Email"
         emailTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
         emailTF.textColor = UIColor.white
         //emailTF.textAlignment = NSTextAlignment.center
         
         
-        passwordTF.placeholder = " Password"
+        passwordTF.placeholder = "Password"
         passwordTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
         passwordTF.textColor = UIColor.white
         passwordTF.isSecureTextEntry = true
         //passwordTF.textAlignment = NSTextAlignment.center
         
+    }
+    
+    func configureLabels(){
+        
+        underlineLabel.textColor = UIColor.white
+        
+        func setUnderline() -> String{
+        
+            var num: Float = 0.0
+            var underlines: Float = 0.0
+            var finalS = ""
+            var rounded = 0
+        
+            num = Float(MWConstants.screenWidth) - Float(MWConstants.loginFieldsOffset*2)
+            underlines = round(num / 8)
+            rounded = Int(underlines)
+        
+            for _ in (0)...rounded{
+                finalS += "_"
+                                }
+            return finalS
+        }
+        
+        underlineLabel.text = setUnderline()
         
     }
+
     
     
     func textFieldDidBeginEditing(_ textField : UITextField)
@@ -81,6 +109,8 @@ class LoginView: UIView {
         forgotPasswordBtn.setTitle("Forgot Password?", for: UIControlState())
         forgotPasswordBtn.setTitleColor(UIColor.lightText, for: UIControlState())
         forgotPasswordBtn.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 12.0)
+        
+        
 
         
         
@@ -99,6 +129,7 @@ class LoginView: UIView {
         configureTextFields()
         configureButtons()
         textFieldDidBeginEditing(emailTF)
+        configureLabels()
         
         //Auto Layout
         let viewsDict = [
@@ -107,18 +138,22 @@ class LoginView: UIView {
             "psTF"  :   passwordTF,
             "login" :   loginBtn,
             "signup":   signUpBtn,
-            "forgotPw": forgotPasswordBtn
+            "forgotPw": forgotPasswordBtn,
+            "label": underlineLabel
             ] as [String : UIView]
         
         self.prepareViewsForAutoLayout(viewsDict)
-        
-//          self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:[title]-100-[emTF]-30-[psTF]-60-[login]-30-[signup]-|", views: viewsDict as [String : AnyObject]))
-//        
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-100-[emTF]-30-[psTF]-60-[login]-10-[forgotPw]-30-[signup]|", views: viewsDict))
+
+   
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-20-[emTF]-1-[label]-15-[psTF]-40-[login]-10-[forgotPw]-30-[signup]|", views: viewsDict))
 //
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[emTF]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[label]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+
+        
         
 //         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-30-[title]-30-|", views: viewsDict as [String : AnyObject]))
         
