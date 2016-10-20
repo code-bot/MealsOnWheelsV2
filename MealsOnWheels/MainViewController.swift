@@ -54,13 +54,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("hi");
         return Model.sharedInstance.routes.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = myRoutesView.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = Model.sharedInstance.routes[indexPath.row].name
+        let routes = Model.sharedInstance.routes[indexPath.row];
+        cell.textLabel?.text = routes.path.name
         return cell
     }
 }

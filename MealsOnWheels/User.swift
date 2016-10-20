@@ -13,8 +13,8 @@ import SwiftyJSON
 class User: NSObject {
     static var email: String?
     static var uid: String?
-    static var routes: Array<Route> = Array<Route>()
-    static var route: Route?
+    static var routes: Array<Path> = Array<Path>()
+    static var route: Path?
     var ref = FIRDatabase.database().reference()
     
     override init() {
@@ -28,7 +28,7 @@ class User: NSObject {
                         let routes = snapshot.value as? NSArray
                         for (route) in routes! {
                             self.ref.child("paths").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                                User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
+                                User.routes.append(Path(dict: JSON(snapshot.value as? NSDictionary)))
                             })
                         }
                         User.route = User.routes.first
@@ -45,7 +45,7 @@ class User: NSObject {
             } else {
                 User.uid = nil
                 User.email = nil
-                User.routes = Array<Route>()
+                User.routes = Array<Path>()
             }
         }
     }
