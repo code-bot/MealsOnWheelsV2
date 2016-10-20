@@ -12,6 +12,7 @@
 		49E37CBA1DA6D41D0022FF1C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CB91DA6D41D0022FF1C /* Model.swift */; };
 		49E37CBC1DA6D4250022FF1C /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CBB1DA6D4250022FF1C /* Route.swift */; };
 		49EAE27F1DAFF5610076CC91 /* MapTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EAE27E1DAFF5610076CC91 /* MapTasks.swift */; };
+		7BFC64391DB9437E005B80BF /* RegistrationProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFC64381DB9437E005B80BF /* RegistrationProfileController.swift */; };
 		8702109F1DA6C0D9008C16D2 /* MainNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8702109E1DA6C0D9008C16D2 /* MainNavBar.swift */; };
 		8734A50D1DA4653F006637E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8734A50C1DA4653F006637E1 /* AppDelegate.swift */; };
 		8734A5141DA4653F006637E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8734A5131DA4653F006637E1 /* Assets.xcassets */; };
@@ -21,7 +22,6 @@
 		8770219B1DA46AEF003F3FC4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021931DA46AEF003F3FC4 /* LoginView.swift */; };
 		8770219C1DA46AEF003F3FC4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021941DA46AEF003F3FC4 /* MainTabView.swift */; };
 		8770219D1DA46AEF003F3FC4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021951DA46AEF003F3FC4 /* MainView.swift */; };
-		8770219E1DA46AEF003F3FC4 /* RegistrationEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021961DA46AEF003F3FC4 /* RegistrationEmailView.swift */; };
 		8770219F1DA46AEF003F3FC4 /* RegistrationProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021971DA46AEF003F3FC4 /* RegistrationProfileView.swift */; };
 		877021A01DA46AEF003F3FC4 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021981DA46AEF003F3FC4 /* RegistrationView.swift */; };
 		877021A11DA46AEF003F3FC4 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021991DA46AEF003F3FC4 /* TitleView.swift */; };
@@ -48,6 +48,7 @@
 		49EAE27E1DAFF5610076CC91 /* MapTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTasks.swift; sourceTree = "<group>"; };
 		4DC65213847D4718E78A6825 /* Pods-MealsOnWheels.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsOnWheels.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels.debug.xcconfig"; sourceTree = "<group>"; };
 		5C9119DF85FF584DF6CA7E69 /* Pods_MealsOnWheels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MealsOnWheels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BFC64381DB9437E005B80BF /* RegistrationProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationProfileController.swift; sourceTree = "<group>"; };
 		8702109E1DA6C0D9008C16D2 /* MainNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavBar.swift; sourceTree = "<group>"; };
 		8734A5091DA4653F006637E1 /* MealsOnWheels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealsOnWheels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8734A50C1DA4653F006637E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		877021931DA46AEF003F3FC4 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		877021941DA46AEF003F3FC4 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		877021951DA46AEF003F3FC4 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		877021961DA46AEF003F3FC4 /* RegistrationEmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationEmailView.swift; sourceTree = "<group>"; };
 		877021971DA46AEF003F3FC4 /* RegistrationProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationProfileView.swift; sourceTree = "<group>"; };
 		877021981DA46AEF003F3FC4 /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		877021991DA46AEF003F3FC4 /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
@@ -165,7 +165,6 @@
 				877021951DA46AEF003F3FC4 /* MainView.swift */,
 				877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */,
 				877021931DA46AEF003F3FC4 /* LoginView.swift */,
-				877021961DA46AEF003F3FC4 /* RegistrationEmailView.swift */,
 				877021971DA46AEF003F3FC4 /* RegistrationProfileView.swift */,
 				877021981DA46AEF003F3FC4 /* RegistrationView.swift */,
 				877021991DA46AEF003F3FC4 /* TitleView.swift */,
@@ -182,6 +181,7 @@
 				8770218D1DA46AA8003F3FC4 /* LoginController.swift */,
 				8770218E1DA46AA8003F3FC4 /* MainViewController.swift */,
 				877021AF1DA46BE1003F3FC4 /* RegistrationController.swift */,
+				7BFC64381DB9437E005B80BF /* RegistrationProfileController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -326,7 +326,6 @@
 				877021AD1DA46B10003F3FC4 /* UILabel+Extensions.swift in Sources */,
 				8770219F1DA46AEF003F3FC4 /* RegistrationProfileView.swift in Sources */,
 				877021901DA46AA8003F3FC4 /* LoginController.swift in Sources */,
-				8770219E1DA46AEF003F3FC4 /* RegistrationEmailView.swift in Sources */,
 				877021B41DA46C5B003F3FC4 /* CurrentRouteView.swift in Sources */,
 				8770219B1DA46AEF003F3FC4 /* LoginView.swift in Sources */,
 				877021A21DA46AEF003F3FC4 /* TitleViewButtonHub.swift in Sources */,
@@ -334,6 +333,7 @@
 				877021A11DA46AEF003F3FC4 /* TitleView.swift in Sources */,
 				8770219C1DA46AEF003F3FC4 /* MainTabView.swift in Sources */,
 				49EAE27F1DAFF5610076CC91 /* MapTasks.swift in Sources */,
+				7BFC64391DB9437E005B80BF /* RegistrationProfileController.swift in Sources */,
 				877021AE1DA46B10003F3FC4 /* UIView+Extensions.swift in Sources */,
 				877021AC1DA46B10003F3FC4 /* UIColor+Extensions.swift in Sources */,
 				49E37CBA1DA6D41D0022FF1C /* Model.swift in Sources */,

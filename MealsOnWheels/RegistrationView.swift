@@ -19,6 +19,7 @@ class RegistrationView: UIView {
     
     //Buttons
     var nextButton = UIButton()
+    var backButton = UIButton()
     
     //Label
     var welLabel = UILabel()
@@ -28,20 +29,21 @@ class RegistrationView: UIView {
         passConfirmTF.placeholder = "  Confirm Password"
         passTF.placeholder = "  Password"
         
-        emailTF.font = UIFont(name: "Avenir-Medium", size: 13.0)
-        passTF.font = UIFont(name: "Avenir-Medium", size: 13.0)
-        passConfirmTF.font = UIFont(name: "Avenir-Medium", size: 13.0)
+        emailTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
+        passTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
+        passConfirmTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
+
         
-        emailTF.textColor = UIColor.lightText
-        passTF.textColor = UIColor.lightText
-        passConfirmTF.textColor = UIColor.lightText
-        
-        emailTF.backgroundColor = UIColor.white
+        emailTF.backgroundColor = UIColor.clear
         emailTF.alpha = 0.5
-        passTF.backgroundColor = UIColor.white
+        passTF.backgroundColor = UIColor.clear
         passTF.alpha = 0.5
-        passConfirmTF.backgroundColor = UIColor.white
+        passConfirmTF.backgroundColor = UIColor.clear
         passConfirmTF.alpha = 0.5
+        
+        emailTF.textColor = UIColor.darkText
+        passTF.textColor = UIColor.darkText
+        passConfirmTF.textColor = UIColor.darkText
         
         passTF.isSecureTextEntry = true
         passConfirmTF.isSecureTextEntry = true
@@ -57,21 +59,44 @@ class RegistrationView: UIView {
         passConfirmTF.layer.cornerRadius = 8.0
         
     }
-
+    
+    func textFieldDidBeginEditing(_ textField : UITextField)
+    {
+        emailTF.autocorrectionType = .no
+        emailTF.autocapitalizationType = .none
+        emailTF.spellCheckingType = .no
+        passTF.autocorrectionType = .no
+        passTF.autocapitalizationType = .none
+        passTF.spellCheckingType = .no
+        passConfirmTF.autocorrectionType = .no
+        passConfirmTF.autocapitalizationType = .none
+        passConfirmTF.spellCheckingType = .no
+    }
+    
     func configureButtons() {
-        nextButton.backgroundColor = UIColor.init(r: 52, g: 152, b: 219, a: 1.0)
+        //nextButton.backgroundColor = UIColor.init(r: 52, g: 152, b: 219, a: 1.0)
+        nextButton.backgroundColor = UIColor.white
         nextButton.setTitle("Next", for: UIControlState())
-        nextButton.setTitleColor(UIColor.lightText, for: UIControlState())
+        nextButton.setTitleColor(UIColor.darkText, for: UIControlState())
         nextButton.layer.cornerRadius = 5.0
-//        nextButton.layer.borderColor = UIColor.white.cgColor
-//        nextButton.layer.borderWidth = 0.5
+        nextButton.layer.borderColor = UIColor.white.cgColor
+        nextButton.layer.borderWidth = 0.5
+        
+        backButton.setTitle("   Back", for: UIControlState())
+        backButton.setTitleColor(UIColor.white, for: UIControlState())
+        //backButton.backgroundColor = UIColor.white
+        
+        
+        
         
     }
     
     func configureLabel() {
-        welLabel.text = "Sign Up"
-        welLabel.font = UIFont(name: "Avenir-Medium", size: 25.0)
+        welLabel.text = "Welcome"
+        welLabel.font = UIFont(name: "California-medium", size: 45.0)
+        
         welLabel.textColor = UIColor.white
+        welLabel.textAlignment = NSTextAlignment.center
         
         
     }
@@ -80,15 +105,18 @@ class RegistrationView: UIView {
         self.backgroundColor = MWConstants.colors.loginLightGradient
         
         
-        configureButtons()
-        configureLabel()
         
+        configureLabel()
+        configureButtons()
         
         configureTextFields()
-        
+        textFieldDidBeginEditing(emailTF)
+        textFieldDidBeginEditing(passTF)
+        textFieldDidBeginEditing(passConfirmTF)
         //Auto Layout
         let viewsDict = [
             "welLabel"  :   welLabel,
+            "back"      :   backButton,
             "emailTF"   :   emailTF,
             "passTF"    :   passTF,
             "confirmTF" :   passConfirmTF,
@@ -97,9 +125,11 @@ class RegistrationView: UIView {
         
         self.prepareViewsForAutoLayout(viewsDict as! [String : UIView])
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-50-[welLabel]-35-[emailTF]-25-[passTF]-25-[confirmTF]-100-[nextBut]", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-50-[back][welLabel]-35-[emailTF]-25-[passTF]-25-[confirmTF]-50-[nextBut]", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[welLabel]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        
+        //self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-20-[back]-80-[welLabel]", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[emailTF]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
@@ -108,6 +138,8 @@ class RegistrationView: UIView {
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[confirmTF]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[nextBut]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        
+//        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[back]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
     }
     
     
