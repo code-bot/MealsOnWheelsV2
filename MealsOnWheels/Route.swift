@@ -26,17 +26,8 @@ class Route {
         self.date = NSDate(timeIntervalSince1970: date)
     }
     
-//    init(dict: JSON) {
-//        ref.child("paths").child(dict["path"].stringValue).observeSingleEvent(of: .value, with: { (snapshot) in
-//            self.path = Path(dict: JSON(snapshot.value as? NSDictionary))
-//        })
-//        user1 = dict["user1"].stringValue
-//        user2 = dict["user2"].stringValue
-//        date = NSDate(timeIntervalSince1970: dict["date"].doubleValue)
-//    }
-    
-    init(dict: JSON, path: JSON) {
-        self.path = Path(dict: path)
+    init(dict: JSON) {
+        path = Path(dict: dict["path"])
         user1 = dict["user1"].stringValue
         user2 = dict["user2"].stringValue
         date = NSDate(timeIntervalSince1970: dict["date"].doubleValue)

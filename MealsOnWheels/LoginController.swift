@@ -75,7 +75,6 @@ class LoginController: UIViewController {
         SwiftLoader.show(title: "Signing in", animated: true)
         let animateBtn: UIButton = sender
         FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
-            SwiftLoader.hide()
             if error == nil {
                 
                 _ = User()
@@ -85,11 +84,15 @@ class LoginController: UIViewController {
                         let routes = snapshot.value as? NSArray
                         for (route) in routes! {
                             self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                                let dict = JSON(snapshot as? NSDictionary)
+                                SwiftLoader.hide()
                                 User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
+                                User.route = User.routes.first
+                                self.present(MainViewController(), animated: true, completion: {
+                                    let thisRoute = User.route
+                                    print(thisRoute)
+                                })
                             })
                         }
-                        User.route = User.routes.first
                     }
                     //                    commented out section is used to manually poppulate testing data
                     
@@ -100,9 +103,6 @@ class LoginController: UIViewController {
                 }) { (error) in
                     print(error.localizedDescription)
                 }
-                self.present(MainViewController(), animated: true, completion: {
-                    
-                })
             } else {
                 let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                 signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
