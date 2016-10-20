@@ -27,6 +27,10 @@ class CurrentWaypointView: UIView {
     
     func configureStreetView() {
         streetView = GMSPanoramaView(frame: .zero)
+        print("LATITUDE")
+        print(CLLocationDegrees(waypoint.latitude))
+        print("LONGITUDE")
+        print(CLLocationDegrees(waypoint.longitude))
         streetView.moveNearCoordinate(CLLocationCoordinate2D(latitude: CLLocationDegrees(waypoint.latitude), longitude: CLLocationDegrees(waypoint.longitude)))
         
     }
@@ -74,7 +78,7 @@ class CurrentWaypointView: UIView {
         self.prepareViewsForAutoLayout(viewsDict)
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[title]-20-[streetView(==\(String(describing: MWConstants.streetViewHeight)))]-20-[info]-15-[phone]", views: viewsDict))
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:[mapView(==\(String(describing: MWConstants.streetViewHeight)))]-20-[next(==\(String(describing: MWConstants.startBtnHeight)))]", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:[streetView(==\(String(describing: MWConstants.streetViewHeight)))]-20-[next(==\(String(describing: MWConstants.startBtnHeight)))]", views: viewsDict))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[streetView]|", views: viewsDict))

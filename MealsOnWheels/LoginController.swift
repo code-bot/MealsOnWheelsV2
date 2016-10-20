@@ -72,46 +72,46 @@ class LoginController: UIViewController {
 //    }
     
     func buttonAction(sender: UIButton!){
-        SwiftLoader.show(title: "Signing in", animated: true)
-        let animateBtn: UIButton = sender
-        FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
-            SwiftLoader.hide()
-            if error == nil {
-                
-                _ = User()
-                User.uid = user?.uid
-                self.ref.child("users").child(User.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
-                    if snapshot.exists() {
-                        let routes = snapshot.value as? NSArray
-                        for (route) in routes! {
-                            self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                                let dict = JSON(snapshot as? NSDictionary)
-                                //User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
-                            })
-                        }
-                        User.route = User.routes.first
-                    }
-                    //                    commented out section is used to manually poppulate testing data
-                    
-                    //                    MapTasks.getDirections("671 10th St NW, Atlanta, GA 30318", destination: "548 Northside Dr NW, Atlanta, GA 30318", waypointStrings: ["746 Marietta St NW, Atlanta, GA 30318", "539 10th St NW, Atlanta, GA 30318", "388 Luckie St NW, Atlanta, GA 30313"], travelMode: nil) { (str, success, route) in
-                    //                        print(route?.toDict())
-                    //                        self.ref.child(user.uid).child("paths").childByAutoId().setValue(route?.toDict())
-                    //                    }
-                }) { (error) in
-                    print(error.localizedDescription)
-                }
-                self.present(MainViewController(), animated: true, completion: {
-                    
-                })
-            } else {
-                let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
-                signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
-                self.present(signInAlert, animated: true, completion: nil)
-            }
-        }
-        if animateBtn.isTouchInside == true {
-            animateBtn.backgroundColor = UIColor.lightGray
-        }
+//        SwiftLoader.show(title: "Signing in", animated: true)
+//        let animateBtn: UIButton = sender
+//        FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
+//            SwiftLoader.hide()
+//            if error == nil {
+//                
+//                _ = User()
+//                User.uid = user?.uid
+//                self.ref.child("users").child(User.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
+//                    if snapshot.exists() {
+//                        let routes = snapshot.value as? NSArray
+//                        for (route) in routes! {
+//                            self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+//                                let dict = JSON(snapshot as? NSDictionary)
+//                                //User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
+//                            })
+//                        }
+//                        User.route = User.routes.first
+//                    }
+//                    //                    commented out section is used to manually poppulate testing data
+//                    
+//                    //                    MapTasks.getDirections("671 10th St NW, Atlanta, GA 30318", destination: "548 Northside Dr NW, Atlanta, GA 30318", waypointStrings: ["746 Marietta St NW, Atlanta, GA 30318", "539 10th St NW, Atlanta, GA 30318", "388 Luckie St NW, Atlanta, GA 30313"], travelMode: nil) { (str, success, route) in
+//                    //                        print(route?.toDict())
+//                    //                        self.ref.child(user.uid).child("paths").childByAutoId().setValue(route?.toDict())
+//                    //                    }
+//                }) { (error) in
+//                    print(error.localizedDescription)
+//                }
+//                self.present(MainViewController(), animated: true, completion: {
+//                    
+//                })
+//            } else {
+//                let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+//                signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+//                self.present(signInAlert, animated: true, completion: nil)
+//            }
+//        }
+//        if animateBtn.isTouchInside == true {
+//            animateBtn.backgroundColor = UIColor.lightGray
+//        }
     
     }
     
