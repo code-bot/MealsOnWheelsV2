@@ -37,6 +37,8 @@
 		877021B41DA46C5B003F3FC4 /* CurrentRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */; };
 		A390881EE561903AFC702B3D /* Pods_MealsOnWheels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9119DF85FF584DF6CA7E69 /* Pods_MealsOnWheels.framework */; };
 		B3AA1DC21DB927B2009B1C11 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */; };
+		B3AA1DC41DB93C54009B1C11 /* ForgotPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA1DC31DB93C54009B1C11 /* ForgotPasswordController.swift */; };
+		B3AA1DC61DB93D0A009B1C11 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA1DC51DB93D0A009B1C11 /* ForgotPasswordView.swift */; };
 		CD9AD2971DA6B75E003C8A10 /* MyRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,8 @@
 		877021B11DA46C52003F3FC4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentRouteView.swift; sourceTree = "<group>"; };
 		B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		B3AA1DC31DB93C54009B1C11 /* ForgotPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
+		B3AA1DC51DB93D0A009B1C11 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRoutesView.swift; sourceTree = "<group>"; };
 		FBA3529086D9763193E317C0 /* Pods-MealsOnWheels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsOnWheels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +169,7 @@
 				877021951DA46AEF003F3FC4 /* MainView.swift */,
 				877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */,
 				877021931DA46AEF003F3FC4 /* LoginView.swift */,
+				B3AA1DC51DB93D0A009B1C11 /* ForgotPasswordView.swift */,
 				877021961DA46AEF003F3FC4 /* RegistrationEmailView.swift */,
 				877021971DA46AEF003F3FC4 /* RegistrationProfileView.swift */,
 				877021981DA46AEF003F3FC4 /* RegistrationView.swift */,
@@ -182,6 +187,7 @@
 				8770218D1DA46AA8003F3FC4 /* LoginController.swift */,
 				8770218E1DA46AA8003F3FC4 /* MainViewController.swift */,
 				877021AF1DA46BE1003F3FC4 /* RegistrationController.swift */,
+				B3AA1DC31DB93C54009B1C11 /* ForgotPasswordController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -329,6 +335,7 @@
 				8770219E1DA46AEF003F3FC4 /* RegistrationEmailView.swift in Sources */,
 				877021B41DA46C5B003F3FC4 /* CurrentRouteView.swift in Sources */,
 				8770219B1DA46AEF003F3FC4 /* LoginView.swift in Sources */,
+				B3AA1DC61DB93D0A009B1C11 /* ForgotPasswordView.swift in Sources */,
 				877021A21DA46AEF003F3FC4 /* TitleViewButtonHub.swift in Sources */,
 				8734A50D1DA4653F006637E1 /* AppDelegate.swift in Sources */,
 				877021A11DA46AEF003F3FC4 /* TitleView.swift in Sources */,
@@ -337,6 +344,7 @@
 				877021AE1DA46B10003F3FC4 /* UIView+Extensions.swift in Sources */,
 				877021AC1DA46B10003F3FC4 /* UIColor+Extensions.swift in Sources */,
 				49E37CBA1DA6D41D0022FF1C /* Model.swift in Sources */,
+				B3AA1DC41DB93C54009B1C11 /* ForgotPasswordController.swift in Sources */,
 				CD9AD2971DA6B75E003C8A10 /* MyRoutesView.swift in Sources */,
 				877021AA1DA46B10003F3FC4 /* MWConstants.swift in Sources */,
 				877021A01DA46AEF003F3FC4 /* RegistrationView.swift in Sources */,
