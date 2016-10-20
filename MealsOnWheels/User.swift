@@ -14,6 +14,7 @@ class User: NSObject {
     static var email: String?
     static var uid: String?
     static var routes: Array<Route> = Array<Route>()
+    static var route: Route?
     var ref = FIRDatabase.database().reference()
     
     override init() {
@@ -22,13 +23,13 @@ class User: NSObject {
             if let user = user {
                 User.uid = user.uid
                 User.email = user.email
-                self.ref.child(User.uid!).child("paths").observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("users").child(User.uid!).child("paths").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.exists() {
-                        
-                        print((snapshot.value as? NSDictionary)?.allKeys)
-                        let routes = snapshot.value as? NSDictionary
-                        for (_, route) in routes! {
-                            User.routes.append(Route(dict: JSON(route)))
+                        let routes = snapshot.value as? NSArray
+                        for (route) in routes! {
+                            self.ref.child("paths").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                                User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
+                            })
                         }
                     }
 //                    commented out section is used to manually poppulate testing data
