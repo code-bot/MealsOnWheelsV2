@@ -47,6 +47,7 @@ class LoginController: UIViewController {
 //        }
 //
         configureView()
+        self.dismissKeyboardAtTap()
         //loginView.emailTF.becomeFirstResponder()
     }
     
