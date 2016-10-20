@@ -10,7 +10,7 @@ import Foundation
 import SwiftLoader
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var mainView = MainView();
     let currentView = CurrentRouteView(frame: CGRect(x: 0, y: MWConstants.navBarHeight + 20.0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight - MWConstants.navBarHeight - 20.0))
@@ -32,6 +32,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         configureView()
+        myRoutesView.tableView.delegate = self;
+        myRoutesView.tableView.dataSource = self;
+        myRoutesView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -48,5 +51,16 @@ class MainViewController: UIViewController {
             mainView.addSubview(myRoutesView)
             currentView.removeFromSuperview()
         }
+    }
+    
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("hi");
+        return Model.sharedInstance.routes.count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = myRoutesView.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        cell.textLabel?.text = Model.sharedInstance.routes[indexPath.row].name
+        return cell
     }
 }

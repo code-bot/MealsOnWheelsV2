@@ -22,9 +22,7 @@ class LoginController: UIViewController {
     
     func configureButtons() {
         loginView.loginBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
         loginView.signUpBtn.addTarget(self, action: #selector(switchToSignIn), for: .touchUpInside)
-        
     }
     
     
@@ -47,6 +45,7 @@ class LoginController: UIViewController {
 //        }
 //
         configureView()
+        self.dismissKeyboardAtTap()
         //loginView.emailTF.becomeFirstResponder()
     }
     
