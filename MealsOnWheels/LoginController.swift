@@ -80,11 +80,12 @@ class LoginController: UIViewController {
                 
                 _ = User()
                 User.uid = user?.uid
-                self.ref.child("users").child(User.uid!).child("paths").observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("users").child(User.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.exists() {
                         let routes = snapshot.value as? NSArray
                         for (route) in routes! {
-                            self.ref.child("paths").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                            self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                                let dict = JSON(snapshot as? NSDictionary)
                                 User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
                             })
                         }
