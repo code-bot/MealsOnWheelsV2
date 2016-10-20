@@ -86,7 +86,7 @@ class LoginController: UIViewController {
                         for (route) in routes! {
                             self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                 let dict = JSON(snapshot as? NSDictionary)
-                                User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
+                                //User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
                             })
                         }
                         User.route = User.routes.first

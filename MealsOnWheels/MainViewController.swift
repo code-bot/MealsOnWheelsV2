@@ -61,7 +61,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = myRoutesView.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         let route = Model.sharedInstance.routes[indexPath.row];
-        cell.textLabel?.text = route.path.name + "\t" + route.date + "\nUsers: " + route.user1 + " & " + route.user2
+        let cellText = "\(route.path.name)\t\(route.date)\nUsers: \(route.user1) & \(route.user2)"
+        cell.textLabel?.text = cellText
         return cell
     }
     
