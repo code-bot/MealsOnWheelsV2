@@ -11,68 +11,37 @@ import UIKit
 
 class MyRoutesView: UIView {
     
-    //Image Views
-    var logoImgView = UIImageView()
-    
-    //Text Fields
-    var emailTF = UITextField()
-    var passTF = UITextField()
+    //Table View
+    var tableView = UITableView()
     
     //Buttons
-    var loginBtn = UIButton()
-    var signUpBtn = UIButton()
-    var forgotPassBtn = UIButton()
     
-    func configureImageViews() {
-        logoImgView.image = MWConstants.titleImg
-        logoImgView.contentMode = .scaleAspectFit
-    }
-    
-    func configureTextFields() {
-        emailTF.placeholder = "Email"
-        
-        passTF.placeholder = "Pass"
-    }
     
     func configureButtons() {
-        loginBtn.setTitle("Login", for: .normal)
-        loginBtn.setTitleColor(UIColor.white, for: .normal)
-        loginBtn.backgroundColor = UIColor.clear
         
-        signUpBtn.setTitle("Sign Up", for: .normal)
-        signUpBtn.setTitleColor(UIColor.white, for: .normal)
-        signUpBtn.backgroundColor = UIColor.clear
     }
     
     func configureView() {
         self.backgroundColor = MWConstants.colors.loginDarkGradient
         
-        configureImageViews()
-        configureTextFields()
         configureButtons()
         
         //Auto Layout
         let viewsDict = [
-            "logo"  :   logoImgView,
-            "emTF"  :   emailTF,
-            "psTF"  :   passTF,
-            "login" :   loginBtn,
-            "signup":   signUpBtn
-            ] as [String : Any]
+            "tableView":tableView
+            ] as [String : UIView]
         
-        self.prepareViewsForAutoLayout(viewsDict as! [String : UIView])
+        self.prepareViewsForAutoLayout(viewsDict)
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[logo]-20-[login]", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-[tableView]-|", views: viewsDict))
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[logo]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
-        
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-[tableView]-|", views: viewsDict))
         
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureView()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
