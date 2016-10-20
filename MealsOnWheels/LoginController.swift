@@ -45,6 +45,7 @@ class LoginController: UIViewController {
 //        }
 //
         configureView()
+        self.dismissKeyboardAtTap()
         //loginView.emailTF.becomeFirstResponder()
     }
     
@@ -67,28 +68,33 @@ class LoginController: UIViewController {
 //    }
     
     func buttonAction(sender: UIButton!){
-        var animateBtn: UIButton = sender
-        FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passField.text!) { (user, error) in
+        SwiftLoader.show(title: "Signing in", animated: true)
+        let animateBtn: UIButton = sender
+        FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
+            SwiftLoader.hide()
             if error == nil {
                 
-                // display
-            } else {
+                _ = User()
                 User.uid = user?.uid
-                // Segue to main page
+                self.present(MainViewController(), animated: true, completion: {
+                    
+                })
+            } else {
+                let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+                self.present(signInAlert, animated: true, completion: nil)
             }
         }
         if animateBtn.isTouchInside == true {
             animateBtn.backgroundColor = UIColor.lightGray
-            }
+        }
     
     }
     
     func switchToSignIn(sender: UIButton){
         
-//        var signupView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
-//        self.view.addSubview(signupView)
-//        loginView.removeFromSuperview()
-//        
+        dismiss(animated: false, completion: nil)
+        present(RegistrationController(), animated: true, completion: nil)
 }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftLoader
 import UIKit
+import Firebase
 
 class RegistrationController : UIViewController {
     
@@ -41,6 +42,21 @@ class RegistrationController : UIViewController {
     }
     
     @IBAction func confirmPasswords(sender: AnyObject) {
+        SwiftLoader.show(title: "Signing Up", animated: true)
+        FIRAuth.auth()?.createUser(withEmail: registrationView.emailTF.text!, password: registrationView.passTF.text!) { (user, error) in
+            SwiftLoader.hide()
+            if error == nil {
+                
+                let ref = FIRDatabase.database().reference()
+                ref.child(user!.uid).child("email").setValue(self.emailTF.text)
+                _ = User()
+                
+            } else {
+                let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+                self.present(signUpAlert, animated: true, completion: nil)
+            }
+        }
 //        SwiftLoader.show(title: "Loading...", animated: true)
 //        User.init(email: emailField.text!, password: passField.text!, errorCase: {() -> Void in
 //            SwiftLoader.hide()

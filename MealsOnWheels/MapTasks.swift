@@ -23,10 +23,10 @@ class MapTasks : NSObject {
     
     
     static func getDirections(_ origin: String!, destination: String!, waypointStrings: Array<String>!, travelMode: AnyObject!, completionHandler: @escaping ((_ status: String, _ success: Bool, _ route: Route?) -> Void)) {
-        
         if let originLocation = origin {
             if let destinationLocation = destination {
                 var directionsURLString = baseURLDirections + "origin=" + originLocation + "&destination=" + destinationLocation
+                directionsURLString += "&waypoints=optimize:true"
                 if waypointStrings.count > 0  {
                     for waypoint in waypointStrings {
                         directionsURLString += "|"+(waypoint)
@@ -45,16 +45,22 @@ class MapTasks : NSObject {
                             let selectedRoute = json["routes"].arrayValue[0]
                             let overviewPolyline = selectedRoute["overview_polyline"]
                             let legs = selectedRoute["legs"]
-                            let order = selectedRoute["waypoints_order"].arrayObject as! Array<Int>
+                            let order = selectedRoute["waypoint_order"].arrayObject as! Array<Int>
                             let route = overviewPolyline["points"].stringValue
                             var waypoints = Array<Waypoint>()
                             for (idx,leg) in legs {
                                 let lastStep = leg["steps"].array?.last
-                                let destination = lastStep?["end_location"]
-                                let destinationLat = destination?["lat"].floatValue
-                                let destinationLng = destination?["lng"].floatValue
-                                let address = waypointStrings[order[Int(idx)!]]
-                                waypoints.append(Waypoint(address: address, phoneNumber: "", info: "", title: address, latitude: destinationLat!, longitude: destinationLng!, priority: order[Int(idx)!]))
+                                let destinationJSON = lastStep?["end_location"]
+                                let destinationLat = destinationJSON?["lat"].floatValue
+                                let destinationLng = destinationJSON?["lng"].floatValue
+                                var address = ""
+                                if Int(idx)! < order.count {
+                                    let indexOfA = order.index(of: Int(idx)!)
+                                    address = waypointStrings[indexOfA!]
+                                } else {
+                                    address = destination
+                                }
+                                waypoints.append(Waypoint(address: address, phoneNumber: "", info: "", title: address, latitude: destinationLat!, longitude: destinationLng!, priority: Int(idx)!))
                             }
                             var totalDistanceInMeter = UInt(0)
                             var totalDurationInSeconds = UInt(0)

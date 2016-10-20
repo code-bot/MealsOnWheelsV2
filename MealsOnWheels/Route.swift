@@ -36,10 +36,25 @@ class Route {
         totalMiles = dict["totalMiles"].doubleValue
         estimatedTime = dict["estimatedime"].stringValue
         overviewPolyline = dict["overviewPolyline"].stringValue
-        for waypoint in dict["waypoints"] {
-            
+        waypoints = PriorityQueue<Waypoint>(ascending: true)
+        for waypoint in dict["waypoints"].array! {
+            waypoints.push(Waypoint(dict: waypoint))
         }
-        
+    }
+    
+    func toDict() -> NSDictionary {
+        let dict = NSMutableDictionary()
+        dict["name"] = name
+        dict["description"] = description
+        dict["totalMiles"] = totalMiles
+        dict["estimatedTime"] = estimatedTime
+        dict["overviewPolyline"] = overviewPolyline
+        var temp = [NSDictionary]()
+        for waypoint in waypoints {
+            temp.append(waypoint.toDict())
+        }
+        dict["waypoints"] = temp
+        return dict
     }
     
     func getPath() -> GMSPath {
@@ -57,22 +72,4 @@ class Route {
             print("Can't use comgooglemaps:");
         }
     }
-    
-    func toDict() -> NSDictionary {
-        let dict = NSMutableDictionary()
-        dict["name"] = name
-        dict["description"] = description
-        dict["totalMiles"] = totalMiles
-        dict["estimatedTime"] = estimatedTime
-        dict["overviewPolyline"] = overviewPolyline
-        var temp = [Waypoint]()
-        for waypoint in waypoints {
-            temp.append(waypoint)
-        }
-        dict["waypoints"] = temp
-        return dict
-    }
-    
-    
-    
 }

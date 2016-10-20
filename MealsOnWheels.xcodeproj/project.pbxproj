@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491959521DB253C800C32723 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 491959511DB253C800C32723 /* GoogleService-Info.plist */; };
 		49E37CB81DA6D4140022FF1C /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CB71DA6D4140022FF1C /* Waypoint.swift */; };
 		49E37CBA1DA6D41D0022FF1C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CB91DA6D41D0022FF1C /* Model.swift */; };
 		49E37CBC1DA6D4250022FF1C /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CBB1DA6D4250022FF1C /* Route.swift */; };
@@ -35,10 +36,12 @@
 		877021B21DA46C52003F3FC4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021B11DA46C52003F3FC4 /* User.swift */; };
 		877021B41DA46C5B003F3FC4 /* CurrentRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */; };
 		A390881EE561903AFC702B3D /* Pods_MealsOnWheels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9119DF85FF584DF6CA7E69 /* Pods_MealsOnWheels.framework */; };
+		B3AA1DC21DB927B2009B1C11 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */; };
 		CD9AD2971DA6B75E003C8A10 /* MyRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		491959511DB253C800C32723 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49E37CB71DA6D4140022FF1C /* Waypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		49E37CB91DA6D41D0022FF1C /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		49E37CBB1DA6D4250022FF1C /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 		877021AF1DA46BE1003F3FC4 /* RegistrationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		877021B11DA46C52003F3FC4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentRouteView.swift; sourceTree = "<group>"; };
+		B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRoutesView.swift; sourceTree = "<group>"; };
 		FBA3529086D9763193E317C0 /* Pods-MealsOnWheels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsOnWheels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +126,7 @@
 				8734A50C1DA4653F006637E1 /* AppDelegate.swift */,
 				8734A5131DA4653F006637E1 /* Assets.xcassets */,
 				8734A5151DA4653F006637E1 /* LaunchScreen.storyboard */,
+				491959511DB253C800C32723 /* GoogleService-Info.plist */,
 				8734A5181DA4653F006637E1 /* Info.plist */,
 			);
 			path = MealsOnWheels;
@@ -135,6 +140,7 @@
 				877021A71DA46B10003F3FC4 /* UIColor+Extensions.swift */,
 				877021A81DA46B10003F3FC4 /* UILabel+Extensions.swift */,
 				877021A91DA46B10003F3FC4 /* UIView+Extensions.swift */,
+				B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */,
 			);
 			name = "Constants+Extensions";
 			sourceTree = "<group>";
@@ -254,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8734A5171DA4653F006637E1 /* LaunchScreen.storyboard in Resources */,
+				491959521DB253C800C32723 /* GoogleService-Info.plist in Resources */,
 				8734A5141DA4653F006637E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,6 +342,7 @@
 				877021A01DA46AEF003F3FC4 /* RegistrationView.swift in Sources */,
 				877021AB1DA46B10003F3FC4 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				877021B01DA46BE1003F3FC4 /* RegistrationController.swift in Sources */,
+				B3AA1DC21DB927B2009B1C11 /* UIViewController+Extensions.swift in Sources */,
 				877021A41DA46AFC003F3FC4 /* TitleViewController.swift in Sources */,
 				8702109F1DA6C0D9008C16D2 /* MainNavBar.swift in Sources */,
 				49E37CBC1DA6D4250022FF1C /* Route.swift in Sources */,
