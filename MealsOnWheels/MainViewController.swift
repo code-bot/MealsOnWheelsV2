@@ -35,6 +35,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         myRoutesView.tableView.delegate = self;
         myRoutesView.tableView.dataSource = self;
         myRoutesView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -59,8 +60,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = myRoutesView.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        let routes = Model.sharedInstance.routes[indexPath.row];
-        cell.textLabel?.text = routes.path.name
+        let route = Model.sharedInstance.routes[indexPath.row];
+        cell.textLabel?.text = route.path.name + "\t" + route.date + "\nUsers: " + route.user1 + " & " + route.user2
         return cell
+    }
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        //switch to waypoints view
+        let myWaypointsController = WaypointsController()
+        myWaypointsController.route = Model.sharedInstance.routes[indexPath.row]
+        self.present(myWaypointsController, animated: true, completion: nil)
     }
 }
