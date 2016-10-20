@@ -7,12 +7,16 @@
 //
 
 import Foundation
+import GoogleMaps
 import UIKit
 
 class CurrentRouteView: UIView {
     
     //Image Views
     var mapImage = UIImageView()
+    
+    //Map View
+    var mapView = GMSMapView()
     
     //Labels
     var routeTitleLbl = UILabel()
@@ -23,12 +27,18 @@ class CurrentRouteView: UIView {
     //Buttons
     var startBtn = UIButton()
     
-    var route = Model.sharedInstance.routes.first!
+    var route = User.routes.first!
     
     func configureImageViews() {
         mapImage.image = MWConstants.noImg
         mapImage.contentMode = .scaleAspectFill
         mapImage.clipsToBounds = true
+    }
+    
+    func configureMapView() {
+        
+        let routePath = GMSPolyline(path: route.getPath())
+        routePath.map = mapView
     }
     
     func configureLabels() {
