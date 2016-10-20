@@ -39,6 +39,8 @@
 		A390881EE561903AFC702B3D /* Pods_MealsOnWheels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9119DF85FF584DF6CA7E69 /* Pods_MealsOnWheels.framework */; };
 		B3AA1DC21DB927B2009B1C11 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */; };
 		CD6FE8741DB9382400B3D8E6 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6FE8731DB9382400B3D8E6 /* Path.swift */; };
+		CD6FE8761DB9407200B3D8E6 /* MyWaypointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6FE8751DB9407200B3D8E6 /* MyWaypointsView.swift */; };
+		CD6FE8781DB9421400B3D8E6 /* WaypointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6FE8771DB9421400B3D8E6 /* WaypointsController.swift */; };
 		CD9AD2971DA6B75E003C8A10 /* MyRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,8 @@
 		877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentRouteView.swift; sourceTree = "<group>"; };
 		B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CD6FE8731DB9382400B3D8E6 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		CD6FE8751DB9407200B3D8E6 /* MyWaypointsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWaypointsView.swift; sourceTree = "<group>"; };
+		CD6FE8771DB9421400B3D8E6 /* WaypointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointsController.swift; sourceTree = "<group>"; };
 		CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRoutesView.swift; sourceTree = "<group>"; };
 		FBA3529086D9763193E317C0 /* Pods-MealsOnWheels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsOnWheels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +181,7 @@
 				877021991DA46AEF003F3FC4 /* TitleView.swift */,
 				8770219A1DA46AEF003F3FC4 /* TitleViewButtonHub.swift */,
 				CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */,
+				CD6FE8751DB9407200B3D8E6 /* MyWaypointsView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				8770218D1DA46AA8003F3FC4 /* LoginController.swift */,
 				8770218E1DA46AA8003F3FC4 /* MainViewController.swift */,
 				877021AF1DA46BE1003F3FC4 /* RegistrationController.swift */,
+				CD6FE8771DB9421400B3D8E6 /* WaypointsController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -331,6 +337,7 @@
 				8770219D1DA46AEF003F3FC4 /* MainView.swift in Sources */,
 				49E37CB81DA6D4140022FF1C /* Waypoint.swift in Sources */,
 				877021AD1DA46B10003F3FC4 /* UILabel+Extensions.swift in Sources */,
+				CD6FE8781DB9421400B3D8E6 /* WaypointsController.swift in Sources */,
 				8770219F1DA46AEF003F3FC4 /* RegistrationProfileView.swift in Sources */,
 				877021901DA46AA8003F3FC4 /* LoginController.swift in Sources */,
 				8770219E1DA46AEF003F3FC4 /* RegistrationEmailView.swift in Sources */,
@@ -348,6 +355,7 @@
 				877021AA1DA46B10003F3FC4 /* MWConstants.swift in Sources */,
 				877021A01DA46AEF003F3FC4 /* RegistrationView.swift in Sources */,
 				877021AB1DA46B10003F3FC4 /* NSLayoutConstraint+Extensions.swift in Sources */,
+				CD6FE8761DB9407200B3D8E6 /* MyWaypointsView.swift in Sources */,
 				877021B01DA46BE1003F3FC4 /* RegistrationController.swift in Sources */,
 				CD6FE8741DB9382400B3D8E6 /* Path.swift in Sources */,
 				B3AA1DC21DB927B2009B1C11 /* UIViewController+Extensions.swift in Sources */,
