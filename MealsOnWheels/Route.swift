@@ -10,66 +10,44 @@ import Foundation
 import SwiftPriorityQueue
 import GoogleMaps
 import SwiftyJSON
+import Firebase
+var ref = FIRDatabase.database().reference()
 
 class Route {
-    var name: String
-    var description: String
-    var waypoints = PriorityQueue<Waypoint>(ascending: true)
-    var totalMiles: Double
-    var estimatedTime: String
-    var overviewPolyline: String
-    var currentWaypoint: Waypoint?
-    init(name: String, desc: String, waypoints: [Waypoint], miles: Double, time: String, overviewPolyline: String) {
-        self.name = name
-        self.description = desc
-        for waypoint in waypoints {
-            self.waypoints.push(waypoint)
-        }
-        self.estimatedTime = time
-        self.totalMiles = miles
-        self.overviewPolyline = overviewPolyline
+    var path: Path
+    var user1: String
+    var user2: String
+    var date: NSDate
+    
+    init(path: Path, user1: String, user2: String, date: Double) {
+        self.path = path
+        self.user1 = user1
+        self.user2 = user2
+        self.date = NSDate(timeIntervalSince1970: date)
     }
     
-    init(dict: JSON) {
-        name = dict["name"].stringValue
-        description = dict["description"].stringValue
-        totalMiles = dict["totalMiles"].doubleValue
-        estimatedTime = dict["estimatedime"].stringValue
-        overviewPolyline = dict["overviewPolyline"].stringValue
-        waypoints = PriorityQueue<Waypoint>(ascending: true)
-        for waypoint in dict["waypoints"].array! {
-            waypoints.push(Waypoint(dict: waypoint))
-        }
+//    init(dict: JSON) {
+//        ref.child("paths").child(dict["path"].stringValue).observeSingleEvent(of: .value, with: { (snapshot) in
+//            self.path = Path(dict: JSON(snapshot.value as? NSDictionary))
+//        })
+//        user1 = dict["user1"].stringValue
+//        user2 = dict["user2"].stringValue
+//        date = NSDate(timeIntervalSince1970: dict["date"].doubleValue)
+//    }
+    
+    init(dict: JSON, path: JSON) {
+        self.path = Path(dict: path)
+        user1 = dict["user1"].stringValue
+        user2 = dict["user2"].stringValue
+        date = NSDate(timeIntervalSince1970: dict["date"].doubleValue)
     }
     
     func toDict() -> NSDictionary {
         let dict = NSMutableDictionary()
-        dict["name"] = name
-        dict["description"] = description
-        dict["totalMiles"] = totalMiles
-        dict["estimatedTime"] = estimatedTime
-        dict["overviewPolyline"] = overviewPolyline
-        var temp = [NSDictionary]()
-        for waypoint in waypoints {
-            temp.append(waypoint.toDict())
-        }
-        dict["waypoints"] = temp
+        dict["user1"] = user1
+        dict["user2"] = user2
+        dict["path"] = path.toDict()
+        dict["date"] = date.timeIntervalSince1970
         return dict
-    }
-    
-    func getPath() -> GMSPath {
-        return GMSPath(fromEncodedPath: overviewPolyline)!
-    }
-    
-    func nextLeg() {
-        self.currentWaypoint = waypoints.pop() as Waypoint!
-        let htmlDestination = currentWaypoint?.address.addingPercentEscapes(using: String.Encoding.utf8)!
-        let directionsRequest = "comgooglemaps-x-callback:" + "?daddr=" + htmlDestination! + "&x-success=MOWapp:?resume=true&x-source=MOW"
-        let directionsURL = URL(string:directionsRequest);
-        if (UIApplication.shared.canOpenURL( URL(string: "comgooglemaps-x-callback:")!)) {
-            UIApplication.shared.openURL(directionsURL!)
-        } else {
-            print("Can't use comgooglemaps:");
-        }
     }
 }
