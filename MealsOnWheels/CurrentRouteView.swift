@@ -19,8 +19,8 @@ class CurrentRouteView: UIView {
     var mapView : GMSMapView!
     
     //Labels
-    var routeTitleLbl = UILabel()
-    var routeDescLbl = UILabel()
+    var pathTitleLbl = UILabel()
+    var pathDescLbl = UILabel()
     var totalMilesLbl = UILabel()
     var estTimeLbl = UILabel()
     
@@ -37,30 +37,30 @@ class CurrentRouteView: UIView {
     
     func configureMapView() {
         mapView = GMSMapView()
-        let routePath = route.getPath()
+        let routePath = route.path.getPath()
         let bounds = GMSCoordinateBounds(path: routePath)
         let camera = mapView.camera(for: bounds, insets: UIEdgeInsets())
         mapView.camera = camera!
         mapView.animate(toZoom: 14.0)
-        let routePolyline = GMSPolyline(path: route.getPath())
-        routePolyline.map = mapView
+        let pathPolyline = GMSPolyline(path: route.path.getPath())
+        pathPolyline.map = mapView
     }
     
     func configureLabels() {
-        routeTitleLbl.font = UIFont.systemFont(ofSize: 35.0)
-        routeTitleLbl.text = route.name
-        routeTitleLbl.textColor = UIColor.white
-        routeTitleLbl.textAlignment = .center
+        pathTitleLbl.font = UIFont.systemFont(ofSize: 35.0)
+        pathTitleLbl.text = route.path.name
+        pathTitleLbl.textColor = UIColor.white
+        pathTitleLbl.textAlignment = .center
         
-        routeDescLbl.text = route.description
-        routeDescLbl.textColor = UIColor.white
-        routeDescLbl.textAlignment = .center
+        pathDescLbl.text = route.path.description
+        pathDescLbl.textColor = UIColor.white
+        pathDescLbl.textAlignment = .center
         
-        totalMilesLbl.text = "Total Miles: " + String(describing: route.totalMiles)
+        totalMilesLbl.text = "Total Miles: " + String(describing: route.path.totalMiles)
         totalMilesLbl.textColor = UIColor.white
         totalMilesLbl.textAlignment = .left
         
-        estTimeLbl.text = "Estimated Time: " + route.estimatedTime
+        estTimeLbl.text = "Estimated Time: " + route.path.estimatedTime
         estTimeLbl.textColor = UIColor.white
         estTimeLbl.textAlignment = .left
     }
@@ -83,8 +83,8 @@ class CurrentRouteView: UIView {
         
         //Auto Layout
         let viewsDict = [
-            "title"     :   routeTitleLbl,
-            "desc"      :   routeDescLbl,
+            "title"     :   pathTitleLbl,
+            "desc"      :   pathDescLbl,
             "mapView"   :   mapView,
             "miles"     :   totalMilesLbl,
             "time"      :   estTimeLbl,
