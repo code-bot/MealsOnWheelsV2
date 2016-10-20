@@ -10,11 +10,12 @@
 import Foundation
 import GoogleMaps
 import SwiftyJSON
+import Firebase
 
 class MapTasks : NSObject {
     static let baseURLGeocode = "https:maps.googleapis.com/maps/api/geocode/json?"
-    
     static let baseURLDirections = "https:maps.googleapis.com/maps/api/directions/json?"
+    static let ref = FIRDatabase.database().reference()
     
     override init() {
         super.init()
@@ -22,7 +23,7 @@ class MapTasks : NSObject {
     
     
     
-    static func getDirections(_ origin: String!, destination: String!, waypointStrings: Array<String>!, travelMode: AnyObject!, completionHandler: @escaping ((_ status: String, _ success: Bool, _ route: Route?) -> Void)) {
+    static func getDirections(_ origin: String!, destination: String!, waypointStrings: Array<String>!, travelMode: AnyObject!, completionHandler: @escaping ((_ status: String, _ success: Bool, _ route: Path?) -> Void)) {
         if let originLocation = origin {
             if let destinationLocation = destination {
                 var directionsURLString = baseURLDirections + "origin=" + originLocation + "&destination=" + destinationLocation
@@ -46,7 +47,7 @@ class MapTasks : NSObject {
                             let overviewPolyline = selectedRoute["overview_polyline"]
                             let legs = selectedRoute["legs"]
                             let order = selectedRoute["waypoint_order"].arrayObject as! Array<Int>
-                            let route = overviewPolyline["points"].stringValue
+                            let pathPoly = overviewPolyline["points"].stringValue
                             var waypoints = Array<Waypoint>()
                             for (idx,leg) in legs {
                                 let lastStep = leg["steps"].array?.last
@@ -74,7 +75,13 @@ class MapTasks : NSObject {
                             let hours = mins/60
                             let days = hours/24
                             let totalDuration = "Duration: \(days) days, \(hours%24) hr, \(mins%60) min"
-                            completionHandler(status, true, Route(name: "", desc: "", waypoints: waypoints, miles: distanceInMiles, time: totalDuration, overviewPolyline: route))
+                            let firPath = ref.child(User.uid!).child("paths").childByAutoId()
+                            let key = firPath.key
+                            let path = Path(name: "", desc: "", waypoints: waypoints, miles: distanceInMiles, time: totalDuration, overviewPolyline: pathPoly, uid: key)
+                            firPath.setValue(path.toDict())
+                            
+                            
+                            completionHandler(status, true, path)
                         } else {
                             completionHandler(status, false, nil)
                         }

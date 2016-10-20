@@ -1,15 +1,15 @@
 //
-//  MyRoutesView.swift
+//  MyWaypointsView.swift
 //  MealsOnWheels
 //
-//  Created by Sunwoo Yim on 10/6/16.
-//  Copyright © 2016 Akhilesh. All rights reserved.
+//  Created by Sunwoo Yim on 10/20/16.
+//  Copyright © 2016 Sahaj Bhatt. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class MyRoutesView: UIView {
+class MyWaypointsView: UIView {
     
     //Table View
     var tableView = UITableView()
