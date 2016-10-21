@@ -38,14 +38,11 @@
 		877021B41DA46C5B003F3FC4 /* CurrentRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */; };
 		A390881EE561903AFC702B3D /* Pods_MealsOnWheels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9119DF85FF584DF6CA7E69 /* Pods_MealsOnWheels.framework */; };
 		B3AA1DC21DB927B2009B1C11 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */; };
-<<<<<<< HEAD
 		B3AA1DC41DB93C54009B1C11 /* ForgotPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA1DC31DB93C54009B1C11 /* ForgotPasswordController.swift */; };
 		B3AA1DC61DB93D0A009B1C11 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA1DC51DB93D0A009B1C11 /* ForgotPasswordView.swift */; };
-=======
 		CD6FE8741DB9382400B3D8E6 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6FE8731DB9382400B3D8E6 /* Path.swift */; };
 		CD6FE8761DB9407200B3D8E6 /* MyWaypointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6FE8751DB9407200B3D8E6 /* MyWaypointsView.swift */; };
 		CD6FE8781DB9421400B3D8E6 /* WaypointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6FE8771DB9421400B3D8E6 /* WaypointsController.swift */; };
->>>>>>> 91626dabb978a2a7d41ddda9d5f17be8d39ecf62
 		CD9AD2971DA6B75E003C8A10 /* MyRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,14 +81,11 @@
 		877021B11DA46C52003F3FC4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentRouteView.swift; sourceTree = "<group>"; };
 		B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		B3AA1DC31DB93C54009B1C11 /* ForgotPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
 		B3AA1DC51DB93D0A009B1C11 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
-=======
 		CD6FE8731DB9382400B3D8E6 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		CD6FE8751DB9407200B3D8E6 /* MyWaypointsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWaypointsView.swift; sourceTree = "<group>"; };
 		CD6FE8771DB9421400B3D8E6 /* WaypointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaypointsController.swift; sourceTree = "<group>"; };
->>>>>>> 91626dabb978a2a7d41ddda9d5f17be8d39ecf62
 		CD9AD2961DA6B75E003C8A10 /* MyRoutesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRoutesView.swift; sourceTree = "<group>"; };
 		FBA3529086D9763193E317C0 /* Pods-MealsOnWheels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsOnWheels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,11 +179,8 @@
 				877021B31DA46C5B003F3FC4 /* CurrentRouteView.swift */,
 				875FF3B51DB93CF0009D4E74 /* CurrentWaypointView.swift */,
 				877021931DA46AEF003F3FC4 /* LoginView.swift */,
-<<<<<<< HEAD
 				B3AA1DC51DB93D0A009B1C11 /* ForgotPasswordView.swift */,
 				877021961DA46AEF003F3FC4 /* RegistrationEmailView.swift */,
-=======
->>>>>>> 91626dabb978a2a7d41ddda9d5f17be8d39ecf62
 				877021971DA46AEF003F3FC4 /* RegistrationProfileView.swift */,
 				877021981DA46AEF003F3FC4 /* RegistrationView.swift */,
 				877021991DA46AEF003F3FC4 /* TitleView.swift */,
@@ -207,12 +198,9 @@
 				8770218D1DA46AA8003F3FC4 /* LoginController.swift */,
 				8770218E1DA46AA8003F3FC4 /* MainViewController.swift */,
 				877021AF1DA46BE1003F3FC4 /* RegistrationController.swift */,
-<<<<<<< HEAD
 				B3AA1DC31DB93C54009B1C11 /* ForgotPasswordController.swift */,
-=======
 				7BFC64381DB9437E005B80BF /* RegistrationProfileController.swift */,
 				CD6FE8771DB9421400B3D8E6 /* WaypointsController.swift */,
->>>>>>> 91626dabb978a2a7d41ddda9d5f17be8d39ecf62
 			);
 			name = Controller;
 			sourceTree = "<group>";
