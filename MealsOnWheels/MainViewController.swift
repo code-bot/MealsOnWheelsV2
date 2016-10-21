@@ -55,12 +55,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Model.sharedInstance.routes.count
+        return User.routes.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = myRoutesView.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        let route = Model.sharedInstance.routes[indexPath.row];
+        let route = User.routes[indexPath.row];
         let cellText = "\(route.path.name)\t\(route.date)\nUsers: \(route.user1) & \(route.user2)"
         cell.textLabel?.text = cellText
         return cell
@@ -70,7 +70,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //switch to waypoints view
         let myWaypointsController = WaypointsController()
         print("Move to next view")
-        myWaypointsController.route = Model.sharedInstance.routes[indexPath.row]
+        myWaypointsController.route = User.routes[indexPath.row]
         self.present(myWaypointsController, animated: true, completion: nil)
     }
 }

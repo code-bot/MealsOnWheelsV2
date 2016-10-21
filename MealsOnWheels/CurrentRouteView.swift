@@ -24,7 +24,7 @@ class CurrentRouteView: UIView {
     //Buttons
     var startBtn = UIButton()
     
-    var route = Model.sharedInstance.routes.last!
+    var route = User.routes.last!
     
     func configureMapView() {
         mapView = GMSMapView()
