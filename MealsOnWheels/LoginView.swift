@@ -12,7 +12,8 @@ import UIKit
 class LoginView: UIView {
     
     // Labels
-    var underlineLabel = UILabel()
+    var emailUnderlineLabel = UILabel()
+    var passUnderlineLabel = UILabel()
     
     //Image Views
     var logoImgView = UIImageView()
@@ -29,7 +30,7 @@ class LoginView: UIView {
     
     
     func configureImageViews() {
-        logoImgView.image = MWConstants.titleImg
+        logoImgView.image = MWConstants.logo
         logoImgView.contentMode = .scaleAspectFit
     }
     
@@ -44,42 +45,27 @@ class LoginView: UIView {
     // Setting text properties
         
         emailTF.placeholder = "Email"
-        emailTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
+        emailTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         emailTF.textColor = UIColor.white
         //emailTF.textAlignment = NSTextAlignment.center
         
         
         passwordTF.placeholder = "Password"
-        passwordTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
+        passwordTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passwordTF.textColor = UIColor.white
         passwordTF.isSecureTextEntry = true
         //passwordTF.textAlignment = NSTextAlignment.center
         
     }
     
+    
     func configureLabels(){
         
-        underlineLabel.textColor = UIColor.white
+        emailUnderlineLabel.textColor = UIColor.white
+        passUnderlineLabel.textColor = UIColor.white
         
-        func setUnderline() -> String{
-        
-            var num: Float = 0.0
-            var underlines: Float = 0.0
-            var finalS = ""
-            var rounded = 0
-        
-            num = Float(MWConstants.screenWidth) - Float(MWConstants.loginFieldsOffset*2)
-            underlines = round(num / 8)
-            rounded = Int(underlines)
-        
-            for _ in (0)...rounded{
-                finalS += "_"
-                                }
-            return finalS
-        }
-        
-        underlineLabel.text = setUnderline()
-        
+        emailUnderlineLabel.text = emailUnderlineLabel.setUnderline()
+        passUnderlineLabel.text = passUnderlineLabel.setUnderline()
     }
 
     
@@ -110,10 +96,6 @@ class LoginView: UIView {
         forgotPasswordBtn.setTitleColor(UIColor.lightText, for: UIControlState())
         forgotPasswordBtn.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 12.0)
         
-        
-
-        
-        
     }
     
     
@@ -139,19 +121,21 @@ class LoginView: UIView {
             "login" :   loginBtn,
             "signup":   signUpBtn,
             "forgotPw": forgotPasswordBtn,
-            "label": underlineLabel
+            "elabel": emailUnderlineLabel,
+            "plabel": passUnderlineLabel
             ] as [String : UIView]
         
         self.prepareViewsForAutoLayout(viewsDict)
 
    
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-20-[emTF]-1-[label]-15-[psTF]-40-[login]-10-[forgotPw]-30-[signup]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-60-[emTF]-1-[elabel]-15-[psTF]-1-[plabel]-40-[login]-10-[forgotPw]-40-[signup]|", views: viewsDict))
 //
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[emTF]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[label]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[elabel]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[plabel]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
 
         
         

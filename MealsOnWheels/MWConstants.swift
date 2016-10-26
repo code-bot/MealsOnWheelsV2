@@ -23,6 +23,7 @@ struct MWConstants {
     static let titleBtnHeight = CGFloat(40)
     static let titleBtnHOffset = CGFloat((screenWidth / 2) - (titleBtnWidth / 2))
     static let titleImg = UIImage(named: "Title")
+    static let logo = UIImage(named:"Logo")
     static let noImg = UIImage(named: "NoImage")
     
     static let tabBtnHeight = CGFloat(50.0)

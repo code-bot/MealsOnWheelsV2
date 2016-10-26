@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 
 class ForgotPasswordView: UIView {
+    //Labels
+    var emailLabel = UILabel()
     
     //Image Views
     var logoImgView = UIImageView()
@@ -13,8 +15,14 @@ class ForgotPasswordView: UIView {
     var submitBtn = UIButton()
     
     
+    func configureLabels(){
+        emailLabel.textColor = UIColor.white
+        
+        emailLabel.text = emailLabel.setUnderline()
+    }
+    
     func configureImageViews() {
-        logoImgView.image = MWConstants.titleImg
+        logoImgView.image = MWConstants.logo
         logoImgView.contentMode = .scaleAspectFit
     }
     
@@ -26,8 +34,8 @@ class ForgotPasswordView: UIView {
         
         // Setting text properties
         
-        emailTF.placeholder = " Email"
-        emailTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
+        emailTF.placeholder = "Email"
+        emailTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         emailTF.textColor = UIColor.white
         //emailTF.textAlignment = NSTextAlignment.center
         
@@ -53,10 +61,6 @@ class ForgotPasswordView: UIView {
         submitBtn.layer.borderColor = UIColor.white.cgColor
         submitBtn.layer.borderWidth = 1
         
-        
-        
-        
-        
     }
     
     
@@ -72,22 +76,26 @@ class ForgotPasswordView: UIView {
         configureTextFields()
         configureButtons()
         textFieldDidBeginEditing(emailTF)
+        configureLabels()
         
         //Auto Layout
         let viewsDict = [
             "title"  :   logoImgView,
             "emTF"  :   emailTF,
+            "elabel" : emailLabel,
             "submit" :   submitBtn
             ] as [String : UIView]
         
         self.prepareViewsForAutoLayout(viewsDict)
         
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-100-[emTF]-40-[submit]-200-|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-100-[emTF]-1-[elabel]-40-[submit]-200-|", views: viewsDict))
         //
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[emTF]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[elabel]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[submit]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         

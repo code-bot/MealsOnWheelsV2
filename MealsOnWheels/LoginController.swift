@@ -46,7 +46,6 @@ class LoginController: UIViewController {
         self.dismissKeyboardAtTap()
     }
     
-    
     func buttonAction(sender: UIButton!){
         SwiftLoader.show(title: "Signing in", animated: true)
         let animateBtn: UIButton = sender
@@ -86,6 +85,7 @@ class LoginController: UIViewController {
                 self.present(signInAlert, animated: true, completion: nil)
             }
         }
+        
     }
     
     func switchToSignIn(sender: UIButton){
