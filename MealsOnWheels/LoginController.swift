@@ -80,11 +80,12 @@ class LoginController: UIViewController {
                 }
             } else {
                 SwiftLoader.hide()
-                let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                let signInAlert = UIAlertController(title: "Failed Sign In", message: "Please enter a correct email", preferredStyle: UIAlertControllerStyle.alert)
                 signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
                 self.present(signInAlert, animated: true, completion: nil)
             }
         }
+       // error?.localizedDescription
         
     }
     
