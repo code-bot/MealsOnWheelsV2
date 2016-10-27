@@ -46,6 +46,10 @@ class LoginController: UIViewController {
         self.dismissKeyboardAtTap()
     }
     
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
     func buttonAction(sender: UIButton!){
         SwiftLoader.show(title: "Signing in", animated: true)
         let animateBtn: UIButton = sender

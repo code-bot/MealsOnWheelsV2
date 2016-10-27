@@ -47,6 +47,9 @@ class ForgotPasswordController: UIViewController{
 //        self.view.addGestureRecognizer(recognizer)
     }
     
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
     
     func swipeLeft(){
         dismiss(animated: false, completion: nil)

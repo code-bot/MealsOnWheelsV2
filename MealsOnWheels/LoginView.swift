@@ -128,7 +128,7 @@ class LoginView: UIView {
         self.prepareViewsForAutoLayout(viewsDict)
 
    
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-60-[emTF]-1-[elabel]-15-[psTF]-1-[plabel]-40-[login]-10-[forgotPw]-40-[signup]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-40-[emTF]-1-[elabel]-15-[psTF]-1-[plabel]-40-[login]-10-[forgotPw]-70-[signup]-10-|", views: viewsDict))
 //
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
         
