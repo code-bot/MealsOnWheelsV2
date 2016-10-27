@@ -61,16 +61,24 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = myRoutesView.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         let route = User.routes[indexPath.row];
-        let cellText = "\(route.path.name)\t\(route.date)\nUsers: \(route.user1) & \(route.user2)"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        let convertedDate = dateFormatter.string(from: route.date as Date)
+        let cellText = "\(route.path.name)\t\(convertedDate)\nUsers: \(route.user1Name) & \(route.user2Name)"
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.textLabel?.text = cellText
         return cell
     }
-    
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //switch to waypoints view
         let myWaypointsController = WaypointsController()
-        print("Move to next view")
         myWaypointsController.route = User.routes[indexPath.row]
-        self.present(myWaypointsController, animated: true, completion: nil)
+        myWaypointsController.myWaypointsView.tableView.delegate = myWaypointsController;
+        myWaypointsController.myWaypointsView.tableView.dataSource = myWaypointsController;
+        myWaypointsController.myWaypointsView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        mainView.addSubview(myWaypointsController.myWaypointsView)
+        myRoutesView.removeFromSuperview()
+        //self.present(myWaypointsController, animated: true, completion: nil)
     }
 }

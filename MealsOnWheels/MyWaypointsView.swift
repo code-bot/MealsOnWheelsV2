@@ -14,17 +14,8 @@ class MyWaypointsView: UIView {
     //Table View
     var tableView = UITableView()
     
-    //Buttons
-    
-    
-    func configureButtons() {
-        
-    }
-    
     func configureView() {
         self.backgroundColor = MWConstants.colors.loginDarkGradient
-        
-        configureButtons()
         
         //Auto Layout
         let viewsDict = [

@@ -10,27 +10,10 @@ import Foundation
 import SwiftLoader
 import UIKit
 
-class WaypointsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var route: Route!
     let myWaypointsView = MyWaypointsView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
-    
-    func configureView() {
-        self.view.addSubview(myWaypointsView)
-    }
-    
-    override func viewDidLoad() {
-        configureView()
-        
-        myWaypointsView.tableView.delegate = self;
-        myWaypointsView.tableView.dataSource = self;
-        myWaypointsView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
-    }
-    
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
-    }
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
         return route.path.waypoints.count
