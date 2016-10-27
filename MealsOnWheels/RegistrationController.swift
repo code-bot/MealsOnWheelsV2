@@ -10,6 +10,7 @@ import Foundation
 import SwiftLoader
 import UIKit
 import Firebase
+import SwiftyJSON
 
 class RegistrationController : UIViewController {
     
@@ -20,10 +21,12 @@ class RegistrationController : UIViewController {
     @IBOutlet weak var welLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     var passConfirm = false
+    var ref = FIRDatabase.database().reference()
     var registrationView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-         registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        registrationView.nextButton.addTarget(self, action: #selector(confirmPasswords), for: .touchUpInside)
     }
     
     func configureView() {
@@ -45,20 +48,43 @@ class RegistrationController : UIViewController {
         configureView()
     }
     
-    @IBAction func confirmPasswords(sender: AnyObject) {
+    func confirmPasswords(sender: AnyObject) {
         SwiftLoader.show(title: "Signing Up", animated: true)
-        FIRAuth.auth()?.createUser(withEmail: registrationView.emailTF.text!, password: registrationView.passTF.text!) { (user, error) in
+        if registrationView.passTF.text != registrationView.passConfirmTF.text {
             SwiftLoader.hide()
-            if error == nil {
-                
-                let ref = FIRDatabase.database().reference()
-                ref.child(user!.uid).child("email").setValue(self.emailTF.text)
+            let signUpAlert = UIAlertController(title: "Failed Sign Up", message: "passwords do not match", preferredStyle: UIAlertControllerStyle.alert)
+            signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+            self.present(signUpAlert, animated: true, completion: nil)
+        } else {
+            FIRAuth.auth()?.createUser(withEmail: registrationView.emailTF.text!, password: registrationView.passTF.text!) { (user, error) in
                 _ = User()
-                
-            } else {
-                let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
-                signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
-                self.present(signUpAlert, animated: true, completion: nil)
+                User.uid = user?.uid
+                SwiftLoader.hide()
+                if error == nil {
+                    self.ref.child("users").child(User.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
+                        if snapshot.exists() {
+                            let routes = snapshot.value as? NSArray
+                            for (route) in routes! {
+                                self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                                    SwiftLoader.hide()
+                                    User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
+                                    User.route = User.routes.first
+                                    self.present(MainViewController(), animated: true, completion: {
+                                    })
+                                })
+                            }
+                        } else {
+                            //poppulate with an emty route
+                        }
+                    }) { (error) in
+                        print(error.localizedDescription)
+                        SwiftLoader.hide()
+                    }
+                } else {
+                    let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error?.localizedDescription, preferredStyle:  UIAlertControllerStyle.alert)
+                    signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+                    self.present(signUpAlert, animated: true, completion: nil)
+                }
             }
         }
 //        SwiftLoader.show(title: "Loading...", animated: true)

@@ -32,7 +32,6 @@ class RegistrationView: UIView {
         emailTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
         passTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
         passConfirmTF.font = UIFont(name: "Avenir-Medium", size: 18.0)
-
         
         emailTF.backgroundColor = UIColor.clear
         emailTF.alpha = 0.5

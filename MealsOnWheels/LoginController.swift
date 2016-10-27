@@ -26,7 +26,6 @@ class LoginController: UIViewController {
     func configureButtons() {
         loginView.loginBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         loginView.signUpBtn.addTarget(self, action: #selector(switchToSignIn), for: .touchUpInside)
-        
         loginView.forgotPasswordBtn.addTarget(self, action: #selector(switchToForgotPassword), for: .touchUpInside)
     }
     
@@ -84,7 +83,7 @@ class LoginController: UIViewController {
                 }
             } else {
                 SwiftLoader.hide()
-                let signInAlert = UIAlertController(title: "Failed Sign In", message: "Please enter a correct email", preferredStyle: UIAlertControllerStyle.alert)
+                let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
                 signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
                 self.present(signInAlert, animated: true, completion: nil)
             }

@@ -20,8 +20,7 @@ class ForgotPasswordController: UIViewController{
     var forgotPassword = ForgotPasswordView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-        
-        
+        forgotPassword.submitBtn.addTarget(self, action: #selector(resetPassword(sender:)), for: .touchUpInside)
     }
     
     
@@ -55,6 +54,22 @@ class ForgotPasswordController: UIViewController{
         dismiss(animated: false, completion: nil)
         present(LoginController(), animated: true, completion: nil)
     
+    }
+    
+    func resetPassword(sender: UIButton){
+        FIRAuth.auth()?.sendPasswordReset(withEmail: forgotPassword.emailTF.text!) { error in
+            if let error = error {
+                let resetAlert = UIAlertController(title: "Reset Password", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                resetAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+                self.present(resetAlert, animated: true, completion: nil)
+            } else {
+                let resetAlert = UIAlertController(title: "Reset Password", message: "email successfully sent", preferredStyle: UIAlertControllerStyle.alert)
+                resetAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+                self.dismiss(animated: false, completion: nil)
+                self.present(resetAlert, animated: true, completion: nil)
+                // Password reset email sent.
+            }
+        }
     }
     
 //    func buttonAction(sender: UIButton!){
