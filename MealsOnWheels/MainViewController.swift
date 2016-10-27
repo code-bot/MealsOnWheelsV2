@@ -18,7 +18,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func configureButtons() {
         mainView.tabView.currentRoute.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
-        
+        currentView.nextBtn.addTarget(self, action: #selector(nextLeg), for: .touchUpInside)
         mainView.tabView.myRoutes.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
     }
     
@@ -80,5 +80,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         mainView.addSubview(myWaypointsController.myWaypointsView)
         myRoutesView.removeFromSuperview()
         //self.present(myWaypointsController, animated: true, completion: nil)
+    }
+    
+    func nextLeg() {
+        User.route?.path.nextLeg()
     }
 }
