@@ -13,7 +13,7 @@ class ForgotPasswordView: UIView {
     
     //Buttons
     var submitBtn = UIButton()
-    
+    var backBtn = UIButton()
     
     func configureLabels(){
         emailLabel.textColor = UIColor.white
@@ -89,7 +89,7 @@ class ForgotPasswordView: UIView {
         self.prepareViewsForAutoLayout(viewsDict)
         
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-100-[emTF]-1-[elabel]-40-[submit]-200-|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[title]-90-[emTF]-1-[elabel]-40-[submit]-200-|", views: viewsDict))
         //
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
         

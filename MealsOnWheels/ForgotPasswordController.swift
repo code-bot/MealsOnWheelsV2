@@ -31,6 +31,10 @@ class ForgotPasswordController: UIViewController{
         
         self.view.addSubview(forgotPassword)
         
+        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
+        recognizer.direction = .right
+        self.view.addGestureRecognizer(recognizer)
+        
         
     }
     
@@ -38,8 +42,17 @@ class ForgotPasswordController: UIViewController{
         
         configureView()
         self.dismissKeyboardAtTap()
+//        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
+//        recognizer.direction = .left
+//        self.view.addGestureRecognizer(recognizer)
     }
     
+    
+    func swipeLeft(){
+        dismiss(animated: false, completion: nil)
+        present(LoginController(), animated: true, completion: nil)
+    
+    }
     
 //    func buttonAction(sender: UIButton!){
 //        SwiftLoader.show(title: "Signing in", animated: true)
