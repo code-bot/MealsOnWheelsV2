@@ -20,6 +20,11 @@ class RegistrationProfileView: UIView {
     var lastNameTF = UITextField()
     var phoneNumberTF = UITextField()
     
+    //Labels
+    var firstNameLabel = UILabel()
+    var lastNameLabel = UILabel()
+    var phoneNumberLabel = UILabel()
+    
     //Buttons
     var photoimageBtn = UIButton()
     var signUpBtn = UIButton()
@@ -34,12 +39,12 @@ class RegistrationProfileView: UIView {
         firstNameTF.layer.cornerRadius = 8.0
         lastNameTF.layer.cornerRadius = 8.0
         phoneNumberTF.layer.cornerRadius = 8.0
-        firstNameTF.layer.borderWidth = 1.5
-        firstNameTF.layer.borderColor = UIColor.lightGray.cgColor
-        lastNameTF.layer.borderWidth = 1.5
-        lastNameTF.layer.borderColor = UIColor.lightGray.cgColor
-        phoneNumberTF.layer.borderWidth = 1.5
-        phoneNumberTF.layer.borderColor = UIColor.lightGray.cgColor
+//        firstNameTF.layer.borderWidth = 1.5
+//        firstNameTF.layer.borderColor = UIColor.lightGray.cgColor
+//        lastNameTF.layer.borderWidth = 1.5
+//        lastNameTF.layer.borderColor = UIColor.lightGray.cgColor
+//        phoneNumberTF.layer.borderWidth = 1.5
+//        phoneNumberTF.layer.borderColor = UIColor.lightGray.cgColor
     
         firstNameTF.placeholder = "First Name"
         lastNameTF.placeholder = "Last Name"
@@ -59,10 +64,21 @@ class RegistrationProfileView: UIView {
         
     }
     
+    func configureLabels() {
+        firstNameLabel.textColor = UIColor.white
+        lastNameLabel.textColor = UIColor.white
+        phoneNumberLabel.textColor = UIColor.white
+    
+        firstNameLabel.text = firstNameLabel.setUnderline()
+        lastNameLabel.text = lastNameLabel.setUnderline()
+        phoneNumberLabel.text = phoneNumberLabel.setUnderline()
+    }
+    
+    
     func configureButtons() {
         photoimageBtn.backgroundColor = MWConstants.colors.lightBackground
         photoimageBtn.setImage(#imageLiteral(resourceName: "usericon"), for: .normal)
-        photoimageBtn.layer.cornerRadius = 35.0
+        //photoimageBtn.layer.cornerRadius = 35.0
         
         signUpBtn.setTitle("Sign Up", for: UIControlState())
         signUpBtn.setTitleColor(UIColor.white, for: UIControlState())
@@ -78,26 +94,36 @@ class RegistrationProfileView: UIView {
         self.backgroundColor = MWConstants.colors.loginLightGradient
         configureButtons()
         configureTextFields()
+        configureLabels()
         
         let viewsDict = [
             "photo"     :   photoimageBtn,
             "firstName" :   firstNameTF,
+            "firstLine" :   firstNameLabel,
             "lastName"  :   lastNameTF,
+            "lastLine"  :   lastNameLabel,
             "phoneNum"  :   phoneNumberTF,
+            "phoneLine" :   phoneNumberLabel,
             "signup"    :   signUpBtn,
         ] as [String:Any]
         
         self.prepareViewsForAutoLayout(viewsDict as! [String : UIView])
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-50-[photo]-35-[firstName]-25-[lastName]-25-[phoneNum]-50-[signup]", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-10-[photo]-35-[firstName]-1-[firstLine]-24-[lastName]-1-[lastLine]-24-[phoneNum]-1-[phoneLine]-49-[signup]", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[photo]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[firstName]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[firstLine]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[lastName]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[lastLine]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[phoneNum]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[phoneLine]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[signup]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
     }

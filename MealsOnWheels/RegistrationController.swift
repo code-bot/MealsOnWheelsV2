@@ -26,7 +26,8 @@ class RegistrationController : UIViewController {
     
     func configureButtons() {
         registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        registrationView.nextButton.addTarget(self, action: #selector(confirmPasswords), for: .touchUpInside)
+        registrationView.nextButton.addTarget(self, action: #selector(confirmPasswords),for: .touchUpInside)
+        registrationView.nextButton.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
     }
     
     func configureView() {
@@ -130,6 +131,12 @@ class RegistrationController : UIViewController {
         dismiss(animated: false, completion: nil)
         present(LoginController(), animated: true, completion: nil)
     }
+    
+    func nextPage(sender: UIButton){
+        dismiss(animated: false, completion: nil)
+        present(RegistrationProfileController(), animated: true, completion: nil)
+    }
+    
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if (identifier == "Sign Up") {
