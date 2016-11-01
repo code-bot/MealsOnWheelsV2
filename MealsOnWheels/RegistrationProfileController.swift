@@ -19,12 +19,18 @@ class RegistrationProfileController : UIViewController {
     @IBOutlet weak var signupbtn: UIButton!
     @IBOutlet weak var phoneNumberTF: UITextView!
     
-    var registrationView = RegistrationProfileView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
+    var registrationProfileView = RegistrationProfileView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
         
     }
+
+    func configureView() {
+        configureButtons()
+        self.view.addSubview(registrationProfileView)
+    }
     
-    
-    
+    override func viewDidLoad() {
+        configureView()
+    }
 }
