@@ -41,9 +41,6 @@ class ForgotPasswordController: UIViewController{
         
         configureView()
         self.dismissKeyboardAtTap()
-//        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
-//        recognizer.direction = .left
-//        self.view.addGestureRecognizer(recognizer)
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -72,42 +69,6 @@ class ForgotPasswordController: UIViewController{
         }
     }
     
-//    func buttonAction(sender: UIButton!){
-//        SwiftLoader.show(title: "Signing in", animated: true)
-//        let animateBtn: UIButton = sender
-//        FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
-//            SwiftLoader.hide()
-//            if error == nil {
-//                
-//                _ = User()
-//                User.uid = user?.uid
-//                self.present(MainViewController(), animated: true, completion: {
-//                    
-//                })
-//            } else {
-//                let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
-//                signInAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
-//                self.present(signInAlert, animated: true, completion: nil)
-//            }
-//        }
-//        
-//        //animateBtn .setTitle("Logging In...", for: .highlighted)
-//    }
-    
-//    func switchToSignIn(sender: UIButton){
-//        
-//        //dismiss(animated: false, completion: nil)
-//        present(RegistrationController(), animated: true, completion: nil)
-//        dismiss(animated: false, completion: nil)
-//    }
-    
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        if (identifier == "login") {
-//            return loginSuccess
-//        } else {
-//            return true
-//        }
-//    }
 
 
 }

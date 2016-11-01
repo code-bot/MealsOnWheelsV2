@@ -88,7 +88,6 @@ class LoginController: UIViewController {
                 self.present(signInAlert, animated: true, completion: nil)
             }
         }
-       // error?.localizedDescription
         
     }
     
