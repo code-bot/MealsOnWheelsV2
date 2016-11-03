@@ -12,17 +12,18 @@ import UIKit
 class MainNavBar: UIView {
     
     //Buttons
-    var signOutBtn = UIButton()
-    var profileBtn = UIButton()
+    var leftBtn = UIButton()
+    var rightBtn = UIButton()
     
     func configureButtons() {
-        signOutBtn.setTitle("Sign Out", for: .normal)
-        signOutBtn.setTitleColor(UIColor.white, for: .normal)
-        signOutBtn.backgroundColor = UIColor.clear
+        //changes text to "Back" in MainViewController when the user clicks on specific route in MyRoutes
+        leftBtn.setTitle("", for: .normal)
+        leftBtn.setTitleColor(UIColor.white, for: .normal)
+        leftBtn.backgroundColor = UIColor.clear
         
-        profileBtn.setTitle("Profile", for: .normal)
-        profileBtn.setTitleColor(UIColor.white, for: .normal)
-        profileBtn.backgroundColor = UIColor.clear
+        rightBtn.setTitle("Settings", for: .normal)
+        rightBtn.setTitleColor(UIColor.white, for: .normal)
+        rightBtn.backgroundColor = UIColor.clear
     }
     
     func configureView() {
@@ -31,17 +32,17 @@ class MainNavBar: UIView {
         configureButtons()
         
         let viewsDict = [
-            "signOut"   :   signOutBtn,
-            "profile"   :   profileBtn
+            "leftBtn"   :   leftBtn,
+            "rightBtn"   :   rightBtn
         ] as [String: UIView]
         
         self.prepareViewsForAutoLayout(viewsDict)
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|[signOut]|", views: viewsDict))
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|[profile]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|[leftBtn]|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|[rightBtn]|", views: viewsDict))
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-15-[signOut]", views: viewsDict))
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:[profile]-15-|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-15-[leftBtn]", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:[rightBtn]-15-|", views: viewsDict))
     }
     
     convenience init() {
