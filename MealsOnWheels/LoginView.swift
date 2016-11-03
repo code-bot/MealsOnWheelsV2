@@ -44,18 +44,16 @@ class LoginView: UIView {
         
     // Setting text properties
         
-        emailTF.placeholder = "Email"
+
+        emailTF.attributedPlaceholder = NSAttributedString(string: "Enter Email", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
         emailTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         emailTF.textColor = UIColor.white
-        //emailTF.textAlignment = NSTextAlignment.center
+
         
-        
-        passwordTF.placeholder = "Password"
+        passwordTF.attributedPlaceholder = NSAttributedString(string: "Enter Password", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
         passwordTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passwordTF.textColor = UIColor.white
         passwordTF.isSecureTextEntry = true
-        //passwordTF.textAlignment = NSTextAlignment.center
-        
     }
     
     

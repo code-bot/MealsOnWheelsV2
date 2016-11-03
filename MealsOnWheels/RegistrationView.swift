@@ -41,21 +41,16 @@ class RegistrationView: UIView {
     func configureTextFields() {
         
         emailTF.becomeFirstResponder()
+    
+        emailTF.attributedPlaceholder = NSAttributedString(string: "Enter Email", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
         
-        emailTF.placeholder = "Email Address"
-        passConfirmTF.placeholder = "Re-enter Password"
-        passTF.placeholder = "Password"
+        passTF.attributedPlaceholder = NSAttributedString(string: "Enter Password", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
+
+        passConfirmTF.attributedPlaceholder = NSAttributedString(string: "Re-enter Password", attributes: [NSForegroundColorAttributeName:UIColor.lightText])
         
         emailTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passConfirmTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
-        
-        emailTF.backgroundColor = UIColor.clear
-        emailTF.alpha = 0.5
-        passTF.backgroundColor = UIColor.clear
-        passTF.alpha = 0.5
-        passConfirmTF.backgroundColor = UIColor.clear
-        passConfirmTF.alpha = 0.5
         
         emailTF.textColor = UIColor.white
         passTF.textColor = UIColor.white
@@ -64,14 +59,8 @@ class RegistrationView: UIView {
         passTF.isSecureTextEntry = true
         passConfirmTF.isSecureTextEntry = true
         
-//        emailTF.layer.borderColor = UIColor.lightGray.cgColor
-//        emailTF.layer.borderWidth = 1.5
         emailTF.layer.cornerRadius = 8.0
-//        passTF.layer.borderColor = UIColor.lightGray.cgColor
-//        passTF.layer.borderWidth = 1.5
         passTF.layer.cornerRadius = 8.0
-//        passConfirmTF.layer.borderColor = UIColor.lightGray.cgColor
-//        passConfirmTF.layer.borderWidth = 1.5
         passConfirmTF.layer.cornerRadius = 8.0
         
     }

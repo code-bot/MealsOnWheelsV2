@@ -34,7 +34,7 @@ class ForgotPasswordView: UIView {
         
         // Setting text properties
         
-        emailTF.placeholder = "Email"
+        emailTF.attributedPlaceholder = NSAttributedString(string: "Enter Email", attributes: [NSForegroundColorAttributeName:UIColor.lightText])
         emailTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         emailTF.textColor = UIColor.white
         //emailTF.textAlignment = NSTextAlignment.center
