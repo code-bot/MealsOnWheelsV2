@@ -25,18 +25,28 @@ class RegistrationController : UIViewController {
     var registrationView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-        registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        //registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registrationView.nextButton.addTarget(self, action: #selector(confirmPasswords),for: .touchUpInside)
-        registrationView.nextButton.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
     }
     
     func configureView() {
         configureButtons()
         self.view.addSubview(registrationView)
+        self.dismissKeyboardAtTap()
+        
+        
+        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
+        recognizer.direction = .right
+        self.view.addGestureRecognizer(recognizer)
+        
         
     }
     
-
+    func swipeLeft(){
+    dismiss(animated: false, completion: nil)
+    present(LoginController(), animated: true, completion: nil)
+    
+    }
     
     
     override func viewDidLoad() {
@@ -47,6 +57,11 @@ class RegistrationController : UIViewController {
         
         
         configureView()
+    }
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return UIStatusBarStyle.lightContent
     }
     
     func confirmPasswords(sender: AnyObject) {
@@ -77,11 +92,17 @@ class RegistrationController : UIViewController {
                         } else {
                             //poppulate with an emty route
                         }
+                        
                     }) { (error) in
                         print(error.localizedDescription)
                         SwiftLoader.hide()
                     }
-                } else {
+                    _ = UIButton()
+                    self.present(RegistrationProfileController(), animated: true, completion: nil)
+                
+                }
+                
+                else {
                     let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error?.localizedDescription, preferredStyle:  UIAlertControllerStyle.alert)
                     signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
                     self.present(signUpAlert, animated: true, completion: nil)
@@ -130,11 +151,6 @@ class RegistrationController : UIViewController {
         
         dismiss(animated: false, completion: nil)
         present(LoginController(), animated: true, completion: nil)
-    }
-    
-    func nextPage(sender: UIButton){
-        dismiss(animated: false, completion: nil)
-        present(RegistrationProfileController(), animated: true, completion: nil)
     }
     
     
