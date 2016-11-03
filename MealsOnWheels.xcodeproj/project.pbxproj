@@ -180,7 +180,6 @@
 				875FF3B51DB93CF0009D4E74 /* CurrentWaypointView.swift */,
 				877021931DA46AEF003F3FC4 /* LoginView.swift */,
 				B3AA1DC51DB93D0A009B1C11 /* ForgotPasswordView.swift */,
-				877021961DA46AEF003F3FC4 /* RegistrationEmailView.swift */,
 				877021971DA46AEF003F3FC4 /* RegistrationProfileView.swift */,
 				877021981DA46AEF003F3FC4 /* RegistrationView.swift */,
 				877021991DA46AEF003F3FC4 /* TitleView.swift */,
@@ -492,10 +491,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U9X42PLV7V;
 				INFOPLIST_FILE = MealsOnWheels/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sahajbhatt.MealsOnWheels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -507,10 +508,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = U9X42PLV7V;
 				INFOPLIST_FILE = MealsOnWheels/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sahajbhatt.MealsOnWheels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

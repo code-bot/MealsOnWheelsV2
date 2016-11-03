@@ -14,11 +14,6 @@ import SwiftyJSON
 
 class LoginController: UIViewController {
     
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passField: UITextField!
-    @IBOutlet weak var login: UIButton!
-    @IBOutlet weak var signUp: UIButton!
-    @IBOutlet weak var forgotPassword: UIButton!
     var ref = FIRDatabase.database().reference()
     var loginSuccess = false
     var loginView = LoginView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
@@ -29,9 +24,11 @@ class LoginController: UIViewController {
         loginView.forgotPasswordBtn.addTarget(self, action: #selector(switchToForgotPassword), for: .touchUpInside)
     }
     
+    func clearPassField() {
+        loginView.passwordTF.text = ""
+    }
     
     func configureView() {
-        
         configureButtons()
         
         self.view.addSubview(loginView)
@@ -43,6 +40,10 @@ class LoginController: UIViewController {
 
         configureView()
         self.dismissKeyboardAtTap()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        clearPassField()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
