@@ -27,7 +27,6 @@ class RegistrationController : UIViewController {
     func configureButtons() {
         registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registrationView.nextButton.addTarget(self, action: #selector(confirmPasswords),for: .touchUpInside)
-        registrationView.nextButton.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
     }
     
     func configureView() {
@@ -77,11 +76,17 @@ class RegistrationController : UIViewController {
                         } else {
                             //poppulate with an emty route
                         }
+                        
                     }) { (error) in
                         print(error.localizedDescription)
                         SwiftLoader.hide()
                     }
-                } else {
+                    _ = UIButton()
+                    self.present(RegistrationProfileController(), animated: true, completion: nil)
+                
+                }
+                
+                else {
                     let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error?.localizedDescription, preferredStyle:  UIAlertControllerStyle.alert)
                     signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
                     self.present(signUpAlert, animated: true, completion: nil)
@@ -130,11 +135,6 @@ class RegistrationController : UIViewController {
         
         dismiss(animated: false, completion: nil)
         present(LoginController(), animated: true, completion: nil)
-    }
-    
-    func nextPage(sender: UIButton){
-        dismiss(animated: false, completion: nil)
-        present(RegistrationProfileController(), animated: true, completion: nil)
     }
     
     

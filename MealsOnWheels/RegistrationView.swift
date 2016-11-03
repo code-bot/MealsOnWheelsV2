@@ -28,6 +28,9 @@ class RegistrationView: UIView {
     var welLabel = UILabel()
     
     func configureTextFields() {
+        
+        emailTF.becomeFirstResponder()
+        
         emailTF.placeholder = "  Email Address"
         passConfirmTF.placeholder = "  Confirm Password"
         passTF.placeholder = "  Password"
