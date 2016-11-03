@@ -33,7 +33,7 @@ class ForgotPasswordView: UIView {
         
         
         // Setting text properties
-        
+        emailTF.keyboardType = UIKeyboardType.emailAddress
         emailTF.attributedPlaceholder = NSAttributedString(string: "Enter Email", attributes: [NSForegroundColorAttributeName:UIColor.lightText])
         emailTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         emailTF.textColor = UIColor.white
@@ -55,10 +55,10 @@ class ForgotPasswordView: UIView {
         
         
         submitBtn.setTitle("Submit", for: UIControlState())
-        submitBtn.setTitleColor(UIColor.darkText, for: UIControlState())
-        submitBtn.backgroundColor = UIColor.white
+        submitBtn.setTitleColor(UIColor.white, for: UIControlState())
+        submitBtn.backgroundColor = UIColor.clear
         submitBtn.layer.cornerRadius = 20.0
-        submitBtn.layer.borderColor = UIColor.white.cgColor
+        submitBtn.layer.borderColor = UIColor.lightText.cgColor
         submitBtn.layer.borderWidth = 1
         
     }

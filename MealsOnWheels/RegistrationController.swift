@@ -25,7 +25,6 @@ class RegistrationController : UIViewController {
     var registrationView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-        //registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registrationView.nextButton.addTarget(self, action: #selector(confirmPasswords),for: .touchUpInside)
     }
     
@@ -147,11 +146,6 @@ class RegistrationController : UIViewController {
         
     }
     
-    func goBack(sender: UIButton){
-        
-        dismiss(animated: false, completion: nil)
-        present(LoginController(), animated: true, completion: nil)
-    }
     
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

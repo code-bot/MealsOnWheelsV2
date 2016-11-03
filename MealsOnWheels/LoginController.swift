@@ -12,13 +12,8 @@ import SwiftLoader
 import Firebase
 import SwiftyJSON
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passField: UITextField!
-    @IBOutlet weak var login: UIButton!
-    @IBOutlet weak var signUp: UIButton!
-    @IBOutlet weak var forgotPassword: UIButton!
     var ref = FIRDatabase.database().reference()
     var loginSuccess = false
     var loginView = LoginView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
@@ -33,7 +28,6 @@ class LoginController: UIViewController {
     func configureView() {
         
         configureButtons()
-        
         self.view.addSubview(loginView)
         
         
@@ -43,11 +37,19 @@ class LoginController: UIViewController {
 
         configureView()
         self.dismissKeyboardAtTap()
+        //self.loginView.emailTF.delegate = self
+        
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
+        
     }
+    
+    //func textFieldShouldReturn(emailField:UITextField) -> Bool{
+       // loginView.passwordTF.becomeFirstResponder()
+        //return true
+    //}
     
     func buttonAction(sender: UIButton!){
         SwiftLoader.show(title: "Signing in", animated: true)

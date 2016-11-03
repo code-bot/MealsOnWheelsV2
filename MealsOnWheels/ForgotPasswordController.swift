@@ -34,7 +34,6 @@ class ForgotPasswordController: UIViewController{
         recognizer.direction = .right
         self.view.addGestureRecognizer(recognizer)
         
-        
     }
     
     override func viewDidLoad() {
