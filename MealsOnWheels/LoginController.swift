@@ -24,9 +24,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
         loginView.forgotPasswordBtn.addTarget(self, action: #selector(switchToForgotPassword), for: .touchUpInside)
     }
     
+    func clearPassField() {
+        loginView.passwordTF.text = ""
+    }
     
     func configureView() {
-        
         configureButtons()
         self.view.addSubview(loginView)
         
@@ -39,6 +41,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         self.dismissKeyboardAtTap()
         //self.loginView.emailTF.delegate = self
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        clearPassField()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
