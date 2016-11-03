@@ -36,12 +36,14 @@ class CurrentWaypointView: UIView {
     }
     
     func configureLabels() {
-        waypointTitleLbl.font = UIFont.systemFont(ofSize: 35.0)
-        waypointTitleLbl.text = waypoint.title
+        waypointTitleLbl.font = UIFont.systemFont(ofSize: 25.0)
+        waypointTitleLbl.numberOfLines = 0
+        let address = waypoint.title.characters.split{$0 == ","}.map(String.init)
+        waypointTitleLbl.text = address[0] + ",\n" + address[1] + "," + address[2]
         waypointTitleLbl.textColor = UIColor.white
         waypointTitleLbl.textAlignment = .center
         
-        waypointInfoLbl.text = waypoint.info
+        waypointInfoLbl.text = "Info:" + waypoint.info
         waypointInfoLbl.textColor = UIColor.white
         waypointInfoLbl.textAlignment = .left
         

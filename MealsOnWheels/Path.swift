@@ -65,15 +65,21 @@ class Path {
         return GMSPath(fromEncodedPath: overviewPolyline)!
     }
     
-    func nextLeg() {
+    func nextLeg() -> Waypoint? {
         self.currentWaypoint = waypoints.pop() as Waypoint!
+        
+        if currentWaypoint == nil {
+            return nil
+        }
         let htmlDestination = currentWaypoint?.address.addingPercentEscapes(using: String.Encoding.utf8)!
-        let directionsRequest = "comgooglemaps-x-callback:" + "?daddr=" + htmlDestination! + "&x-success=MOWapp:?resume=true&x-source=MOW"
+        let directionsRequest = "comgooglemaps-x-callback://" + "?daddr=" + htmlDestination! + "&x-success=MOWapp:?resume=true&x-source=MOW"
         let directionsURL = URL(string:directionsRequest);
-        if (UIApplication.shared.canOpenURL( URL(string: "comgooglemaps-x-callback:")!)) {
+        if (UIApplication.shared.canOpenURL( URL(string: "comgooglemaps-x-callback://")!)) {
             UIApplication.shared.openURL(directionsURL!)
+            return currentWaypoint
         } else {
             print("Can't use comgooglemaps:");
         }
+        return nil
     }
 }

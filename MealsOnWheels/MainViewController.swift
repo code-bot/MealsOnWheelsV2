@@ -9,18 +9,24 @@
 import Foundation
 import SwiftLoader
 import UIKit
+import Firebase
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var mainView = MainView();
-    let currentView = CurrentWaypointView(frame: CGRect(x: 0, y: MWConstants.navBarHeight + 20.0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight - MWConstants.navBarHeight - 20.0))
+    let currentRouteView = CurrentRouteView(frame: CGRect(x: 0, y: MWConstants.navBarHeight + 20.0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight - MWConstants.navBarHeight - 20.0))
+    let currentWayPointView = CurrentWaypointView(frame: CGRect(x: 0, y: MWConstants.navBarHeight + 20.0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight - MWConstants.navBarHeight - 20.0))
     let myRoutesView = MyRoutesView(frame: CGRect(x: 0, y: MWConstants.navBarHeight + 20.0, width: MWConstants.screenWidth, height: MWConstants.screenHeight - MWConstants.tabBtnHeight - MWConstants.navBarHeight - 20.0))
+    var currentView: UIView!
+    var routeStarted = false
     let myWaypointsController = WaypointsController()
     
     func configureButtons() {
         mainView.tabView.currentRoute.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
-        currentView.nextBtn.addTarget(self, action: #selector(nextLeg), for: .touchUpInside)
+        currentRouteView.startBtn.addTarget(self, action: #selector(startRoute), for: .touchUpInside)
+        currentWayPointView.nextBtn.addTarget(self, action: #selector(nextLeg), for: .touchUpInside)
         mainView.tabView.myRoutes.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
+
         mainView.navBar.leftBtn.addTarget(self, action: #selector(backPage), for: .touchUpInside)
     }
     
@@ -31,7 +37,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         myWaypointsController.myWaypointsView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         configureButtons()
-        
+        currentView = currentRouteView
         mainView.addSubview(currentView)
         self.view = mainView
         
@@ -47,6 +53,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
+    }
+    
+    
+    func startRoute() {
+        routeStarted = true
+        currentView = currentWayPointView
+        nextLeg()
     }
     
     func backPage(sender:UIButton) {
@@ -147,7 +160,25 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func nextLeg() {
-        User.route?.path.nextLeg()
+        if let nextWaypoint = User.route?.path.nextLeg() {
+            currentWayPointView.waypoint = nextWaypoint
+            if User.route?.path.waypoints.first == nil {
+                currentWayPointView.nextBtn.setTitle("Finish Route", for: .normal)
+            } else {
+                currentWayPointView.nextBtn.setTitle("Next Point", for: .normal)
+            }
+            currentWayPointView.configureView()
+            currentView.removeFromSuperview()
+            mainView.addSubview(currentView)
+            
+        } else {
+            routeStarted = false
+            currentView.removeFromSuperview()
+            currentView = currentRouteView
+            mainView.addSubview(currentView)
+            
+        }
+        
     }
     
     func addNew(type: String, index: Int) {
