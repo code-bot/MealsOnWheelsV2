@@ -11,6 +11,10 @@ import UIKit
 
 class RegistrationView: UIView {
     
+    //logo
+    
+    var logoImgView = UIImageView()
+    
     
     //Text fields
     var emailTF = UITextField()
@@ -22,45 +26,41 @@ class RegistrationView: UIView {
     
     //Buttons
     var nextButton = UIButton()
-    var backButton = UIButton()
+    //var backButton = UIButton()
     
     //Label
-    var welLabel = UILabel()
+    
+    
+    func configureImageView(){
+    logoImgView.image = MWConstants.logo
+    logoImgView.contentMode = .scaleAspectFit
+    
+    
+    }
     
     func configureTextFields() {
         
         emailTF.becomeFirstResponder()
+    
+        emailTF.attributedPlaceholder = NSAttributedString(string: "Enter Email", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
         
-        emailTF.placeholder = "  Email Address"
-        passConfirmTF.placeholder = "  Confirm Password"
-        passTF.placeholder = "  Password"
+        passTF.attributedPlaceholder = NSAttributedString(string: "Enter Password", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
+
+        passConfirmTF.attributedPlaceholder = NSAttributedString(string: "Re-enter Password", attributes: [NSForegroundColorAttributeName:UIColor.lightText])
         
         emailTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passConfirmTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         
-        emailTF.backgroundColor = UIColor.clear
-        emailTF.alpha = 0.5
-        passTF.backgroundColor = UIColor.clear
-        passTF.alpha = 0.5
-        passConfirmTF.backgroundColor = UIColor.clear
-        passConfirmTF.alpha = 0.5
-        
-        emailTF.textColor = UIColor.darkText
-        passTF.textColor = UIColor.darkText
-        passConfirmTF.textColor = UIColor.darkText
+        emailTF.textColor = UIColor.white
+        passTF.textColor = UIColor.white
+        passConfirmTF.textColor = UIColor.white
         
         passTF.isSecureTextEntry = true
         passConfirmTF.isSecureTextEntry = true
         
-//        emailTF.layer.borderColor = UIColor.lightGray.cgColor
-//        emailTF.layer.borderWidth = 1.5
         emailTF.layer.cornerRadius = 8.0
-//        passTF.layer.borderColor = UIColor.lightGray.cgColor
-//        passTF.layer.borderWidth = 1.5
         passTF.layer.cornerRadius = 8.0
-//        passConfirmTF.layer.borderColor = UIColor.lightGray.cgColor
-//        passConfirmTF.layer.borderWidth = 1.5
         passConfirmTF.layer.cornerRadius = 8.0
         
     }
@@ -80,12 +80,7 @@ class RegistrationView: UIView {
         emailTF.autocorrectionType = .no
         emailTF.autocapitalizationType = .none
         emailTF.spellCheckingType = .no
-        passTF.autocorrectionType = .no
-        passTF.autocapitalizationType = .none
-        passTF.spellCheckingType = .no
-        passConfirmTF.autocorrectionType = .no
-        passConfirmTF.autocapitalizationType = .none
-        passConfirmTF.spellCheckingType = .no
+        
     }
     
     func configureButtons() {
@@ -97,31 +92,24 @@ class RegistrationView: UIView {
         nextButton.layer.borderColor = UIColor.white.cgColor
         nextButton.layer.borderWidth = 0.5
         
-        backButton.setTitle("   Back", for: UIControlState())
-        backButton.setTitleColor(UIColor.white, for: UIControlState())
+        //backButton.setTitle("   Back", for: UIControlState())
+        //backButton.setTitleColor(UIColor.white, for: UIControlState())
         //backButton.backgroundColor = UIColor.white
         
         
         
         
     }
-    
-    func configureLabel() {
-        welLabel.text = "Welcome"
-        welLabel.font = UIFont(name: "California-medium", size: 45.0)
-        
-        welLabel.textColor = UIColor.white
-        welLabel.textAlignment = NSTextAlignment.center
-        
-        
-    }
+
     
     func configureView() {
-        self.backgroundColor = MWConstants.colors.loginLightGradient
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = [MWConstants.colors.loginDarkGradient.cgColor, MWConstants.colors.loginLightGradient.cgColor]
+        self.layer.insertSublayer(gradient, at: 0)
         
         
-        
-        configureLabel()
+        configureImageView()
         configureButtons()
         configureLabels()
         configureTextFields()
@@ -130,8 +118,8 @@ class RegistrationView: UIView {
         textFieldDidBeginEditing(passConfirmTF)
         //Auto Layout
         let viewsDict = [
-            "welLabel"      :   welLabel,
-            "back"          :   backButton,
+            "logo"      :   logoImgView,
+            //"back"          :   backButton,
             "emailTF"       :   emailTF,
             "emailLine"     :   emailUnderlineLabel,
             "passTF"        :   passTF,
@@ -143,9 +131,9 @@ class RegistrationView: UIView {
         
         self.prepareViewsForAutoLayout(viewsDict as! [String : UIView])
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-30-[back]-10-[welLabel]-60-[emailTF]-1-[emailLine]-24-[passTF]-1-[passLine]-24-[confirmTF]-1-[confirmLine]-49-[nextBut]", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-30-[logo]-60-[emailTF]-1-[emailLine]-24-[passTF]-1-[passLine]-24-[confirmTF]-1-[confirmLine]-49-[nextBut]", views: viewsDict as [String : AnyObject]))
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[welLabel]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[logo]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
         //self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-20-[back]-80-[welLabel]", views: viewsDict as [String : AnyObject]))
         
