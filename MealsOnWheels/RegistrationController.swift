@@ -25,17 +25,28 @@ class RegistrationController : UIViewController {
     var registrationView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-        registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        //registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registrationView.nextButton.addTarget(self, action: #selector(confirmPasswords),for: .touchUpInside)
     }
     
     func configureView() {
         configureButtons()
         self.view.addSubview(registrationView)
+        self.dismissKeyboardAtTap()
+        
+        
+        let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
+        recognizer.direction = .right
+        self.view.addGestureRecognizer(recognizer)
+        
         
     }
     
-
+    func swipeLeft(){
+    dismiss(animated: false, completion: nil)
+    present(LoginController(), animated: true, completion: nil)
+    
+    }
     
     
     override func viewDidLoad() {
@@ -46,6 +57,11 @@ class RegistrationController : UIViewController {
         
         
         configureView()
+    }
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return UIStatusBarStyle.lightContent
     }
     
     func confirmPasswords(sender: AnyObject) {
