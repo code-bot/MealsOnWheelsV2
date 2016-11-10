@@ -16,6 +16,8 @@ class RegistrationProfileView: UIView {
     var lastNameTF = UITextField()
     var phoneNumberTF = UITextField()
     
+    var myImageView = UIView()
+    
     //Labels
     var firstNameLabel = UILabel()
     var lastNameLabel = UILabel()
@@ -68,14 +70,19 @@ class RegistrationProfileView: UIView {
     
     func configureButtons() {
        //photoimageBtn.backgroundColor = MWConstants.colors.lightBackground
-        photoimageBtn.backgroundColor = UIColor.clear
+        //photoimageBtn.backgroundColor = UIColor.white
         photoimageBtn.setImage(#imageLiteral(resourceName: "usericon"), for: .normal)
         photoimageBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        photoimageBtn.layer.cornerRadius = 50.0
+        photoimageBtn.layer.borderColor = UIColor.white.cgColor
+        photoimageBtn.layer.borderWidth = 1.0
+        photoimageBtn.layer.masksToBounds = false
+        photoimageBtn.clipsToBounds = true
         
         signUpBtn.setTitle("Sign Up", for: UIControlState())
         signUpBtn.setTitleColor(UIColor.white, for: UIControlState())
         signUpBtn.layer.cornerRadius = 20.0
-        signUpBtn.layer.borderColor = UIColor.lightText.cgColor
+        signUpBtn.layer.borderColor = UIColor.white.cgColor
         signUpBtn.layer.borderWidth = 1.0
         signUpBtn.backgroundColor = UIColor.clear
         
@@ -107,7 +114,7 @@ class RegistrationProfileView: UIView {
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[photo(==100)]-40-[firstName]-1-[firstLine]-24-[lastName]-1-[lastLine]-24-[phoneNum]-1-[phoneLine]-49-[signup]", views: viewsDict as [String : AnyObject]))
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[photo]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.imageFieldsOffset))-[photo(==100)]-\(String(describing: MWConstants.imageFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[firstName]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         

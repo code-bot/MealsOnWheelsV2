@@ -19,6 +19,7 @@ struct MWConstants {
     static let btnWidth = CGFloat(100)
     
     static let loginFieldsOffset = CGFloat((screenWidth / 2)-btnWidth)
+    static let imageFieldsOffset = CGFloat((screenWidth / 2)-50)
     static let titleBtnWidth = CGFloat(3 * screenWidth/5)
     static let titleBtnHeight = CGFloat(40)
     static let titleBtnHOffset = CGFloat((screenWidth / 2) - (titleBtnWidth / 2))

@@ -30,20 +30,25 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
     
     func configureButtons() {
 
-        registrationProfileView.photoimageBtn.addTarget(self, action: #selector(imagePickerControllerDidCancel), for: .touchUpInside)
-=======
-        registrationProfileView.photoimageBtn.addTarget(self, action: #selector(btnClicked), for: .touchUpInside)
+        registrationProfileView.photoimageBtn.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+       // registrationProfileView.photoimageBtn.addTarget(self, action: #selector(btnClicked), for: .touchUpInside)
         registrationProfileView.signUpBtn.addTarget(self, action: #selector(storeData), for: .touchUpInside)
 
     }
     
+    func pickImage() {
+        picker.allowsEditing = true;
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
+    }
+    /**
     @IBAction func photoFromLibrary(_sender: UIBarButtonItem) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         picker.modalPresentationStyle = .popover
         present(picker, animated: true, completion: nil)
-        picker.popoverPresentationController?.barButtonItem = sender
+        picker.popoverPresentationController?.barButtonItem = _sender
     }
     
     @IBAction func shootPhoto(_sender: UIBarButtonItem) {
@@ -56,7 +61,7 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         } else {
             noCamera()
         }
-    }
+    }**/
     func noCamera() {
         let alertVC = UIAlertController(
             title: "No Camera",
@@ -126,18 +131,20 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         configureView()
         picker.delegate = self
 }
-     func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : AnyObject] ) {
-        var chosenImage = UIImage()
-        chosenImage = info[UIImagePickerControllerOriginalImage]
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            photoimage.contentMode = .scaleAspectFit
-            photoimage.setImage(pickedImage, for: .normal)
+
+    func imagePickerController(_ picker: UIImagePickerController,                              didFinishPickingMediaWithInfo info: [String : Any]){
+        
+        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            registrationProfileView.photoimageBtn.contentMode = .scaleAspectFill
+            registrationProfileView.photoimageBtn.clipsToBounds = true
+            registrationProfileView.photoimageBtn.setImage(chosenImage, for: .normal)
+            
         }
-        picker.dismiss(animated: true, completion: nil)
+
+        self.dismiss(animated: true, completion: nil)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
-        self.imagePicker = UIImagePickerController()
         dismiss(animated: true, completion: nil)
 
     }
