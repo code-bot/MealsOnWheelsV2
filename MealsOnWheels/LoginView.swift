@@ -45,11 +45,12 @@ class LoginView: UIView {
         
     // Setting text properties
         emailTF.keyboardType = UIKeyboardType.emailAddress
+        emailTF.returnKeyType = UIReturnKeyType.next
         emailTF.attributedPlaceholder = NSAttributedString(string: "Enter Email", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
         emailTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         emailTF.textColor = UIColor.white
 
-        
+        passwordTF.returnKeyType = UIReturnKeyType.done
         passwordTF.attributedPlaceholder = NSAttributedString(string: "Enter Password", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
         passwordTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passwordTF.textColor = UIColor.white

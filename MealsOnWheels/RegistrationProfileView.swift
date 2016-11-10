@@ -36,10 +36,10 @@ class RegistrationProfileView: UIView {
 //        lastNameTF.layer.borderColor = UIColor.lightGray.cgColor
 //        phoneNumberTF.layer.borderWidth = 1.5
 //        phoneNumberTF.layer.borderColor = UIColor.lightGray.cgColor
-    
-        firstNameTF.placeholder = "First Name"
-        lastNameTF.placeholder = "Last Name"
-        phoneNumberTF.placeholder = "Phone Number"
+        
+        lastNameTF.attributedPlaceholder = NSAttributedString(string: "Enter Last Name", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
+        firstNameTF.attributedPlaceholder = NSAttributedString(string: "Enter First Name", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
+        phoneNumberTF.attributedPlaceholder = NSAttributedString(string: "Enter Phone Number", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
         
         firstNameTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         lastNameTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
@@ -73,11 +73,11 @@ class RegistrationProfileView: UIView {
         photoimageBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         signUpBtn.setTitle("Sign Up", for: UIControlState())
-        signUpBtn.setTitleColor(UIColor.darkText, for: UIControlState())
+        signUpBtn.setTitleColor(UIColor.white, for: UIControlState())
         signUpBtn.layer.cornerRadius = 20.0
-        signUpBtn.layer.borderColor = UIColor.white.cgColor
-        signUpBtn.layer.borderWidth = 0.5
-        signUpBtn.backgroundColor = UIColor.white
+        signUpBtn.layer.borderColor = UIColor.lightText.cgColor
+        signUpBtn.layer.borderWidth = 1.0
+        signUpBtn.backgroundColor = UIColor.clear
         
         
     }
