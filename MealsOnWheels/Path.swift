@@ -82,4 +82,16 @@ class Path {
         }
         return nil
     }
+    
+    func skipLeg() {
+        var maxWeight = 0;
+        for i in waypoints {
+            if i.priority > maxWeight {
+                maxWeight = i.priority;
+            }
+        }
+        let end = waypoints.pop()
+        end?.priority = maxWeight + 1;
+        waypoints.push(end!);
+    }
 }
