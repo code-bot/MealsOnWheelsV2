@@ -11,16 +11,14 @@ import UIKit
 import SwiftLoader
 import Firebase
 
-class ForgotPasswordController: UIViewController{
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var submit: UIButton!
+class ForgotPasswordController: UIViewController, UITextFieldDelegate{
     
     
     //var loginSuccess = false
     var forgotPassword = ForgotPasswordView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-        forgotPassword.submitBtn.addTarget(self, action: #selector(resetPassword(sender:)), for: .touchUpInside)
+        forgotPassword.submitBtn.addTarget(self, action: #selector(resetPassword), for: .touchUpInside)
     }
     
     
@@ -40,6 +38,7 @@ class ForgotPasswordController: UIViewController{
         
         configureView()
         self.dismissKeyboardAtTap()
+        self.forgotPassword.emailTF.delegate = self
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -52,7 +51,7 @@ class ForgotPasswordController: UIViewController{
     
     }
     
-    func resetPassword(sender: UIButton){
+    func resetPassword(){
         FIRAuth.auth()?.sendPasswordReset(withEmail: forgotPassword.emailTF.text!) { error in
             if let error = error {
                 let resetAlert = UIAlertController(title: "Reset Password", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
@@ -68,6 +67,11 @@ class ForgotPasswordController: UIViewController{
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        forgotPassword.emailTF.resignFirstResponder()
+        resetPassword()
+        return true
+    }
 
 
 }

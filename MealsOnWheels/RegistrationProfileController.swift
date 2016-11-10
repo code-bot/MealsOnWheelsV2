@@ -96,20 +96,23 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         self.ref.child("users").child(User.uid!).child("phone").setValue(registrationProfileView.phoneNumberTF.text)
         self.ref.child("users").child(User.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
                                     SwiftLoader.hide()
-                                    self.present(MainViewController(), animated: true, completion: {
-                                    })
                                     if snapshot.exists() {
+                                        
                                         let routes = snapshot.value as? NSArray
                                         for (route) in routes! {
+                                            
                                             self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                                 SwiftLoader.hide()
-                                                User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
+                                                User.routes.append(Route(dict: JSON(snapshot.value as Any)))
                                                 User.route = User.routes.first
                                                 
                                             })
                                         }
                                     } else {
+
                                     }
+                                    self.present(MainViewController(), animated: true, completion: {
+                                    })
             
                                 }) { (error) in
                                     print(error.localizedDescription)
