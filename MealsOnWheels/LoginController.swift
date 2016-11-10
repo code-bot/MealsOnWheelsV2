@@ -39,7 +39,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
 
         configureView()
         self.dismissKeyboardAtTap()
-        //self.loginView.emailTF.delegate = self
+        self.loginView.emailTF.delegate = self
+        self.loginView.passwordTF.delegate = self
         
     }
     
@@ -52,14 +53,24 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
     }
     
-    //func textFieldShouldReturn(emailField:UITextField) -> Bool{
-       // loginView.passwordTF.becomeFirstResponder()
+    func textFieldShouldReturn(_:UITextField) -> Bool{
+        if(loginView.emailTF.isEditing){
+            loginView.passwordTF.becomeFirstResponder()
+            return true
+        }
+        else if loginView.passwordTF.isEditing{
+            loginView.passwordTF.resignFirstResponder()
+            buttonAction()
+            return true
+        }
+        //loginView.passwordTF.becomeFirstResponder()
         //return true
-    //}
+        return false
+    }
     
-    func buttonAction(sender: UIButton!){
+    func buttonAction(){
         SwiftLoader.show(title: "Signing in", animated: true)
-        let animateBtn: UIButton = sender
+        //let animateBtn: UIButton = sender
         FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
             if error == nil {
                 _ = User()
@@ -101,6 +112,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    
     
     func switchToSignIn(sender: UIButton){
         

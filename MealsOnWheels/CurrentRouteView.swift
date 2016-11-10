@@ -35,6 +35,7 @@ class CurrentRouteView: UIView {
             mapView.camera = camera!
             mapView.animate(toZoom: 14.0)
             let pathPolyline = GMSPolyline(path: route.path.getPath())
+            pathPolyline.strokeWidth = 5.0
             pathPolyline.map = mapView
         }
     }
