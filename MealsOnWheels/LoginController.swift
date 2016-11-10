@@ -77,6 +77,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
                             })
                         }
                     } else {
+                        SwiftLoader.hide()
+                        self.present(MainViewController(), animated: true, completion: {
+                        })
                         //poppulate with an emty route
                     }
                     //                    commented out section is used to manually poppulate testing data

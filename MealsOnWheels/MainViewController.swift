@@ -26,6 +26,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         mainView.tabView.currentRoute.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
         currentRouteView.startBtn.addTarget(self, action: #selector(startRoute), for: .touchUpInside)
         currentWayPointView.nextBtn.addTarget(self, action: #selector(nextLeg), for: .touchUpInside)
+        currentWayPointView.skipBtn.addTarget(self, action: #selector(skipLeg), for: .touchUpInside)
+        
         mainView.tabView.myRoutes.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
 
         mainView.navBar.leftBtn.addTarget(self, action: #selector(backPage), for: .touchUpInside)
@@ -160,9 +162,30 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return [deleteAction, editAction]
     }
     
+    func skipLeg() {
+        if let nextWaypoint = User.route?.path.nextLeg() {
+            currentWayPointView.currWaypoint = nextWaypoint
+            if User.route?.path.waypoints.first == nil {
+                currentWayPointView.nextBtn.setTitle("Finish Route", for: .normal)
+            } else {
+                currentWayPointView.nextBtn.setTitle("Next Point", for: .normal)
+            }
+            currentWayPointView.configureView()
+            currentView.removeFromSuperview()
+            mainView.addSubview(currentView)
+            
+        } else {
+            routeStarted = false
+            currentView.removeFromSuperview()
+            currentView = currentRouteView
+            mainView.addSubview(currentView)
+            
+        }
+    }
+    
     func nextLeg() {
         if let nextWaypoint = User.route?.path.nextLeg() {
-            currentWayPointView.waypoint = nextWaypoint
+            currentWayPointView.currWaypoint = nextWaypoint
             if User.route?.path.waypoints.first == nil {
                 currentWayPointView.nextBtn.setTitle("Finish Route", for: .normal)
             } else {
