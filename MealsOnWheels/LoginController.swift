@@ -12,7 +12,7 @@ import SwiftLoader
 import Firebase
 import SwiftyJSON
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, UITextFieldDelegate {
     
     var ref = FIRDatabase.database().reference()
     var loginSuccess = false
@@ -30,7 +30,6 @@ class LoginController: UIViewController {
     
     func configureView() {
         configureButtons()
-        
         self.view.addSubview(loginView)
         
         
@@ -40,6 +39,8 @@ class LoginController: UIViewController {
 
         configureView()
         self.dismissKeyboardAtTap()
+        //self.loginView.emailTF.delegate = self
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,7 +49,13 @@ class LoginController: UIViewController {
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
+        
     }
+    
+    //func textFieldShouldReturn(emailField:UITextField) -> Bool{
+       // loginView.passwordTF.becomeFirstResponder()
+        //return true
+    //}
     
     func buttonAction(sender: UIButton!){
         SwiftLoader.show(title: "Signing in", animated: true)

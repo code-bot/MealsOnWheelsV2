@@ -25,7 +25,6 @@ class RegistrationController : UIViewController {
     var registrationView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
     
     func configureButtons() {
-        //registrationView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registrationView.nextButton.addTarget(self, action: #selector(confirmPasswords),for: .touchUpInside)
     }
     
@@ -77,26 +76,6 @@ class RegistrationController : UIViewController {
                 User.uid = user?.uid
                 SwiftLoader.hide()
                 if error == nil {
-                    self.ref.child("users").child(User.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
-                        if snapshot.exists() {
-                            let routes = snapshot.value as? NSArray
-                            for (route) in routes! {
-                                self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                                    SwiftLoader.hide()
-                                    User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
-                                    User.route = User.routes.first
-                                    self.present(MainViewController(), animated: true, completion: {
-                                    })
-                                })
-                            }
-                        } else {
-                            //poppulate with an emty route
-                        }
-                        
-                    }) { (error) in
-                        print(error.localizedDescription)
-                        SwiftLoader.hide()
-                    }
                     _ = UIButton()
                     self.present(RegistrationProfileController(), animated: true, completion: nil)
                 
@@ -109,49 +88,9 @@ class RegistrationController : UIViewController {
                 }
             }
         }
-//        SwiftLoader.show(title: "Loading...", animated: true)
-//        User.init(email: emailField.text!, password: passField.text!, errorCase: {() -> Void in
-//            SwiftLoader.hide()
-//            let signUpAlert = UIAlertController(title: "Failed Sign Up", message: "Incorrect Email and Password", preferredStyle: UIAlertControllerStyle.alert)
-//            signUpAlert
-//            signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
-//            self.passConfirm = false
-//            }, closure: {() -> Void in
-//                SwiftLoader.hide()
-//                self.passConfirm = true
-//                self.performSegue(withIdentifier: "Sign Up", sender: self)
-//            
-        
-            
-            
-//            if passField.text.isEmpty || passConfirmField.text.isEmpty {
-//                passConfirm = false
-//                SwiftLoader.hide()
-//                let emptyFields = UIAlertController(title: "Failed Sign Up", message: "Please Enter in a Password and Confirm", preferredStyle: UIAlertController.alert)
-//            emptyFields
-//            emptyFields.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel, handler: nil))}
-//            if passField.text != passConfirmField.text {
-//                passConfirm = false
-//                    {() -> Void in
-//                        SwiftLoader.hide()
-//                let wrongConfirm = UIAlertController(title: "Failed Sign Up", message: "Your Password Does Not Match Confirm Password", preferredStyle: UIAlertControllerStyle.alert)
-//                wrongConfirm
-//                wrongConfirm.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel, handler: nil))
-//                self.passConfirm = false
-
-//        })
-//    }
-//    override var preferredStatusBarStyle : UIStatusBarStyle {
-//        return UIStatusBarStyle.lightContent
-//    }
         
     }
     
-    func goBack(sender: UIButton){
-        
-        dismiss(animated: false, completion: nil)
-        present(LoginController(), animated: true, completion: nil)
-    }
     
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

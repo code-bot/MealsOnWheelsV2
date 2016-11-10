@@ -11,10 +11,6 @@ import UIKit
 
 class RegistrationProfileView: UIView {
     
-    // Image View
-    
-    //var photoImg = UIImageView()
-    
     //Text fields
     var firstNameTF = UITextField()
     var lastNameTF = UITextField()
@@ -29,11 +25,6 @@ class RegistrationProfileView: UIView {
     var photoimageBtn = UIButton()
     var signUpBtn = UIButton()
     
-    func configureImageView() {
-       // photoImg.image = #imageLiteral(resourceName: "usericon")
-        //photoImg.backgroundColor = UIColor.lightGray
-        
-    }
     
     func configureTextFields() {
         firstNameTF.layer.cornerRadius = 8.0
@@ -55,8 +46,8 @@ class RegistrationProfileView: UIView {
         phoneNumberTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         
         firstNameTF.textAlignment = NSTextAlignment.natural
-        lastNameTF.textAlignment = NSTextAlignment.justified
-        phoneNumberTF.textAlignment = NSTextAlignment.center
+        lastNameTF.textAlignment = NSTextAlignment.natural
+        phoneNumberTF.textAlignment = NSTextAlignment.natural
         
         firstNameTF.textColor = UIColor.darkText
         lastNameTF.textColor = UIColor.darkText
@@ -76,13 +67,14 @@ class RegistrationProfileView: UIView {
     
     
     func configureButtons() {
-        photoimageBtn.backgroundColor = MWConstants.colors.lightBackground
+       //photoimageBtn.backgroundColor = MWConstants.colors.lightBackground
+        photoimageBtn.backgroundColor = UIColor.clear
         photoimageBtn.setImage(#imageLiteral(resourceName: "usericon"), for: .normal)
-        //photoimageBtn.layer.cornerRadius = 35.0
+        photoimageBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         signUpBtn.setTitle("Sign Up", for: UIControlState())
-        signUpBtn.setTitleColor(UIColor.white, for: UIControlState())
-        signUpBtn.layer.cornerRadius = 5.0
+        signUpBtn.setTitleColor(UIColor.darkText, for: UIControlState())
+        signUpBtn.layer.cornerRadius = 20.0
         signUpBtn.layer.borderColor = UIColor.white.cgColor
         signUpBtn.layer.borderWidth = 0.5
         signUpBtn.backgroundColor = UIColor.white
@@ -91,10 +83,14 @@ class RegistrationProfileView: UIView {
     }
     
     func configureView() {
-        self.backgroundColor = MWConstants.colors.loginLightGradient
-        configureButtons()
+//        let gradient = CAGradientLayer()
+//        gradient.frame = self.bounds
+//        gradient.colors = [MWConstants.colors.loginDarkGradient.cgColor, MWConstants.colors.loginLightGradient.cgColor]
+//        self.layer.insertSublayer(gradient, at: 0)
+        self.backgroundColor = MWConstants.colors.lightBackground
         configureTextFields()
         configureLabels()
+        configureButtons()
         
         let viewsDict = [
             "photo"     :   photoimageBtn,
@@ -109,7 +105,7 @@ class RegistrationProfileView: UIView {
         
         self.prepareViewsForAutoLayout(viewsDict as! [String : UIView])
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-10-[photo]-35-[firstName]-1-[firstLine]-24-[lastName]-1-[lastLine]-24-[phoneNum]-1-[phoneLine]-49-[signup]", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-40-[photo(==100)]-40-[firstName]-1-[firstLine]-24-[lastName]-1-[lastLine]-24-[phoneNum]-1-[phoneLine]-49-[signup]", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[photo]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         

@@ -40,7 +40,7 @@ class RegistrationView: UIView {
     
     func configureTextFields() {
         
-        emailTF.becomeFirstResponder()
+        //emailTF.becomeFirstResponder()
     
         emailTF.attributedPlaceholder = NSAttributedString(string: "Enter Email", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
         
@@ -52,6 +52,7 @@ class RegistrationView: UIView {
         passTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passConfirmTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         
+        emailTF.keyboardType = UIKeyboardType.emailAddress
         emailTF.textColor = UIColor.white
         passTF.textColor = UIColor.white
         passConfirmTF.textColor = UIColor.white
@@ -85,12 +86,12 @@ class RegistrationView: UIView {
     
     func configureButtons() {
         //nextButton.backgroundColor = UIColor.init(r: 52, g: 152, b: 219, a: 1.0)
-        nextButton.backgroundColor = UIColor.white
+        nextButton.backgroundColor = UIColor.clear
         nextButton.setTitle("Next", for: UIControlState())
-        nextButton.setTitleColor(UIColor.darkText, for: UIControlState())
+        nextButton.setTitleColor(UIColor.white, for: UIControlState())
         nextButton.layer.cornerRadius = 20.0
-        nextButton.layer.borderColor = UIColor.white.cgColor
-        nextButton.layer.borderWidth = 0.5
+        nextButton.layer.borderColor = UIColor.lightText.cgColor
+        nextButton.layer.borderWidth = 1.0
         
         //backButton.setTitle("   Back", for: UIControlState())
         //backButton.setTitleColor(UIColor.white, for: UIControlState())
