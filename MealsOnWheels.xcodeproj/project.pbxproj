@@ -495,11 +495,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
 				DEVELOPMENT_TEAM = U9X42PLV7V;
-=======
-				DEVELOPMENT_TEAM = "";
->>>>>>> 940a5c8f44a98f082c44df726a2372c08b2a0fc8
 				INFOPLIST_FILE = MealsOnWheels/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
