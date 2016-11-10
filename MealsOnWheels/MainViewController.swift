@@ -31,7 +31,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         mainView.navBar.leftBtn.addTarget(self, action: #selector(backPage), for: .touchUpInside)
     }
     
-    func configureView() {
+    func configureView() {        
+        myWaypointsController.selectedIndex = -1
         myWaypointsController.mainViewController = self
         myWaypointsController.myWaypointsView.tableView.delegate = myWaypointsController;
         myWaypointsController.myWaypointsView.tableView.dataSource = myWaypointsController;
@@ -111,7 +112,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.row == User.routes.count) {
             //add new route
-            addNew(type: "Route", index: -1)
+            addNew(type: "Route", index: -1, tableView: tableView)
             return
         }
         //switch to waypoints view
@@ -137,6 +138,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let user2TF = alertController.textFields![1] as UITextField
                 User.routes[indexPath.row].user1Name = user1TF.text!
                 User.routes[indexPath.row].user2Name = user2TF.text!
+                tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
             
@@ -182,12 +184,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func addNew(type: String, index: Int) {
+    func addNew(type: String, index: Int, tableView: UITableView) {
         //type- "Route" or "Waypoint"
         //popup with the information to edit
         let alertController = UIAlertController(title: "New \(type)", message: "Fill out the fields.", preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
             if (type == "Route") {
+                //Route
                 let nameString = (alertController.textFields![0] as UITextField).text
                 let descString = (alertController.textFields![1] as UITextField).text
                 let dateString = (alertController.textFields![2] as UITextField).text
@@ -200,18 +203,22 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let user1 = "" //based on user1TF
                 let user2 = "" //based on user2TF
                 User.routes.append(Route(path: Path(name: nameString!, desc: descString!, waypoints: [], miles: Double(miles), time: time, overviewPolyline: polyLine, uid: uid), user1: user1, user2: user2, user1Name: user1String!, user2Name: user2String!, date: NewDate.parse(dateStr: dateString!).timeIntervalSince1970))
+                tableView.reloadData()
             } else {
+                //Waypoint
                 let addString = (alertController.textFields![0] as UITextField).text
                 let phoneString = (alertController.textFields![1] as UITextField).text
                 let latitude = 0
                 let longitude = 0
                 let priority = 0
                 User.routes[index].path.waypoints.push(Waypoint(address: addString!, phoneNumber: phoneString!, info: "", title: addString!, latitude: Float(latitude), longitude: Float(longitude), priority: priority))
+                tableView.reloadData()
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         
         if (type == "Route") {
+            //Route
             alertController.addTextField { (textField) in
                 textField.placeholder = "Name"
             }
@@ -228,6 +235,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 textField.placeholder = "User 2"
             }
         } else {
+            //Waypoint
             alertController.addTextField { (textField) in
                 textField.placeholder = "Address"
             }
