@@ -36,8 +36,10 @@ class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource 
         let waypoint:Waypoint = User.currentUser!.routes[routeIndex].path.waypoints[indexPath.row]
         if (indexPath.row == selectedIndex) {
             //the cell user selected has more information
-            //cell.textLabel?.text = "\(waypoint.title!)\t\(waypoint.phoneNumber!)\n\(waypoint.info!)"
-            cell.textLabel?.text = "\(waypoint.title!)\n337339204\nthis guy is dead dont go to him"
+            waypoint.phoneNumber = "123456789"
+            waypoint.info = "this guy is dead dont go to him"
+            cell.textLabel?.text = "\(waypoint.title!)\t\(waypoint.phoneNumber!)\n\(waypoint.info!)"
+            //cell.textLabel?.text = "\(waypoint.title!)\n337339204\nthis guy is dead dont go to him"
         } else {
             //every other cell
             cell.textLabel?.text = waypoint.title

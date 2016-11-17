@@ -78,7 +78,7 @@ class RegistrationProfileView: UIView {
     func configureButtons() {
        //photoimageBtn.backgroundColor = MWConstants.colors.lightBackground
         //photoimageBtn.backgroundColor = UIColor.white
-        photoimageBtn.setImage(#imageLiteral(resourceName: "usericon"), for: .normal)
+        photoimageBtn.setImage(#imageLiteral(resourceName: "cameraicon"), for: .normal)
         photoimageBtn.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         photoimageBtn.layer.cornerRadius = 50.0
         photoimageBtn.layer.borderColor = UIColor.white.cgColor

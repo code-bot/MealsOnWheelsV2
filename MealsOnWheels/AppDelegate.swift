@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         window = UIWindow()
-        window?.rootViewController = LoginController()
+        window?.rootViewController = RegistrationProfileController()
         window?.makeKeyAndVisible()
         
         return true

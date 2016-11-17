@@ -15,7 +15,8 @@ import Firebase
 class Path {
     var name: String
     var description: String
-    var waypoints = PriorityQueue<Waypoint>(ascending: true)
+    var waypointsQueue = PriorityQueue<Waypoint>(ascending: true)
+    var waypoints = [Waypoint]()
     var totalMiles: Double
     var estimatedTime: String
     var overviewPolyline: String
@@ -28,7 +29,7 @@ class Path {
         self.name = name
         self.description = desc
         for waypoint in waypoints {
-            self.waypoints.push(waypoint)
+            self.waypoints.append(waypoint)
         }
         self.estimatedTime = time
         self.totalMiles = miles
@@ -42,9 +43,8 @@ class Path {
         totalMiles = dict["totalMiles"].doubleValue
         estimatedTime = dict["estimatedime"].stringValue
         overviewPolyline = dict["overviewPolyline"].stringValue
-        waypoints = PriorityQueue<Waypoint>(ascending: true)
         for waypoint in dict["waypoints"].array! {
-            waypoints.push(Waypoint(dict: waypoint))
+            waypoints.append(Waypoint(dict: waypoint))
         }
         uid = dict["uid"].stringValue
     }
@@ -70,7 +70,7 @@ class Path {
     }
     
     func nextLeg() -> Waypoint? {
-        self.currentWaypoint = waypoints.pop() as Waypoint!
+        //self.currentWaypoint = waypoints.pop() as Waypoint!
         
         if currentWaypoint == nil {
             return nil
@@ -87,6 +87,17 @@ class Path {
         return nil
     }
     
+    func initWaypointQueue() {
+        for waypoint in waypoints {
+            waypointsQueue.push(waypoint)
+        }
+    }
+    
+    func getCurrentWaypoint() -> Waypoint? {
+        self.currentWaypoint = waypointsQueue.pop() as Waypoint!
+        return currentWaypoint
+    }
+    
     func skipLeg() {
         var maxWeight = 0;
         for i in waypoints {
@@ -94,15 +105,15 @@ class Path {
                 maxWeight = i.priority;
             }
         }
-        let end = waypoints.pop()
+        let end = waypointsQueue.pop()
         end?.priority = maxWeight + 1;
-        waypoints.push(end!);
+        waypointsQueue.push(end!);
     }
     
     func getPaths() -> Array<Route>{
         if Path.paths.count == 0 {
             User.ref.child("paths").observeSingleEvent(of: .value, with: { ( snapshot) in
-                let response = JSON(snapshot as! NSDictionary)
+                let response = JSON(snapshot.value as! NSDictionary)
                 for path in response.arrayValue {
                     Path.paths.append(Route(path: Path(dict: path), user1: "", user2: "", user1Name: "Akhi Aji", user2Name: "Mr. Test", date: NSDate().timeIntervalSince1970))
                 }
