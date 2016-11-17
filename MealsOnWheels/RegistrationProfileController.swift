@@ -16,7 +16,7 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
     
 
     let picker = UIImagePickerController()
-
+    var image:UIImage?
     var imagePicker: UIImagePickerController!
     var ref = FIRDatabase.database().reference()
 
@@ -151,16 +151,45 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
 //            imagePicker.delegate = self
 //            imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
 //            imagePicker.allowsEditing = false
+    
 //            
-//            self.present(imagePicker, animated: true, completion: nil)
+//                                }) { (error) in
+//                                    print(error.localizedDescription)
+//                                    SwiftLoader.hide()
+//                                }
+//
+//        
+//    }
+//    
+//
+//    func configureView() {
+//        configureButtons()
+//        self.dismissKeyboardAtTap()
+//        self.view.addSubview(registrationProfileView)
+//    }
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        configureView()
+//        picker.delegate = self
+//}
+//     func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : AnyObject] ) {
+//        var chosenImage = UIImage()
+//        chosenImage = info[UIImagePickerControllerOriginalImage]
+//        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//            photoimage.contentMode = .scaleAspectFit
+//            photoimage.setImage(pickedImage, for: .normal)
 //        }
+//        picker.dismiss(animated: true, completion: nil)
 //    }
 
      func storeData() {
         SwiftLoader.show(title: "Saving Data", animated: true)
         let name = registrationProfileView.firstNameTF.text! + " " + registrationProfileView.lastNameTF.text!
+        User.currentUser?.name = name
         self.ref.child("users").child(User.currentUser!.uid!).child("name").setValue(name)
         self.ref.child("users").child(User.currentUser!.uid!).child("phone").setValue(registrationProfileView.phoneNumberTF.text)
+        self.ref.child("users").child(User.currentUser!.uid!).child("image").setValue(UIImageJPEGRepresentation(image!, 0.5)?.base64EncodedString())
         self.ref.child("users").child(User.currentUser!.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
                                     SwiftLoader.hide()
                                     if snapshot.exists() {
@@ -212,6 +241,7 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
     func imagePickerController(_ picker: UIImagePickerController,                              didFinishPickingMediaWithInfo info: [String : Any]){
         
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.image = chosenImage
             registrationProfileView.photoimageBtn.contentMode = .scaleAspectFill
             registrationProfileView.photoimageBtn.clipsToBounds = true
             registrationProfileView.photoimageBtn.setImage(chosenImage, for: .normal)
@@ -225,6 +255,5 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         dismiss(animated: true, completion: nil)
 
     }
-    
 }
 
