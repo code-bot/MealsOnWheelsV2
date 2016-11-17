@@ -25,8 +25,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func configureButtons() {
         mainView.tabView.currentRoute.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
         currentRouteView.startBtn.addTarget(self, action: #selector(startRoute), for: .touchUpInside)
-        currentWayPointView.nextBtn.addTarget(self, action: #selector(nextLeg), for: .touchUpInside)
-        currentWayPointView.skipBtn.addTarget(self, action: #selector(skipLeg), for: .touchUpInside)
+        currentWayPointView.nextBtn.addTarget(self, action: #selector(nextWaypoint), for: .touchUpInside)
+        currentWayPointView.showDirBtn.addTarget(self, action: #selector(showDirections), for: .touchUpInside)
+        currentWayPointView.phoneNumBtn.addTarget(self, action: #selector(callPhoneNum), for: .touchUpInside)
         
         mainView.tabView.myRoutes.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
 
@@ -63,7 +64,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func startRoute() {
         routeStarted = true
         currentView = currentWayPointView
-        nextLeg()
+        nextWaypoint()
     }
     
     func backPage(sender:UIButton) {
@@ -164,30 +165,30 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return [deleteAction, editAction]
     }
     
-    func skipLeg() {
-        User.currentUser?.route?.path.skipLeg()
-        if let nextWaypoint = User.currentUser?.route?.path.nextLeg() {
-            currentWayPointView.currWaypoint = nextWaypoint
-            if User.currentUser?.route?.path.waypoints.first == nil {
-                currentWayPointView.nextBtn.setTitle("Finish Route", for: .normal)
-            } else {
-                currentWayPointView.nextBtn.setTitle("Next Point", for: .normal)
-            }
-            currentWayPointView.configureView()
-            currentView.removeFromSuperview()
-            mainView.addSubview(currentView)
-            
-        } else {
-            routeStarted = false
-            currentView.removeFromSuperview()
-            currentView = currentRouteView
-            mainView.addSubview(currentView)
-        }
-    }
+//    func skipLeg() {
+//        User.currentUser?.route?.path.skipLeg()
+//        if let nextWaypoint = User.currentUser?.route?.path.nextLeg() {
+//            currentWayPointView.currWaypoint = nextWaypoint
+//            if User.currentUser?.route?.path.waypoints.first == nil {
+//                currentWayPointView.nextBtn.setTitle("Finish Route", for: .normal)
+//            } else {
+//                currentWayPointView.nextBtn.setTitle("Next Point", for: .normal)
+//            }
+//            currentWayPointView.configureView()
+//            currentView.removeFromSuperview()
+//            mainView.addSubview(currentView)
+//            
+//        } else {
+//            routeStarted = false
+//            currentView.removeFromSuperview()
+//            currentView = currentRouteView
+//            mainView.addSubview(currentView)
+//        }
+//    }
     
-    func nextLeg() {
+    func nextWaypoint() {
 
-        if let nextWaypoint = User.currentUser!.route?.path.nextLeg() {
+        if let nextWaypoint = User.currentUser!.route?.path.getCurrentWaypoint() {
             currentWayPointView.currWaypoint = nextWaypoint
             if User.currentUser!.route?.path.waypoints.first == nil {
                 currentWayPointView.nextBtn.setTitle("Finish Route", for: .normal)
@@ -206,6 +207,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
         
+    }
+    
+    func showDirections() {
+        User.currentUser!.route?.path.nextLeg()
+    }
+    
+    func callPhoneNum() {
+        let phoneNum = currentWayPointView.currWaypoint?.phoneNumber
+        if let url = NSURL(string: "tel://\(phoneNum)"), UIApplication.shared.canOpenURL(url as URL){
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+            //UIApplication.shared.openURL(url as URL)
+        } else {
+            print("Can't open url to call")
+        }
     }
     
     func addNew(type: String, index: Int, tableView: UITableView) {

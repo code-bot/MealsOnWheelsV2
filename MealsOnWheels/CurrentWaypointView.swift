@@ -22,7 +22,8 @@ class CurrentWaypointView: UIView {
     
     //Buttons
     var nextBtn = UIButton()
-    var skipBtn = UIButton()
+    var showDirBtn = UIButton()
+    var phoneNumBtn = UIButton()
     
     var currWaypoint = User.currentUser!.routes.first!.path.waypoints.first
     
@@ -50,14 +51,14 @@ class CurrentWaypointView: UIView {
             waypointInfoLbl.textColor = UIColor.white
             waypointInfoLbl.textAlignment = .left
             
-            waypointPhNumLbl.text = "Phone#: " + waypoint.phoneNumber
+            waypointPhNumLbl.text = "Phone#:"
             waypointPhNumLbl.textColor = UIColor.white
             waypointPhNumLbl.textAlignment = .left
         }
     }
     
     func configureButtons() {
-        if let _ = currWaypoint {
+        if let waypoint = currWaypoint {
             nextBtn.setTitle("Next Point", for: .normal)
             nextBtn.setTitleColor(MWConstants.colors.darkBackground, for: .normal)
             nextBtn.backgroundColor = UIColor.white
@@ -65,12 +66,17 @@ class CurrentWaypointView: UIView {
             nextBtn.layer.borderColor = MWConstants.colors.lightBackground.cgColor
             nextBtn.layer.borderWidth = 2
             
-            skipBtn.setTitle("Skipped Point", for: .normal)
-            skipBtn.setTitleColor(MWConstants.colors.darkBackground, for: .normal)
-            skipBtn.backgroundColor = UIColor.white
-            skipBtn.layer.cornerRadius = 20.0
-            skipBtn.layer.borderColor = MWConstants.colors.lightBackground.cgColor
-            skipBtn.layer.borderWidth = 2
+            showDirBtn.setTitle("Show Directions", for: .normal)
+            showDirBtn.setTitleColor(MWConstants.colors.darkBackground, for: .normal)
+            showDirBtn.backgroundColor = UIColor.white
+            showDirBtn.layer.cornerRadius = 20.0
+            showDirBtn.layer.borderColor = MWConstants.colors.lightBackground.cgColor
+            showDirBtn.layer.borderWidth = 2
+            
+            phoneNumBtn.setTitle("7327623380", for: .normal)
+            phoneNumBtn.setTitleColor(UIColor.white, for: .normal)
+            phoneNumBtn.backgroundColor = UIColor.clear
+            phoneNumBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
         }
     }
     
@@ -88,21 +94,23 @@ class CurrentWaypointView: UIView {
                 "streetView":   streetView,
                 "info"      :   waypointInfoLbl,
                 "phone"     :   waypointPhNumLbl,
+                "phoneBtn"  :   phoneNumBtn,
                 "next"      :   nextBtn,
-                "skip"      :   skipBtn
+                "show"      :   showDirBtn
                 ] as [String : UIView]
             
             self.prepareViewsForAutoLayout(viewsDict)
             
             self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[title]-20-[streetView(==\(String(describing: MWConstants.streetViewHeight)))]-20-[info]-15-[phone]", views: viewsDict))
-            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:[streetView(==\(String(describing: MWConstants.streetViewHeight)))]-20-[next(==\(String(describing: MWConstants.startBtnHeight * 2/3)))]-10-[skip(==\(String(describing: MWConstants.startBtnHeight * 2/3)))]", views: viewsDict))
+            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-20-[title]-20-[streetView(==\(String(describing: MWConstants.streetViewHeight)))]-20-[info]-10-[phoneBtn]", views: viewsDict))
+            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:[streetView(==\(String(describing: MWConstants.streetViewHeight)))]-20-[next(==\(String(describing: MWConstants.startBtnHeight * 2/3)))]-10-[show(==\(String(describing: MWConstants.startBtnHeight * 2/3)))]", views: viewsDict))
             
             self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
             self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[streetView]|", views: viewsDict))
-            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-20-[info]|", views: viewsDict))
-            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-20-[phone]|", views: viewsDict))
+            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-20-[info]", views: viewsDict))
+            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-20-[phone]-10-[phoneBtn]", views: viewsDict))
             self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:[next(==\(String(describing: MWConstants.startBtnWidth)))]-20-|", views: viewsDict))
-            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:[skip(==\(String(describing: MWConstants.startBtnWidth)))]-20-|", views: viewsDict))
+            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:[show(==\(String(describing: MWConstants.startBtnWidth)))]-20-|", views: viewsDict))
         }
     }
     

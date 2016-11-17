@@ -66,7 +66,7 @@ class Path {
     }
     
     func nextLeg() -> Waypoint? {
-        self.currentWaypoint = waypoints.pop() as Waypoint!
+        //self.currentWaypoint = waypoints.pop() as Waypoint!
         
         if currentWaypoint == nil {
             return nil
@@ -81,6 +81,11 @@ class Path {
             print("Can't use comgooglemaps:");
         }
         return nil
+    }
+    
+    func getCurrentWaypoint() -> Waypoint? {
+        self.currentWaypoint = waypoints.pop() as Waypoint!
+        return currentWaypoint
     }
     
     func skipLeg() {
