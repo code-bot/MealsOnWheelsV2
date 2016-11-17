@@ -49,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		491959511DB253C800C32723 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		49DDAF461DDE38AB00F70317 /* MealsOnWheels.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MealsOnWheels.entitlements; sourceTree = "<group>"; };
 		49E37CB71DA6D4140022FF1C /* Waypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		49E37CB91DA6D41D0022FF1C /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		49E37CBB1DA6D4250022FF1C /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 		8734A50B1DA4653F006637E1 /* MealsOnWheels */ = {
 			isa = PBXGroup;
 			children = (
+				49DDAF461DDE38AB00F70317 /* MealsOnWheels.entitlements */,
 				8734A51E1DA46790006637E1 /* Constants+Extensions */,
 				8734A51F1DA467A2006637E1 /* Model */,
 				8734A5201DA467AB006637E1 /* View */,
@@ -254,6 +256,11 @@
 						DevelopmentTeam = U9X42PLV7V;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

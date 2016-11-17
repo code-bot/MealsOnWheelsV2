@@ -74,10 +74,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
         FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
             if error == nil {
                 User.setCurrentUser()
-                self.ref.child("users").child(user!.uid).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.exists() {
-                        let routes = snapshot.value as? NSArray
-                        for (route) in routes! {
+                        let response = JSON(snapshot.value as! NSDictionary)
+                        User.currentUser?.name = response["name"].stringValue
+                        for (route) in response["routes"].arrayObject! {
                             self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                 SwiftLoader.hide()
                                 User.currentUser!.routes.append(Route(dict: JSON(snapshot.value as! NSDictionary)))

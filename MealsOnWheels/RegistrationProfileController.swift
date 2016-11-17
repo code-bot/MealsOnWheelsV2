@@ -79,10 +79,15 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
             return true
         }
         else if (registrationProfileView.phoneNumberTF.isEditing){
-            registrationProfileView.phoneNumberTF.resignFirstResponder()
-            storeData()
-            return true
-        }
+            //let numberList = registrationProfileView.phoneNumberTF.text?.characters
+            //let indexNL  = numberList?.index((numberList?.startIndex)!, offsetBy: 0)
+           // if ((registrationProfileView.phoneNumberTF.text?.characters.count == 10)){
+                registrationProfileView.phoneNumberTF.resignFirstResponder()
+                storeData()
+                return true
+                //}
+            }
+
         return false
     }
 
