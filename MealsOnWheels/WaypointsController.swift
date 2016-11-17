@@ -89,7 +89,7 @@ class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource 
         //delete
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:IndexPath!) -> Void in
             //delete this cell
-            User.routes.remove(at: indexPath.row)
+            User.currentUser!.routes.remove(at: indexPath.row)
         })
         return [deleteAction, editAction]
     }

@@ -92,9 +92,9 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
     @IBAction func storeData() {
         SwiftLoader.show(title: "Saving Data", animated: true)
         let name = registrationProfileView.firstNameTF.text! + " " + registrationProfileView.lastNameTF.text!
-        self.ref.child("users").child(User.uid!).child("name").setValue(name)
-        self.ref.child("users").child(User.uid!).child("phone").setValue(registrationProfileView.phoneNumberTF.text)
-        self.ref.child("users").child(User.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child("users").child(User.currentUser!.uid!).child("name").setValue(name)
+        self.ref.child("users").child(User.currentUser!.uid!).child("phone").setValue(registrationProfileView.phoneNumberTF.text)
+        self.ref.child("users").child(User.currentUser!.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
                                     SwiftLoader.hide()
                                     if snapshot.exists() {
                                         
@@ -103,8 +103,8 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
                                             
                                             self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                                 SwiftLoader.hide()
-                                                User.routes.append(Route(dict: JSON(snapshot.value as Any)))
-                                                User.route = User.routes.first
+                                                User.currentUser!.routes.append(Route(dict: JSON(snapshot.value as Any)))
+                                                User.currentUser!.route = User.currentUser!.routes.first
                                                 
                                             })
                                         }

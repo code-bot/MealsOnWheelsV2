@@ -69,8 +69,7 @@ class RegistrationController : UIViewController, UITextFieldDelegate {
             self.present(signUpAlert, animated: true, completion: nil)
         } else {
             FIRAuth.auth()?.createUser(withEmail: registrationView.emailTF.text!, password: registrationView.passTF.text!) { (user, error) in
-                _ = User()
-                User.uid = user?.uid
+                User.setCurrentUser()
                 SwiftLoader.hide()
                 if error == nil {
                     _ = UIButton()

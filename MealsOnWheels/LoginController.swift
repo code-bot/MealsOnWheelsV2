@@ -73,22 +73,23 @@ class LoginController: UIViewController, UITextFieldDelegate {
         //let animateBtn: UIButton = sender
         FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
             if error == nil {
-                _ = User()
-                User.uid = user?.uid
-                self.ref.child("users").child(User.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
+                User.setCurrentUser()
+                self.ref.child("users").child(user!.uid).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.exists() {
                         let routes = snapshot.value as? NSArray
                         for (route) in routes! {
                             self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                 SwiftLoader.hide()
-                                User.routes.append(Route(dict: JSON(snapshot.value as? NSDictionary)))
-                                User.route = User.routes.first
+                                User.currentUser!.routes.append(Route(dict: JSON(snapshot.value as! NSDictionary)))
+                                User.currentUser!.route = User.currentUser!.routes.first
                                 self.present(MainViewController(), animated: true, completion: {
                                 })
                             })
                         }
                     } else {
-                        //poppulate with an emty route
+                        SwiftLoader.hide()
+                        self.present(MainViewController(), animated: true, completion: {
+                        })
                     }
                     //                    commented out section is used to manually poppulate testing data
                     

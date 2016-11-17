@@ -23,7 +23,7 @@ class CurrentWaypointView: UIView {
     //Buttons
     var nextBtn = UIButton()
     
-    var waypoint = User.routes.first!.path.waypoints.first!
+    var waypoint = User.currentUser!.routes.first!.path.waypoints.first!
     
     func configureStreetView() {
         streetView = GMSPanoramaView(frame: .zero)
