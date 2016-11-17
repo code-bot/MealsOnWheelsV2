@@ -12,14 +12,8 @@ import UIKit
 import Firebase
 import SwiftyJSON
 
-class RegistrationController : UIViewController {
+class RegistrationController : UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var emailTF: UITextField!
-    @IBOutlet weak var passTF: UITextField!
-    @IBOutlet weak var passConfirmTF: UITextField!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var welLabel: UILabel!
-    @IBOutlet weak var backButton: UIButton!
     var passConfirm = false
     var ref = FIRDatabase.database().reference()
     var registrationView = RegistrationView(frame: CGRect(x: 0, y: 0, width: MWConstants.screenWidth, height: MWConstants.screenHeight))
@@ -56,6 +50,9 @@ class RegistrationController : UIViewController {
         
         
         configureView()
+        self.registrationView.emailTF.delegate = self
+        self.registrationView.passTF.delegate = self
+        self.registrationView.passConfirmTF.delegate = self
     }
     
     
@@ -63,7 +60,7 @@ class RegistrationController : UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
-    func confirmPasswords(sender: AnyObject) {
+    func confirmPasswords() {
         SwiftLoader.show(title: "Signing Up", animated: true)
         if registrationView.passTF.text != registrationView.passConfirmTF.text {
             SwiftLoader.hide()
@@ -72,8 +69,7 @@ class RegistrationController : UIViewController {
             self.present(signUpAlert, animated: true, completion: nil)
         } else {
             FIRAuth.auth()?.createUser(withEmail: registrationView.emailTF.text!, password: registrationView.passTF.text!) { (user, error) in
-                _ = User()
-                User.uid = user?.uid
+                User.setCurrentUser()
                 SwiftLoader.hide()
                 if error == nil {
                     _ = UIButton()
@@ -91,6 +87,22 @@ class RegistrationController : UIViewController {
         
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if(registrationView.emailTF.isEditing){
+            registrationView.passTF.becomeFirstResponder()
+            return true
+        }
+        else if registrationView.passTF.isEditing{
+            registrationView.passConfirmTF.becomeFirstResponder()
+            return true
+        }
+        else if registrationView.passConfirmTF.isEditing{
+            registrationView.passConfirmTF.resignFirstResponder()
+            confirmPasswords()
+            return true
+        }
+        return false
+    }
     
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

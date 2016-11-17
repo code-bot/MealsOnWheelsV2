@@ -11,22 +11,37 @@ import Firebase
 import SwiftyJSON
 
 class User: NSObject {
-    static var email: String?
-    static var uid: String?
-    static var routes: Array<Route> = Array<Route>()
-    static var route: Route?
-    override init() {
-        super.init()
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if let user = user {
-                User.uid = user.uid
-                User.email = user.email
-            } else {
-                User.uid = nil
-                User.email = nil
-                User.routes = Array<Route>()
-            }
-        }
-    }
+    var email: String?
+    var uid: String?
+    var routes: Array<Route> = Array<Route>()
+    var route: Route?
+    static var currentUser: User?
+    static let ref = FIRDatabase.database().reference()
 
+    
+
+    
+    init(email: String, uid: String) {
+        super.init()
+        self.email = email
+        self.uid = uid
+        self.routes = Array<Route>()
+    }
+    
+    static func setCurrentUser() {
+        let user = FIRAuth.auth()?.currentUser
+        User.currentUser = User(email: (user?.email!)!, uid: (user?.uid)!);
+    }
+    
+    static func loadCurrentRoutes() {
+        User.ref.child("users").child(self.currentUser!.uid!).child("routes").observeSingleEvent(of: .value, with: { ( snapshot) in
+            let response = JSON(snapshot.value as! NSDictionary)
+            for route in response.array! {
+                User.ref.child("routes").child(route.stringValue).observeSingleEvent(of: .value, with: { ( snapshot) in
+                    User.currentUser!.routes.append(Route(dict: JSON(snapshot)))
+                })
+            }
+        })
+    }
 }
+

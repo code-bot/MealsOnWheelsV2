@@ -53,10 +53,14 @@ class RegistrationView: UIView {
         passConfirmTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         
         emailTF.keyboardType = UIKeyboardType.emailAddress
+        emailTF.returnKeyType = UIReturnKeyType.continue
         emailTF.textColor = UIColor.white
+        
+        passTF.returnKeyType = UIReturnKeyType.continue
         passTF.textColor = UIColor.white
         passConfirmTF.textColor = UIColor.white
         
+        passConfirmTF.returnKeyType = UIReturnKeyType.done
         passTF.isSecureTextEntry = true
         passConfirmTF.isSecureTextEntry = true
         

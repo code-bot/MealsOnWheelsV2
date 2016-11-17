@@ -33,7 +33,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         mainView.navBar.leftBtn.addTarget(self, action: #selector(backPage), for: .touchUpInside)
     }
     
-    func configureView() {
+    func configureView() {        
+        myWaypointsController.selectedIndex = -1
         myWaypointsController.mainViewController = self
         myWaypointsController.myWaypointsView.tableView.delegate = myWaypointsController;
         myWaypointsController.myWaypointsView.tableView.dataSource = myWaypointsController;
@@ -88,18 +89,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.routes.count+1
+        return User.currentUser!.routes.count+1
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = myRoutesView.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        if (indexPath.row == User.routes.count) {
+        if (indexPath.row == User.currentUser!.routes.count) {
             //+ new route
             cell.textLabel?.textAlignment = NSTextAlignment.center
             cell.textLabel?.text = "+"
             return cell
         }
-        let route = User.routes[indexPath.row];
+        let route = User.currentUser!.routes[indexPath.row];
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
         let convertedDate = dateFormatter.string(from: route.date as Date)
@@ -111,13 +112,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.row == User.routes.count) {
+        if (indexPath.row == User.currentUser!.routes.count) {
             //add new route
-            addNew(type: "Route", index: -1)
+            addNew(type: "Route", index: -1, tableView: tableView)
             return
         }
         //switch to waypoints view
-        myWaypointsController.route = User.routes[indexPath.row]
+        myWaypointsController.route = User.currentUser!.routes[indexPath.row]
         mainView.addSubview(myWaypointsController.myWaypointsView)
         myRoutesView.removeFromSuperview()
         mainView.navBar.leftBtn.setTitle("Back", for: .normal)
@@ -129,7 +130,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let route = User.routes[indexPath.row];
+        let route = User.currentUser!.routes[indexPath.row];
         //edit the information
         let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit" , handler: { (action:UITableViewRowAction!, indexPath:IndexPath!) -> Void in
             //popup with the information to edit
@@ -137,8 +138,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
                 let user1TF = alertController.textFields![0] as UITextField
                 let user2TF = alertController.textFields![1] as UITextField
-                User.routes[indexPath.row].user1Name = user1TF.text!
-                User.routes[indexPath.row].user2Name = user2TF.text!
+                User.currentUser!.routes[indexPath.row].user1Name = user1TF.text!
+                User.currentUser!.routes[indexPath.row].user2Name = user2TF.text!
+                tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
             
@@ -157,16 +159,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //delete
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:IndexPath!) -> Void in
             //delete this cell
-            User.routes.remove(at: indexPath.row)
+            User.currentUser!.routes.remove(at: indexPath.row)
         })
         return [deleteAction, editAction]
     }
     
     func skipLeg() {
-        User.route?.path.skipLeg()
-        if let nextWaypoint = User.route?.path.nextLeg() {
+        User.currentUser?.route?.path.skipLeg()
+        if let nextWaypoint = User.currentUser?.route?.path.nextLeg() {
             currentWayPointView.currWaypoint = nextWaypoint
-            if User.route?.path.waypoints.first == nil {
+            if User.currentUser?.route?.path.waypoints.first == nil {
                 currentWayPointView.nextBtn.setTitle("Finish Route", for: .normal)
             } else {
                 currentWayPointView.nextBtn.setTitle("Next Point", for: .normal)
@@ -184,9 +186,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func nextLeg() {
-        if let nextWaypoint = User.route?.path.nextLeg() {
+
+        if let nextWaypoint = User.currentUser!.route?.path.nextLeg() {
             currentWayPointView.currWaypoint = nextWaypoint
-            if User.route?.path.waypoints.first == nil {
+            if User.currentUser!.route?.path.waypoints.first == nil {
                 currentWayPointView.nextBtn.setTitle("Finish Route", for: .normal)
             } else {
                 currentWayPointView.nextBtn.setTitle("Next Point", for: .normal)
@@ -205,12 +208,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func addNew(type: String, index: Int) {
+    func addNew(type: String, index: Int, tableView: UITableView) {
         //type- "Route" or "Waypoint"
         //popup with the information to edit
         let alertController = UIAlertController(title: "New \(type)", message: "Fill out the fields.", preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
             if (type == "Route") {
+                //Route
                 let nameString = (alertController.textFields![0] as UITextField).text
                 let descString = (alertController.textFields![1] as UITextField).text
                 let dateString = (alertController.textFields![2] as UITextField).text
@@ -222,19 +226,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let uid = ""
                 let user1 = "" //based on user1TF
                 let user2 = "" //based on user2TF
-                User.routes.append(Route(path: Path(name: nameString!, desc: descString!, waypoints: [], miles: Double(miles), time: time, overviewPolyline: polyLine, uid: uid), user1: user1, user2: user2, user1Name: user1String!, user2Name: user2String!, date: NewDate.parse(dateStr: dateString!).timeIntervalSince1970))
+                User.currentUser!.routes.append(Route(path: Path(name: nameString!, desc: descString!, waypoints: [], miles: Double(miles), time: time, overviewPolyline: polyLine, uid: uid), user1: user1, user2: user2, user1Name: user1String!, user2Name: user2String!, date: NewDate.parse(dateStr: dateString!).timeIntervalSince1970))
+                tableView.reloadData()
             } else {
+                //Waypoint
                 let addString = (alertController.textFields![0] as UITextField).text
                 let phoneString = (alertController.textFields![1] as UITextField).text
                 let latitude = 0
                 let longitude = 0
                 let priority = 0
-                User.routes[index].path.waypoints.push(Waypoint(address: addString!, phoneNumber: phoneString!, info: "", title: addString!, latitude: Float(latitude), longitude: Float(longitude), priority: priority))
+                User.currentUser!.routes[index].path.waypoints.push(Waypoint(address: addString!, phoneNumber: phoneString!, info: "", title: addString!, latitude: Float(latitude), longitude: Float(longitude), priority: priority))
+                tableView.reloadData()
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         
         if (type == "Route") {
+            //Route
             alertController.addTextField { (textField) in
                 textField.placeholder = "Name"
             }
@@ -251,6 +259,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 textField.placeholder = "User 2"
             }
         } else {
+            //Waypoint
             alertController.addTextField { (textField) in
                 textField.placeholder = "Address"
             }

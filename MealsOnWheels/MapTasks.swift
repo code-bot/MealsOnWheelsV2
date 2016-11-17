@@ -75,7 +75,7 @@ class MapTasks : NSObject {
                             let hours = mins/60
                             let days = hours/24
                             let totalDuration = "Duration: \(days) days, \(hours%24) hr, \(mins%60) min"
-                            let firPath = ref.child(User.uid!).child("paths").childByAutoId()
+                            let firPath = ref.child((User.currentUser?.uid!)!).child("paths").childByAutoId()
                             let key = firPath.key
                             let path = Path(name: "", desc: "", waypoints: waypoints, miles: distanceInMiles, time: totalDuration, overviewPolyline: pathPoly, uid: key)
                             firPath.setValue(path.toDict())
@@ -98,6 +98,8 @@ class MapTasks : NSObject {
             completionHandler("Origin is nil", false, nil)
         }
     }
+    
+    
     
 
 }

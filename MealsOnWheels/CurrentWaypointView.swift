@@ -24,7 +24,7 @@ class CurrentWaypointView: UIView {
     var nextBtn = UIButton()
     var skipBtn = UIButton()
     
-    var currWaypoint = User.routes.first?.path.waypoints.first
+    var currWaypoint = User.currentUser!.routes.first!.path.waypoints.first
     
     func configureStreetView() {
         if let waypoint = currWaypoint {

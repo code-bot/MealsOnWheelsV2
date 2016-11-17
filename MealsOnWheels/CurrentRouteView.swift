@@ -24,7 +24,7 @@ class CurrentRouteView: UIView {
     //Buttons
     var startBtn = UIButton()
     
-    var currRoute = User.routes.last
+    var currRoute = User.currentUser!.routes.last
     
     func configureMapView() {
         if let route = currRoute {
