@@ -120,7 +120,7 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
                 if (length - index) > 3
                 {
                     let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
-                    formattedString.appendFormat("(%@)", areaCode)
+                    formattedString.appendFormat("(%@) ", areaCode)
                     index += 3
                 }
                 if length - index > 3
