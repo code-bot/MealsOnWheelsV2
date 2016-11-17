@@ -53,6 +53,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    
+    
     func textFieldShouldReturn(_:UITextField) -> Bool{
         if(loginView.emailTF.isEditing){
             loginView.passwordTF.becomeFirstResponder()
@@ -137,3 +140,5 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
     }
 }
+
+
