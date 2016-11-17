@@ -12,13 +12,8 @@ import UIKit
 import Firebase
 import SwiftyJSON
 
-class RegistrationProfileController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class RegistrationProfileController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    @IBOutlet weak var firstNameTF: UITextField!
-    @IBOutlet weak var lastNameTF: UITextField!
-    @IBOutlet weak var photoimage: UIButton!
-    @IBOutlet weak var signupbtn: UIButton!
-    @IBOutlet weak var phoneNumberTF: UITextView!
 
     let picker = UIImagePickerController()
 
@@ -74,7 +69,27 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         alertVC.addAction(okAction)
         present(alertVC, animated: true, completion: nil)
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if (registrationProfileView.firstNameTF.isEditing){
+            registrationProfileView.lastNameTF.becomeFirstResponder()
+            return true
+        }
+        else if (registrationProfileView.lastNameTF.isEditing){
+            registrationProfileView.phoneNumberTF.becomeFirstResponder()
+            return true
+        }
+        else if (registrationProfileView.phoneNumberTF.isEditing){
+            //let numberList = registrationProfileView.phoneNumberTF.text?.characters
+            //let indexNL  = numberList?.index((numberList?.startIndex)!, offsetBy: 0)
+           // if ((registrationProfileView.phoneNumberTF.text?.characters.count == 10)){
+                registrationProfileView.phoneNumberTF.resignFirstResponder()
+                storeData()
+                return true
+                //}
+            }
+
+        return false
+    }
 
 //    @IBAction func btnClicked(_ sender: AnyObject){
 //        
@@ -89,7 +104,7 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
 //        }
 //    }
 
-    @IBAction func storeData() {
+     func storeData() {
         SwiftLoader.show(title: "Saving Data", animated: true)
         let name = registrationProfileView.firstNameTF.text! + " " + registrationProfileView.lastNameTF.text!
         self.ref.child("users").child(User.currentUser!.uid!).child("name").setValue(name)
@@ -133,8 +148,16 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         super.viewDidLoad()
         configureView()
         picker.delegate = self
+        self.registrationProfileView.firstNameTF.delegate = self
+        self.registrationProfileView.lastNameTF.delegate = self
+        self.registrationProfileView.phoneNumberTF.delegate = self
+        
 }
-
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return UIStatusBarStyle.lightContent
+    }
+    
+    
     func imagePickerController(_ picker: UIImagePickerController,                              didFinishPickingMediaWithInfo info: [String : Any]){
         
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {

@@ -32,6 +32,13 @@ class RegistrationProfileView: UIView {
         firstNameTF.layer.cornerRadius = 8.0
         lastNameTF.layer.cornerRadius = 8.0
         phoneNumberTF.layer.cornerRadius = 8.0
+        
+        firstNameTF.returnKeyType = UIReturnKeyType.next
+        lastNameTF.returnKeyType = UIReturnKeyType.next
+        phoneNumberTF.returnKeyType = UIReturnKeyType.done
+        
+        phoneNumberTF.keyboardType = UIKeyboardType.phonePad
+        
 //        firstNameTF.layer.borderWidth = 1.5
 //        firstNameTF.layer.borderColor = UIColor.lightGray.cgColor
 //        lastNameTF.layer.borderWidth = 1.5
@@ -51,9 +58,9 @@ class RegistrationProfileView: UIView {
         lastNameTF.textAlignment = NSTextAlignment.natural
         phoneNumberTF.textAlignment = NSTextAlignment.natural
         
-        firstNameTF.textColor = UIColor.darkText
-        lastNameTF.textColor = UIColor.darkText
-        phoneNumberTF.textColor = UIColor.darkText
+        firstNameTF.textColor = UIColor.white
+        lastNameTF.textColor = UIColor.white
+        phoneNumberTF.textColor = UIColor.white
         
     }
     
