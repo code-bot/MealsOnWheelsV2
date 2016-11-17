@@ -14,19 +14,24 @@ class MyWaypointsView: UIView {
     //Table View
     var tableView = UITableView()
     
+    //Buttons
+    var startRouteButton = UIButton()
+    
     func configureView() {
         self.backgroundColor = MWConstants.colors.loginDarkGradient
         
         //Auto Layout
         let viewsDict = [
-            "tableView":tableView
+            "tableView":tableView,
+            "startButton":startRouteButton
             ] as [String : UIView]
         
         self.prepareViewsForAutoLayout(viewsDict)
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-[tableView]-|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-[startButton]-10-[tableView]-|", views: viewsDict))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-[tableView]-|", views: viewsDict))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-[startButton]-|", views: viewsDict))
         
     }
     
