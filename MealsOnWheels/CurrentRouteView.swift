@@ -122,7 +122,7 @@ class CurrentRouteView: UIView {
             
             self.prepareViewsForAutoLayout(viewsDict)
             
-            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-15[title]-10-[desc]", views: viewsDict))
+            self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-15-[title]-10-[desc]", views: viewsDict))
             
             self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[title]|", views: viewsDict))
             self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|[desc]|", views: viewsDict))

@@ -53,6 +53,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    
+    
     func textFieldShouldReturn(_:UITextField) -> Bool{
         if(loginView.emailTF.isEditing){
             loginView.passwordTF.becomeFirstResponder()
@@ -91,6 +94,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
                         SwiftLoader.hide()
                         self.present(MainViewController(), animated: true, completion: {
                         })
+                        //poppulate with an emty route
                     }
                     //                    commented out section is used to manually poppulate testing data
                     
@@ -136,3 +140,5 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
     }
 }
+
+
