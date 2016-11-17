@@ -33,10 +33,11 @@ class RegistrationProfileView: UIView {
         lastNameTF.layer.cornerRadius = 8.0
         phoneNumberTF.layer.cornerRadius = 8.0
         
-        firstNameTF.returnKeyType = UIReturnKeyType.continue
-        lastNameTF.returnKeyType = UIReturnKeyType.continue
+        firstNameTF.returnKeyType = UIReturnKeyType.next
+        lastNameTF.returnKeyType = UIReturnKeyType.next
         phoneNumberTF.returnKeyType = UIReturnKeyType.done
         
+        phoneNumberTF.keyboardType = UIKeyboardType.phonePad
         
 //        firstNameTF.layer.borderWidth = 1.5
 //        firstNameTF.layer.borderColor = UIColor.lightGray.cgColor
