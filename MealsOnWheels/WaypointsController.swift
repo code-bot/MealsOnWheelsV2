@@ -81,7 +81,6 @@ class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource 
             
             alertController.addTextField { (textField) in
                 textField.placeholder = "Phone Number"
-                print("PHONE NUMBER IS ")
                 print(User.currentUser!.routes[self.routeIndex].path.waypoints[indexPath.row].phoneNumber)
                 textField.text = User.currentUser!.routes[self.routeIndex].path.waypoints[indexPath.row].phoneNumber
             }
@@ -93,17 +92,20 @@ class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource 
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
             self.mainViewController.present(alertController, animated: true);
+            tableView.setEditing(false, animated: true)
         })
         
         //delete
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:IndexPath!) -> Void in
             //delete this cell
             self.mainViewController.delete(type: "Waypoint", index: indexPath.row)
+            tableView.setEditing(false, animated: true)
         })
         return [deleteAction, editAction]
     }
     
     func startRoute() {
+        mainViewController.mainView.navBar.leftBtn.setTitle("", for: .normal)
         mainViewController.mainView.tabView.currentPage = Page.currentRoute
         mainViewController.mainView.addSubview(mainViewController.currentView)
         mainViewController.myRoutesView.removeFromSuperview()
