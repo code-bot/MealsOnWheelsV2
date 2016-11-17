@@ -163,6 +163,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func skipLeg() {
+        User.route?.path.skipLeg()
         if let nextWaypoint = User.route?.path.nextLeg() {
             currentWayPointView.currWaypoint = nextWaypoint
             if User.route?.path.waypoints.first == nil {
@@ -179,7 +180,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             currentView.removeFromSuperview()
             currentView = currentRouteView
             mainView.addSubview(currentView)
-            
         }
     }
     
