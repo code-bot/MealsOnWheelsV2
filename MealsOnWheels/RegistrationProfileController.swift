@@ -36,6 +36,7 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
+    
     /**
     @IBAction func photoFromLibrary(_sender: UIBarButtonItem) {
         picker.allowsEditing = false
@@ -137,7 +138,6 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         
     }
     
-
     func configureView() {
         configureButtons()
         self.dismissKeyboardAtTap()
@@ -174,6 +174,6 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         dismiss(animated: true, completion: nil)
 
     }
-
+    
 }
 
