@@ -30,6 +30,7 @@ class User: NSObject {
         self.routes = Array<Route>()
     }
     
+    
     static func setCurrentUser() {
         let user = FIRAuth.auth()?.currentUser
         User.currentUser = User(email: (user?.email!)!, uid: (user?.uid)!, name: "");
