@@ -73,7 +73,7 @@ class CurrentWaypointView: UIView {
             showDirBtn.layer.borderColor = MWConstants.colors.lightBackground.cgColor
             showDirBtn.layer.borderWidth = 2
             
-            phoneNumBtn.setTitle("7327623380", for: .normal)
+            phoneNumBtn.setTitle(waypoint.info, for: .normal)
             phoneNumBtn.setTitleColor(UIColor.white, for: .normal)
             phoneNumBtn.backgroundColor = UIColor.clear
             phoneNumBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)

@@ -66,6 +66,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func startRoute() {
         routeStarted = true
         currentView = currentWayPointView
+        User.currentUser?.route?.path.initWaypointQueue()
         nextWaypoint()
     }
     
@@ -227,6 +228,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             //UIApplication.shared.openURL(url as URL)
         } else {
             print("Can't open url to call")
+        }
     }
 
     func delete(type: String, index: Int) {
@@ -271,7 +273,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let latitude = 0
                 let longitude = 0
                 let priority = 0
-                User.currentUser!.routes[index].path.waypoints.push(Waypoint(address: addString!, phoneNumber: phoneString!, info: "", title: addString!, latitude: Float(latitude), longitude: Float(longitude), priority: priority))
+                User.currentUser!.routes[index].path.waypoints.append(Waypoint(address: addString!, phoneNumber: phoneString!, info: "", title: addString!, latitude: Float(latitude), longitude: Float(longitude), priority: priority))
                 tableView.reloadData()
             }
         }
