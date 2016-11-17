@@ -72,12 +72,14 @@ class RegistrationController : UIViewController, UITextFieldDelegate {
                 User.setCurrentUser()
                 SwiftLoader.hide()
                 if error == nil {
+                    self.ref.child("users").child((user?.uid)!).observeSingleEvent(of: .value, with: {(snapshot) in
+                        let response = JSON(snapshot.value as! NSDictionary)
+                        User.currentUser?.name = response["name"].stringValue
+                    })
                     _ = UIButton()
                     self.present(RegistrationProfileController(), animated: true, completion: nil)
                 
-                }
-                
-                else {
+                } else {
                     let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error?.localizedDescription, preferredStyle:  UIAlertControllerStyle.alert)
                     signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
                     self.present(signUpAlert, animated: true, completion: nil)
