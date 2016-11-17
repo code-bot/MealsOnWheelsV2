@@ -142,7 +142,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 User.currentUser!.routes[indexPath.row].user2Name = user2TF.text!
                 tableView.reloadData()
             }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            }
             
             alertController.addTextField { (textField) in
                 textField.placeholder = "User 1"
@@ -156,12 +157,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true);
+            tableView.setEditing(false, animated: true)
         })
         
         //delete
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:IndexPath!) -> Void in
             //delete this cell
             self.delete(type: "Route", index: indexPath.row);
+            tableView.setEditing(false, animated: true)
         })
         return [deleteAction, editAction]
     }
