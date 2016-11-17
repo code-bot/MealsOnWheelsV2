@@ -27,8 +27,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         currentRouteView.startBtn.addTarget(self, action: #selector(startRoute), for: .touchUpInside)
         currentWayPointView.nextBtn.addTarget(self, action: #selector(nextLeg), for: .touchUpInside)
         mainView.tabView.myRoutes.addTarget(self, action: #selector(switchPage(_:)), for: .touchUpInside)
-
-        mainView.navBar.leftBtn.addTarget(self, action: #selector(backPage), for: .touchUpInside)
+        
+        mainView.navBar.leftBtn.addTarget(self, action: #selector(navBtnAction), for: .touchUpInside)
+        mainView.navBar.rightBtn.addTarget(self, action: #selector(navBtnAction), for: .touchUpInside)
     }
     
     func configureView() {        
@@ -59,6 +60,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return UIStatusBarStyle.lightContent
     }
     
+    func navBtnAction(sender:UIButton) {
+        if (sender.currentTitle == "Back") {
+            backPage(sender: sender)
+        } else if (sender.currentTitle == "Settings") {
+            present(SettingsController(), animated: true, completion: nil)
+        }
+    }
     
     func startRoute() {
         routeStarted = true
