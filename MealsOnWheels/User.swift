@@ -11,8 +11,9 @@ import Firebase
 import SwiftyJSON
 
 class User: NSObject {
-    var email: String?
-    var uid: String?
+    var email: String!
+    var uid: String!
+    var name: String!
     var routes: Array<Route> = Array<Route>()
     var route: Route?
     static var currentUser: User?
@@ -21,25 +22,37 @@ class User: NSObject {
     
 
     
-    init(email: String, uid: String) {
+    init(email: String, uid: String, name: String) {
         super.init()
         self.email = email
         self.uid = uid
+        self.name = name
         self.routes = Array<Route>()
     }
     
     static func setCurrentUser() {
         let user = FIRAuth.auth()?.currentUser
-        User.currentUser = User(email: (user?.email!)!, uid: (user?.uid)!);
+        User.currentUser = User(email: (user?.email!)!, uid: (user?.uid)!, name: "");
+        getUsers()
     }
     
-    static func loadCurrentRoutes() {
-        User.ref.child("users").child(self.currentUser!.uid!).child("routes").observeSingleEvent(of: .value, with: { ( snapshot) in
+    static func loadRoutes(user: User) {
+        User.ref.child("users").child(user.uid!).child("routes").observeSingleEvent(of: .value, with: { ( snapshot) in
             let response = JSON(snapshot.value as! NSDictionary)
             for route in response.array! {
                 User.ref.child("routes").child(route.stringValue).observeSingleEvent(of: .value, with: { ( snapshot) in
                     User.currentUser!.routes.append(Route(dict: JSON(snapshot)))
                 })
+            }
+        })
+    }
+    
+    static func getUsers() {
+        User.ref.child("users").observeSingleEvent(of: .value, with: {(snapshot) in
+//            let response = JSON(snapshot.value as! NSDictionary)
+            let dict = snapshot.value as! NSDictionary
+            for key in dict {
+                
             }
         })
     }
