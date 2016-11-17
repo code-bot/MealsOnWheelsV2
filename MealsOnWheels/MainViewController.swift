@@ -37,12 +37,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         myWaypointsController.myWaypointsView.tableView.delegate = myWaypointsController;
         myWaypointsController.myWaypointsView.tableView.dataSource = myWaypointsController;
         myWaypointsController.myWaypointsView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        myWaypointsController.myWaypointsView.startRouteButton.setTitle("Start Route", for:UIControlState.normal)
+        //myWaypointsController.myWaypointsView.startRouteButton.backgroundColor = UIColor.white
+        //myWaypointsController.myWaypointsView.startRouteButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+        myWaypointsController.myWaypointsView.startRouteButton.addTarget(myWaypointsController, action: #selector(myWaypointsController.startRoute), for: UIControlEvents.touchUpInside)
         
         configureButtons()
         currentView = currentRouteView
         mainView.addSubview(currentView)
         self.view = mainView
-        
     }
     
     override func viewDidLoad() {
@@ -50,7 +53,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         myRoutesView.tableView.delegate = self;
         myRoutesView.tableView.dataSource = self;
         myRoutesView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -116,7 +118,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             return
         }
         //switch to waypoints view
-        myWaypointsController.route = User.currentUser!.routes[indexPath.row]
+        myWaypointsController.routeIndex = indexPath.row
         mainView.addSubview(myWaypointsController.myWaypointsView)
         myRoutesView.removeFromSuperview()
         mainView.navBar.leftBtn.setTitle("Back", for: .normal)
@@ -140,24 +142,29 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 User.currentUser!.routes[indexPath.row].user2Name = user2TF.text!
                 tableView.reloadData()
             }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            }
             
             alertController.addTextField { (textField) in
                 textField.placeholder = "User 1"
+                textField.text = User.currentUser!.routes[indexPath.row].user1Name
             }
             alertController.addTextField { (textField) in
                 textField.placeholder = "User 2"
+                textField.text = User.currentUser!.routes[indexPath.row].user2Name
             }
             
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true);
+            tableView.setEditing(false, animated: true)
         })
         
         //delete
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:IndexPath!) -> Void in
             //delete this cell
-            User.currentUser!.routes.remove(at: indexPath.row)
+            self.delete(type: "Route", index: indexPath.row);
+            tableView.setEditing(false, animated: true)
         })
         return [deleteAction, editAction]
     }
@@ -184,8 +191,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func delete(type: String, index: Int) {
+        //type- "Route" or "Waypoint"
+        //TODO- delete the route or waypoint from firebase
+        if (type == "Route") {
+            //delete the Route
+            User.currentUser!.routes.remove(at: index)
+            //TODO
+        } else {
+            //delete the Waypoint
+            User.currentUser!.routes.remove(at: index)
+            //TODO
+        }
+    }
+    
     func addNew(type: String, index: Int, tableView: UITableView) {
         //type- "Route" or "Waypoint"
+        //TODO- a lot of the information is in dummy variables bc i don't know what to put there
         //popup with the information to edit
         let alertController = UIAlertController(title: "New \(type)", message: "Fill out the fields.", preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in

@@ -10,6 +10,7 @@ import Foundation
 import SwiftPriorityQueue
 import GoogleMaps
 import SwiftyJSON
+import Firebase
 
 class Path {
     var name: String
@@ -20,6 +21,9 @@ class Path {
     var overviewPolyline: String
     var currentWaypoint: Waypoint?
     var uid: String
+    static var paths: Array<Route> = Array<Route>()
+    static let ref = FIRDatabase.database().reference()
+
     init(name: String, desc: String, waypoints: [Waypoint], miles: Double, time: String, overviewPolyline: String, uid: String) {
         self.name = name
         self.description = desc
@@ -94,4 +98,17 @@ class Path {
         end?.priority = maxWeight + 1;
         waypoints.push(end!);
     }
+    
+    func getPaths() -> Array<Route>{
+        if Path.paths.count == 0 {
+            User.ref.child("paths").observeSingleEvent(of: .value, with: { ( snapshot) in
+                let response = JSON(snapshot.value as! NSDictionary)
+                for path in response.arrayValue {
+                    Path.paths.append(Route(path: Path(dict: path), user1: "", user2: "", user1Name: "Akhi Aji", user2Name: "Mr. Test", date: NSDate().timeIntervalSince1970))
+                }
+            })
+        }
+        return Path.paths
+    }
+    
 }
