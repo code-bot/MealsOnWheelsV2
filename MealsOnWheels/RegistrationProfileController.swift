@@ -193,15 +193,12 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         self.ref.child("users").child(User.currentUser!.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
                                     SwiftLoader.hide()
                                     if snapshot.exists() {
-                                        
                                         let routes = snapshot.value as? NSArray
                                         for (route) in routes! {
-                                            
                                             self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                                 SwiftLoader.hide()
                                                 User.currentUser!.routes.append(Route(dict: JSON(snapshot.value as Any)))
                                                 User.currentUser!.route = User.currentUser!.routes.first
-                                                
                                             })
                                         }
                                     } else {
@@ -210,12 +207,10 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
                                     self.present(MainViewController(), animated: true, completion: {
                                     })
             
-                                }) { (error) in
-                                    print(error.localizedDescription)
-                                    SwiftLoader.hide()
-                                }
-
-        
+                            }) { (error) in
+                                print(error.localizedDescription)
+                                SwiftLoader.hide()
+                            }
     }
     
     func configureView() {
@@ -231,8 +226,8 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         self.registrationProfileView.firstNameTF.delegate = self
         self.registrationProfileView.lastNameTF.delegate = self
         self.registrationProfileView.phoneNumberTF.delegate = self
-        
-}
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return UIStatusBarStyle.lightContent
     }
