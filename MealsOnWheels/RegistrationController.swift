@@ -36,8 +36,8 @@ class RegistrationController : UIViewController, UITextFieldDelegate {
     }
     
     func swipeLeft(){
-    dismiss(animated: false, completion: nil)
-    present(LoginController(), animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
+        present(LoginController(), animated: true, completion: nil)
     
     }
     

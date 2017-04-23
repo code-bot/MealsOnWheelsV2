@@ -51,7 +51,7 @@ class CurrentWaypointView: UIView {
             waypointInfoLbl.textColor = UIColor.white
             waypointInfoLbl.textAlignment = .left
             
-            waypointPhNumLbl.text = "Phone#:"
+            waypointPhNumLbl.text = "Phone#:" + waypoint.phoneNumber
             waypointPhNumLbl.textColor = UIColor.white
             waypointPhNumLbl.textAlignment = .left
         }
