@@ -37,8 +37,13 @@ struct MWConstants {
     
     struct colors {
         static let loginBackground = UIColor.blue
-        static let loginDarkGradient = UIColor(r: 24, g: 51, b: 78, a: 1.0)
-        static let loginLightGradient = UIColor(r: 42, g: 89, b: 137, a: 1.0)
+        //static let loginDarkGradient = UIColor(r: 162 , g: 212, b: 171, a: 1.0)
+        //static let loginLightGradient = UIColor(r: 229, g: 238, b: 193, a: 1.0)
+        
+        
+        static let loginDarkGradient = UIColor(r: 44 , g: 62, b: 80, a: 1.0)
+        static let loginLightGradient = UIColor(r: 52, g: 73, b: 94, a: 1.0)
+    
         static let darkBackground = UIColor(r: 24, g: 51, b: 78, a: 1.0)
         static let lightBackground = UIColor(r: 42, g: 89, b: 137, a: 1.0)
         
