@@ -14,8 +14,8 @@ class User: NSObject {
     var email: String!
     var uid: String!
     var name: String!
-    var routes: Array<Route> = Array<Route>()
-    var route: Route?
+    var routes: Array<Path> = Array<Path>()
+    var route: Path?
     static var currentUser: User?
     static let ref = FIRDatabase.database().reference()
 
@@ -27,7 +27,7 @@ class User: NSObject {
         self.email = email
         self.uid = uid
         self.name = name
-        self.routes = Array<Route>()
+        self.routes = Array<Path>()
     }
     
     
@@ -42,7 +42,7 @@ class User: NSObject {
             let response = JSON(snapshot.value as! NSDictionary)
             for route in response.array! {
                 User.ref.child("routes").child(route.stringValue).observeSingleEvent(of: .value, with: { ( snapshot) in
-                    User.currentUser!.routes.append(Route(dict: JSON(snapshot)))
+                    User.currentUser!.routes.append(Path(dict: JSON(snapshot)))
                 })
             }
         })

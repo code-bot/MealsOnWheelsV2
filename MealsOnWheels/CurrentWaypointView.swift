@@ -25,7 +25,7 @@ class CurrentWaypointView: UIView {
     var showDirBtn = UIButton()
     var phoneNumBtn = UIButton()
     
-    var currWaypoint = User.currentUser!.routes.first!.path.waypoints.first
+    var currWaypoint = User.currentUser!.routes.first!.waypoints.first
     
     func configureStreetView() {
         if let waypoint = currWaypoint {

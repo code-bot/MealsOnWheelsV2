@@ -74,7 +74,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func startRoute() {
         routeStarted = true
         currentView = currentWayPointView
-        User.currentUser?.route?.path.initWaypointQueue()
+        User.currentUser?.route?.initWaypointQueue()
         nextWaypoint()
     }
     
@@ -113,10 +113,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         }
         let route = User.currentUser!.routes[indexPath.row];
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium
-        let convertedDate = dateFormatter.string(from: route.date as Date)
-        let cellText = "\(route.path.name)\t\(convertedDate)\nUsers: \(route.user1Name) & \(route.user2Name)"
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = DateFormatter.Style.medium
+//        let convertedDate = dateFormatter.string(from: route.date as Date)
+        let cellText = "\(route.name)"
         //let cellText = "Route 1\t\(convertedDate)"
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -146,12 +146,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //edit the information
         let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit" , handler: { (action:UITableViewRowAction!, indexPath:IndexPath!) -> Void in
             //popup with the information to edit
-            let alertController = UIAlertController(title: "Edit Route", message: route.path.name, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Edit Route", message: route.name, preferredStyle: .alert)
             let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
-                let user1TF = alertController.textFields![0] as UITextField
-                let user2TF = alertController.textFields![1] as UITextField
-                User.currentUser!.routes[indexPath.row].user1Name = user1TF.text!
-                User.currentUser!.routes[indexPath.row].user2Name = user2TF.text!
+//                let user1TF = alertController.textFields![0] as UITextField
+//                let user2TF = alertController.textFields![1] as UITextField
+//                User.currentUser!.routes[indexPath.row].user1Name = user1TF.text!
+//                User.currentUser!.routes[indexPath.row].user2Name = user2TF.text!
                 tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
@@ -159,11 +159,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             alertController.addTextField { (textField) in
                 textField.placeholder = "User 1"
-                textField.text = User.currentUser!.routes[indexPath.row].user1Name
+//                textField.text = User.currentUser!.routes[indexPath.row].user1Name
             }
             alertController.addTextField { (textField) in
                 textField.placeholder = "User 2"
-                textField.text = User.currentUser!.routes[indexPath.row].user2Name
+//                textField.text = User.currentUser!.routes[indexPath.row].user2Name
             }
             
             alertController.addAction(saveAction)
@@ -204,9 +204,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func nextWaypoint() {
 
-        if let nextWaypoint = User.currentUser!.route?.path.getCurrentWaypoint() {
+        if let nextWaypoint = User.currentUser!.route?.getCurrentWaypoint() {
             currentWayPointView.currWaypoint = nextWaypoint
-            if User.currentUser!.route?.path.waypoints.first == nil {
+            if User.currentUser!.route?.waypoints.first == nil {
                 currentWayPointView.nextBtn.setTitle("Finish Route", for: .normal)
             } else {
                 currentWayPointView.nextBtn.setTitle("Next Point", for: .normal)
@@ -226,7 +226,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func showDirections() {
-        User.currentUser!.route?.path.nextLeg()
+        User.currentUser!.route?.nextLeg()
     }
     
     func callPhoneNum() {
@@ -263,16 +263,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 //Route
                 let nameString = (alertController.textFields![0] as UITextField).text
                 let descString = (alertController.textFields![1] as UITextField).text
-                let dateString = (alertController.textFields![2] as UITextField).text
-                let user1String = (alertController.textFields![3] as UITextField).text
-                let user2String = (alertController.textFields![4] as UITextField).text
+//                let dateString = (alertController.textFields![2] as UITextField).text
+//                let user1String = (alertController.textFields![3] as UITextField).text
+//                let user2String = (alertController.textFields![4] as UITextField).text
                 let time = "" //estimated time
                 let miles = 0 // total miles
                 let polyLine = ""
                 let uid = ""
-                let user1 = "" //based on user1TF
-                let user2 = "" //based on user2TF
-                User.currentUser!.routes.append(Route(path: Path(name: nameString!, desc: descString!, waypoints: [], miles: Double(miles), time: time, overviewPolyline: polyLine, uid: uid), user1: user1, user2: user2, user1Name: user1String!, user2Name: user2String!, date: NewDate.parse(dateStr: dateString!).timeIntervalSince1970))
+//                let user1 = "" //based on user1TF
+//                let user2 = "" //based on user2TF
+                User.currentUser!.routes.append(Path(name: nameString!, desc: descString!, waypoints: [], miles: Double(miles), time: time, overviewPolyline: polyLine, uid: uid))
                 tableView.reloadData()
             } else {
                 //Waypoint
@@ -281,7 +281,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let latitude = 0
                 let longitude = 0
                 let priority = 0
-                User.currentUser!.routes[index].path.waypoints.append(Waypoint(address: addString!, phoneNumber: phoneString!, info: "", title: addString!, latitude: Float(latitude), longitude: Float(longitude), priority: priority))
+                User.currentUser!.routes[index].waypoints.append(Waypoint(address: addString!, phoneNumber: phoneString!, info: "", title: addString!, latitude: Float(latitude), longitude: Float(longitude), priority: priority))
                 tableView.reloadData()
             }
         }

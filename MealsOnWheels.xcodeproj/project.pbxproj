@@ -12,6 +12,7 @@
 		49E37CBA1DA6D41D0022FF1C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CB91DA6D41D0022FF1C /* Model.swift */; };
 		49E37CBC1DA6D4250022FF1C /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E37CBB1DA6D4250022FF1C /* Route.swift */; };
 		49EAE27F1DAFF5610076CC91 /* MapTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EAE27E1DAFF5610076CC91 /* MapTasks.swift */; };
+		49ECAB311ED0F21B0034BAB2 /* default-user-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 49ECAB301ED0F21B0034BAB2 /* default-user-image.png */; };
 		7BFC64391DB9437E005B80BF /* RegistrationProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFC64381DB9437E005B80BF /* RegistrationProfileController.swift */; };
 		8702109F1DA6C0D9008C16D2 /* MainNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8702109E1DA6C0D9008C16D2 /* MainNavBar.swift */; };
 		8734A50D1DA4653F006637E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8734A50C1DA4653F006637E1 /* AppDelegate.swift */; };
@@ -56,6 +57,7 @@
 		49E37CB91DA6D41D0022FF1C /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		49E37CBB1DA6D4250022FF1C /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		49EAE27E1DAFF5610076CC91 /* MapTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTasks.swift; sourceTree = "<group>"; };
+		49ECAB301ED0F21B0034BAB2 /* default-user-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-user-image.png"; sourceTree = "<group>"; };
 		4DC65213847D4718E78A6825 /* Pods-MealsOnWheels.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealsOnWheels.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MealsOnWheels/Pods-MealsOnWheels.debug.xcconfig"; sourceTree = "<group>"; };
 		5C9119DF85FF584DF6CA7E69 /* Pods_MealsOnWheels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MealsOnWheels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BFC64381DB9437E005B80BF /* RegistrationProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationProfileController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				877021A91DA46B10003F3FC4 /* UIView+Extensions.swift */,
 				B3AA1DC11DB927B2009B1C11 /* UIViewController+Extensions.swift */,
 				CD016A8D1DCBBBF8000394CE /* NewDate.swift */,
+				49ECAB301ED0F21B0034BAB2 /* default-user-image.png */,
 			);
 			name = "Constants+Extensions";
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			files = (
 				8734A5171DA4653F006637E1 /* LaunchScreen.storyboard in Resources */,
 				491959521DB253C800C32723 /* GoogleService-Info.plist in Resources */,
+				49ECAB311ED0F21B0034BAB2 /* default-user-image.png in Resources */,
 				8734A5141DA4653F006637E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

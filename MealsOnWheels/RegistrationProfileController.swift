@@ -189,28 +189,21 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         User.currentUser?.name = name
         self.ref.child("users").child(User.currentUser!.uid!).child("name").setValue(name)
         self.ref.child("users").child(User.currentUser!.uid!).child("phone").setValue(registrationProfileView.phoneNumberTF.text)
-        self.ref.child("users").child(User.currentUser!.uid!).child("image").setValue(UIImageJPEGRepresentation(image!, 0.5)?.base64EncodedString())
-        self.ref.child("users").child(User.currentUser!.uid!).child("routes").observeSingleEvent(of: .value, with: { (snapshot) in
-                                    SwiftLoader.hide()
-                                    if snapshot.exists() {
-                                        let routes = snapshot.value as? NSArray
-                                        for (route) in routes! {
-                                            self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                                                SwiftLoader.hide()
-                                                User.currentUser!.routes.append(Route(dict: JSON(snapshot.value as Any)))
-                                                User.currentUser!.route = User.currentUser!.routes.first
-                                            })
-                                        }
-                                    } else {
-
-                                    }
-                                    self.present(MainViewController(), animated: true, completion: {
-                                    })
+        if ((image) != nil) {
+            self.ref.child("users").child(User.currentUser!.uid!).child("image").setValue(UIImageJPEGRepresentation(image!, 0.5)?.base64EncodedString())
+        } else {
+            self.ref.child("users").child(User.currentUser!.uid!).child("image").setValue(UIImageJPEGRepresentation(#imageLiteral(resourceName: "default-user-image.png"), 0.5)?.base64EncodedString())
+        }
+        self.ref.child("routes").observeSingleEvent(of: .value, with: {(snapshot) in
+            let response = JSON(snapshot.value as! NSDictionary)
+            for (_ , subJson) in response {
+                User.currentUser!.routes.append(Path(dict: subJson))
+            }
+            SwiftLoader.hide()
+            self.present(MainViewController(), animated: true, completion: {
+            })
             
-                            }) { (error) in
-                                print(error.localizedDescription)
-                                SwiftLoader.hide()
-                            }
+        })
     }
     
     func configureView() {

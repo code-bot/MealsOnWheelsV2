@@ -35,6 +35,7 @@ class MapTasks : NSObject {
                 }
 
                 directionsURLString = directionsURLString.addingPercentEscapes(using: String.Encoding.utf8)!
+//                directionsURLString = directionsURLString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
                 let directionsURL = URL(string: directionsURLString)
                 DispatchQueue.main.async(execute: {() -> Void in
                     let directionsData = try? Data(contentsOf: directionsURL!)
@@ -75,13 +76,13 @@ class MapTasks : NSObject {
                             let hours = mins/60
                             let days = hours/24
                             let totalDuration = "Duration: \(days) days, \(hours%24) hr, \(mins%60) min"
-                            let firPath = ref.child((User.currentUser?.uid!)!).child("paths").childByAutoId()
+                            let firPath = ref.child("routes").childByAutoId()
                             let key = firPath.key
                             let path = Path(name: "", desc: "", waypoints: waypoints, miles: distanceInMiles, time: totalDuration, overviewPolyline: pathPoly, uid: key)
                             firPath.setValue(path.toDict())
                             
                             
-                            completionHandler(status, true, path)
+                            completionHandler(key, true, path)
                         } else {
                             completionHandler(status, false, nil)
                         }

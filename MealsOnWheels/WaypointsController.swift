@@ -18,12 +18,12 @@ class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource 
     var selectedIndex: Int!
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.currentUser!.routes[routeIndex].path.waypoints.count+1
+        return User.currentUser!.routes[routeIndex].waypoints.count+1
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = myWaypointsView.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        if (indexPath.row == User.currentUser!.routes[routeIndex].path.waypoints.count) {
+        if (indexPath.row == User.currentUser!.routes[routeIndex].waypoints.count) {
             //+ new route
             cell.textLabel?.textAlignment = NSTextAlignment.center
             cell.textLabel?.text = "+"
@@ -33,7 +33,7 @@ class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource 
         tableView.estimatedRowHeight = 50; //Set this to any value that works for you.
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
-        let waypoint:Waypoint = User.currentUser!.routes[routeIndex].path.waypoints[indexPath.row]
+        let waypoint:Waypoint = User.currentUser!.routes[routeIndex].waypoints[indexPath.row]
         if (indexPath.row == selectedIndex) {
             //the cell user selected has more information
             cell.textLabel?.text = "\(waypoint.title!)\t\(waypoint.phoneNumber!)\n\(waypoint.info!)"
@@ -46,7 +46,7 @@ class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.row == User.currentUser!.routes[routeIndex].path.waypoints.count) {
+        if (indexPath.row == User.currentUser!.routes[routeIndex].waypoints.count) {
             //add new route
             mainViewController.addNew(type: "Waypoint", index: indexPath.row, tableView: tableView)
             return
@@ -69,24 +69,24 @@ class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource 
         //edit the information
         let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit" , handler: { (action:UITableViewRowAction!, indexPath:IndexPath!) -> Void in
             //popup with the information to edit
-            let alertController = UIAlertController(title: "Edit Waypoint", message: User.currentUser!.routes[self.routeIndex].path.waypoints[indexPath.row].title, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Edit Waypoint", message: User.currentUser!.routes[self.routeIndex].waypoints[indexPath.row].title, preferredStyle: .alert)
             let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
                 let phoneTF = alertController.textFields![0] as UITextField
                 let infoTF = alertController.textFields![0] as UITextField
-                User.currentUser!.routes[self.routeIndex].path.waypoints[indexPath.row].phoneNumber = phoneTF.text!
-                User.currentUser!.routes[self.routeIndex].path.waypoints[indexPath.row].info = infoTF.text!
+                User.currentUser!.routes[self.routeIndex].waypoints[indexPath.row].phoneNumber = phoneTF.text!
+                User.currentUser!.routes[self.routeIndex].waypoints[indexPath.row].info = infoTF.text!
                 tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
             
             alertController.addTextField { (textField) in
                 textField.placeholder = "Phone Number"
-                print(User.currentUser!.routes[self.routeIndex].path.waypoints[indexPath.row].phoneNumber)
-                textField.text = User.currentUser!.routes[self.routeIndex].path.waypoints[indexPath.row].phoneNumber
+                print(User.currentUser!.routes[self.routeIndex].waypoints[indexPath.row].phoneNumber)
+                textField.text = User.currentUser!.routes[self.routeIndex].waypoints[indexPath.row].phoneNumber
             }
             alertController.addTextField { (textField) in
                 textField.placeholder = "Information"
-                textField.text = User.currentUser!.routes[self.routeIndex].path.waypoints[indexPath.row].info
+                textField.text = User.currentUser!.routes[self.routeIndex].waypoints[indexPath.row].info
             }
             
             alertController.addAction(saveAction)

@@ -29,12 +29,12 @@ class CurrentRouteView: UIView {
     func configureMapView() {
         if let route = currRoute {
             mapView = GMSMapView()
-            let routePath = route.path.getPath()
+            let routePath = route.getPath()
             let bounds = GMSCoordinateBounds(path: routePath)
             let camera = mapView.camera(for: bounds, insets: UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0))
             mapView.camera = camera!
             mapView.animate(toZoom: 14.0)
-            let pathPolyline = GMSPolyline(path: route.path.getPath())
+            let pathPolyline = GMSPolyline(path: route.getPath())
             pathPolyline.strokeWidth = 5.0
             pathPolyline.map = mapView
         }
@@ -43,19 +43,19 @@ class CurrentRouteView: UIView {
     func configureLabels() {
         if let route = currRoute {
             pathTitleLbl.font = UIFont.systemFont(ofSize: 30.0)
-            pathTitleLbl.text = route.path.name
+            pathTitleLbl.text = route.name
             pathTitleLbl.textColor = UIColor.white
             pathTitleLbl.textAlignment = .center
             
-            pathDescLbl.text = route.path.description
+            pathDescLbl.text = route.description
             pathDescLbl.textColor = UIColor.white
             pathDescLbl.textAlignment = .center
             
-            totalMilesLbl.text = "Total Miles: " + String(describing: route.path.totalMiles)
+            totalMilesLbl.text = "Total Miles: " + String(describing: route.totalMiles)
             totalMilesLbl.textColor = UIColor.white
             totalMilesLbl.textAlignment = .left
             
-            estTimeLbl.text = "Estimated Time: " + route.path.estimatedTime
+            estTimeLbl.text = "Estimated Time: " + route.estimatedTime
             estTimeLbl.textColor = UIColor.white
             estTimeLbl.textAlignment = .left
         } else {

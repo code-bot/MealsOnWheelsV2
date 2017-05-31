@@ -22,6 +22,12 @@ class LoginController: UIViewController, UITextFieldDelegate {
         loginView.loginBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         loginView.signUpBtn.addTarget(self, action: #selector(switchToSignIn), for: .touchUpInside)
         loginView.forgotPasswordBtn.addTarget(self, action: #selector(switchToForgotPassword), for: .touchUpInside)
+//        MapTasks.getDirections("803 N. Davis Albany GA", destination: "2308 Lamar St. Albany GA", waypointStrings: ["803 N. Davis Albany GA", "1406 N. Monroe apt. 4 Albany GA", "1406 N. Monroe apt. 21 Albany GA", "528 9th Albany GA", "716 9th Apt. B Albany GA"], travelMode: nil) { (str, success, route) in
+//            print(route?.toDict())
+//            let x = route?.toDict()
+//            self.ref.child("routes").child(str).setValue(route?.toDict())
+//        }
+
     }
     
     func clearPassField() {
@@ -72,24 +78,15 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     func buttonAction(){
+
         SwiftLoader.show(title: "Signing in", animated: true)
         //let animateBtn: UIButton = sender
         FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
             if error == nil {
                 User.setCurrentUser()
-                self.ref.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("users").child(user!.uid).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.exists() {
-                        let response = JSON(snapshot.value as! NSDictionary)
-                        User.currentUser?.name = response["name"].stringValue
-                        for (route) in response["routes"].arrayObject! {
-                            self.ref.child("routes").child(route as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                                SwiftLoader.hide()
-                                User.currentUser!.routes.append(Route(dict: JSON(snapshot.value as! NSDictionary)))
-                                User.currentUser!.route = User.currentUser!.routes.first
-                                self.present(MainViewController(), animated: true, completion: {
-                                })
-                            })
-                        }
+                        User.currentUser?.name = snapshot.value as! String!
                     } else {
                         SwiftLoader.hide()
                         self.present(MainViewController(), animated: true, completion: {
@@ -98,14 +95,21 @@ class LoginController: UIViewController, UITextFieldDelegate {
                     }
                     //                    commented out section is used to manually poppulate testing data
                     
-                    //                    MapTasks.getDirections("671 10th St NW, Atlanta, GA 30318", destination: "548 Northside Dr NW, Atlanta, GA 30318", waypointStrings: ["746 Marietta St NW, Atlanta, GA 30318", "539 10th St NW, Atlanta, GA 30318", "388 Luckie St NW, Atlanta, GA 30313"], travelMode: nil) { (str, success, route) in
-                    //                        print(route?.toDict())
-                    //                        self.ref.child(user.uid).child("paths").childByAutoId().setValue(route?.toDict())
-                    //                    }
-                }) { (error) in
+                                      }) { (error) in
                     print(error.localizedDescription)
                     SwiftLoader.hide()
                 }
+                self.ref.child("routes").observeSingleEvent(of: .value, with: {(snapshot) in
+                    let response = JSON(snapshot.value as! NSDictionary)
+                    for (_ , subJson) in response {
+                        User.currentUser!.routes.append(Path(dict: subJson))
+                    }
+                    SwiftLoader.hide()
+                    self.present(MainViewController(), animated: true, completion: {
+                    })
+                    
+                })
+                
             } else {
                 SwiftLoader.hide()
                 let signInAlert = UIAlertController(title: "Failed Sign In", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)

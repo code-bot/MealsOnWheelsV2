@@ -22,7 +22,7 @@ class Path {
     var overviewPolyline: String
     var currentWaypoint: Waypoint?
     var uid: String
-    static var paths: Array<Route> = Array<Route>()
+    static var paths: Array<Path> = Array<Path>()
     static let ref = FIRDatabase.database().reference()
 
     init(name: String, desc: String, waypoints: [Waypoint], miles: Double, time: String, overviewPolyline: String, uid: String) {
@@ -75,7 +75,8 @@ class Path {
         if currentWaypoint == nil {
             return nil
         }
-        let htmlDestination = currentWaypoint?.address.addingPercentEscapes(using: String.Encoding.utf8)!
+//        let htmlDestination = currentWaypoint?.address.addingPercentEscapes(using: String.Encoding.utf8)!
+        let htmlDestination = currentWaypoint?.address.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let directionsRequest = "comgooglemaps-x-callback://" + "?daddr=" + htmlDestination! + "&x-success=MOWapp:?resume=true&x-source=MOW"
         let directionsURL = URL(string:directionsRequest);
         if (UIApplication.shared.canOpenURL( URL(string: "comgooglemaps-x-callback://")!)) {
@@ -110,12 +111,12 @@ class Path {
         waypointsQueue.push(end!);
     }
     
-    func getPaths() -> Array<Route>{
+    func getPaths() -> Array<Path>{
         if Path.paths.count == 0 {
             User.ref.child("paths").observeSingleEvent(of: .value, with: { ( snapshot) in
                 let response = JSON(snapshot.value as! NSDictionary)
                 for path in response.arrayValue {
-                    Path.paths.append(Route(path: Path(dict: path), user1: "", user2: "", user1Name: "Akhi Aji", user2Name: "Mr. Test", date: NSDate().timeIntervalSince1970))
+                    Path.paths.append(Path(dict: path))
                 }
             })
         }
