@@ -21,7 +21,7 @@ class MainNavBar: UIView {
         leftBtn.setTitleColor(UIColor.white, for: .normal)
         leftBtn.backgroundColor = UIColor.clear
         
-        rightBtn.setTitle("Settings", for: .normal)
+        rightBtn.setTitle("Sign Out", for: .normal)
         rightBtn.setTitleColor(UIColor.white, for: .normal)
         rightBtn.backgroundColor = UIColor.clear
     }

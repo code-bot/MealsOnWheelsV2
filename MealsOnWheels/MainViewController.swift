@@ -66,8 +66,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func navBtnAction(sender:UIButton) {
         if (sender.currentTitle == "Back") {
             backPage(sender: sender)
-        } else if (sender.currentTitle == "Settings") {
-            present(SettingsController(), animated: true, completion: nil)
+        } else if (sender.currentTitle == "Sign Out") {
+            
+            present(LoginController(), animated: true, completion: nil)
+            
+            
+            
+            
+            //Implement Backend Sign Out Here
+            //Possibly add alert asking to confirm if user wants to sign out.
         }
     }
     
