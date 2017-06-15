@@ -110,6 +110,7 @@ class WaypointsController: NSObject, UITableViewDelegate, UITableViewDataSource 
         mainViewController.mainView.addSubview(mainViewController.currentView)
         mainViewController.myRoutesView.removeFromSuperview()
         mainViewController.currentRouteView.currRoute = User.currentUser!.routes[routeIndex]
+        User.currentUser?.route = User.currentUser!.routes[routeIndex]
         mainViewController.startRoute()
     }
 }
