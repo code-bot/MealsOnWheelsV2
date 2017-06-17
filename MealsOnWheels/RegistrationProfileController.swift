@@ -199,6 +199,7 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
             for (_ , subJson) in response {
                 User.currentUser!.routes.append(Path(dict: subJson))
             }
+            User.currentUser?.route = User.currentUser?.routes.first
             SwiftLoader.hide()
             self.present(MainViewController(), animated: true, completion: {
             })
