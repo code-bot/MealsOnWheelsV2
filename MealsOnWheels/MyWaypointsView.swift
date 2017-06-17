@@ -17,6 +17,7 @@ class MyWaypointsView: UIView {
     //Buttons
     var startRouteButton = UIButton()
     
+    
     func configureView() {
         self.backgroundColor = MWConstants.colors.loginDarkGradient
         

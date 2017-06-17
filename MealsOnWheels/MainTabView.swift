@@ -21,12 +21,12 @@ class MainTabView: UIView {
             if (newPage != currentPage) {
                 switch newPage {
                 case .currentRoute:
-                    currentRoute.backgroundColor = MWConstants.colors.loginDarkGradient
-                    myRoutes.backgroundColor = MWConstants.colors.loginLightGradient
+                    currentRoute.backgroundColor = MWConstants.colors.lightBackground
+                    myRoutes.backgroundColor = MWConstants.colors.darkBackground
                     break
                 case .myRoutes:
-                    myRoutes.backgroundColor = MWConstants.colors.loginDarkGradient
-                    currentRoute.backgroundColor = MWConstants.colors.loginLightGradient
+                    myRoutes.backgroundColor = MWConstants.colors.lightBackground
+                    currentRoute.backgroundColor = MWConstants.colors.loginDarkGradient
                     break
                 }
             }
@@ -36,11 +36,13 @@ class MainTabView: UIView {
     func configureButtons() {
         currentRoute.setTitle("Current Route", for: .normal)
         currentRoute.setTitleColor(UIColor.white, for: .normal)
-        currentRoute.backgroundColor = MWConstants.colors.loginDarkGradient
+        currentRoute.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 15.0)
+        currentRoute.backgroundColor = MWConstants.colors.lightBackground
         
         myRoutes.setTitle("My Routes", for: .normal)
         myRoutes.setTitleColor(UIColor.white, for: .normal)
-        myRoutes.backgroundColor = MWConstants.colors.loginLightGradient
+        myRoutes.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 15.0)
+        myRoutes.backgroundColor = MWConstants.colors.darkBackground
     }
     
     func configureView() {

@@ -43,17 +43,20 @@ class CurrentWaypointView: UIView {
             waypointTitleLbl.font = UIFont.systemFont(ofSize: 25.0)
             waypointTitleLbl.numberOfLines = 0
             let address = waypoint.title.characters.split{$0 == ","}.map(String.init)
-            waypointTitleLbl.text = address[0] + ",\n" + address[1] + "," + address[2]
+            //waypointTitleLbl.text = address[0] + ",\n" + address[1] + "," + address[2]
 //          let address = waypoint.address.characters.split{$0 == ","}.map(String.init)
-            waypointTitleLbl.text = waypoint.address[0] + ",\n" + address[1] + "," + address[2]
+            waypointTitleLbl.text = waypoint.address//[0] + ",\n" + address[1] + "," + address[2]
             waypointTitleLbl.textColor = UIColor.white
             waypointTitleLbl.textAlignment = .center
+            waypointTitleLbl.font = UIFont(name: "Avenir-Medium", size: 20.0)
             
             waypointInfoLbl.text = "Info:" + waypoint.info
             waypointInfoLbl.textColor = UIColor.white
+            waypointInfoLbl.font = UIFont(name: "Avenir-Medium", size: 15.0)
             waypointInfoLbl.textAlignment = .left
             
             waypointPhNumLbl.text = "Phone#:" + waypoint.phoneNumber
+            waypointPhNumLbl.font = UIFont(name: "Avenir-Medium", size: 15.0)
             waypointPhNumLbl.textColor = UIColor.white
             waypointPhNumLbl.textAlignment = .left
         }
@@ -62,23 +65,26 @@ class CurrentWaypointView: UIView {
     func configureButtons() {
         if let waypoint = currWaypoint {
             nextBtn.setTitle("Next Point", for: .normal)
-            nextBtn.setTitleColor(MWConstants.colors.darkBackground, for: .normal)
-            nextBtn.backgroundColor = UIColor.white
+            nextBtn.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 15.0)
+            nextBtn.setTitleColor(UIColor.white, for: .normal)
+            nextBtn.backgroundColor = UIColor.clear
             nextBtn.layer.cornerRadius = 20.0
-            nextBtn.layer.borderColor = MWConstants.colors.lightBackground.cgColor
+            nextBtn.layer.borderColor = UIColor.lightText.cgColor //MWConstants.colors.lightBackground.cgColor
             nextBtn.layer.borderWidth = 2
             
             showDirBtn.setTitle("Show Directions", for: .normal)
-            showDirBtn.setTitleColor(MWConstants.colors.darkBackground, for: .normal)
-            showDirBtn.backgroundColor = UIColor.white
+            showDirBtn.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 15.0)
+            showDirBtn.setTitleColor(UIColor.white, for: .normal)
+            showDirBtn.backgroundColor = UIColor.clear
             showDirBtn.layer.cornerRadius = 20.0
-            showDirBtn.layer.borderColor = MWConstants.colors.lightBackground.cgColor
+            showDirBtn.layer.borderColor = UIColor.lightText.cgColor//MWConstants.colors.lightBackground.cgColor
             showDirBtn.layer.borderWidth = 2
             
             phoneNumBtn.setTitle(waypoint.info, for: .normal)
             phoneNumBtn.setTitleColor(UIColor.white, for: .normal)
+            phoneNumBtn.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 15.0)
             phoneNumBtn.backgroundColor = UIColor.clear
-            phoneNumBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
+            //phoneNumBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
         }
     }
     

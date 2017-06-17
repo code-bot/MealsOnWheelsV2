@@ -19,9 +19,11 @@ class MainNavBar: UIView {
         //changes text to "Back" in MainViewController when the user clicks on specific route in MyRoutes
         leftBtn.setTitle("", for: .normal)
         leftBtn.setTitleColor(UIColor.white, for: .normal)
+        leftBtn.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 18.0)
         leftBtn.backgroundColor = UIColor.clear
         
         rightBtn.setTitle("Sign Out", for: .normal)
+        rightBtn.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 18.0)
         rightBtn.setTitleColor(UIColor.white, for: .normal)
         rightBtn.backgroundColor = UIColor.clear
     }

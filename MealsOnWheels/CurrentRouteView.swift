@@ -72,11 +72,12 @@ class CurrentRouteView: UIView {
     
     func configureButtons() {
         if let _ = currRoute {
-            startBtn.setTitle("Start Route", for: .normal)
-            startBtn.setTitleColor(MWConstants.colors.darkBackground, for: .normal)
-            startBtn.backgroundColor = UIColor.white
+            startBtn.setTitle("Start", for: .normal)
+            startBtn.setTitleColor(UIColor.white, for: .normal)
+            startBtn.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 18.0)
+            startBtn.backgroundColor = UIColor.clear
             startBtn.layer.cornerRadius = 20.0
-            startBtn.layer.borderColor = MWConstants.colors.lightBackground.cgColor
+            startBtn.layer.borderColor = UIColor.lightText.cgColor//MWConstants.colors.lightBackground.cgColor
             startBtn.layer.borderWidth = 2
         }
     }

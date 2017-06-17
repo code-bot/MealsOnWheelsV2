@@ -41,10 +41,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         myWaypointsController.myWaypointsView.tableView.delegate = myWaypointsController;
         myWaypointsController.myWaypointsView.tableView.dataSource = myWaypointsController;
         myWaypointsController.myWaypointsView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        myWaypointsController.myWaypointsView.startRouteButton.setTitle("Start Route", for:UIControlState.normal)
-        //myWaypointsController.myWaypointsView.startRouteButton.backgroundColor = UIColor.white
+        myWaypointsController.myWaypointsView.startRouteButton.setTitle("Start", for:UIControlState.normal)
+        myWaypointsController.myWaypointsView.startRouteButton.backgroundColor = UIColor.clear
         //myWaypointsController.myWaypointsView.startRouteButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+        myWaypointsController.myWaypointsView.startRouteButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 15.0)
         myWaypointsController.myWaypointsView.startRouteButton.addTarget(myWaypointsController, action: #selector(myWaypointsController.startRoute), for: UIControlEvents.touchUpInside)
+        currentWayPointView.waypointTitleLbl.font = UIFont(name: "Avenir-Medium", size: 15.0)
         
         configureButtons()
         currentView = currentRouteView
