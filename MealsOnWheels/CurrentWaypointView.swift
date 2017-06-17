@@ -15,7 +15,7 @@ class CurrentWaypointView: UIView {
     //Map View
     var streetView : GMSPanoramaView!
     
-    //Labels
+    //Labelss
     var waypointTitleLbl = UILabel()
     var waypointInfoLbl = UILabel()
     var waypointPhNumLbl = UILabel()
@@ -43,7 +43,7 @@ class CurrentWaypointView: UIView {
             waypointTitleLbl.font = UIFont.systemFont(ofSize: 25.0)
             waypointTitleLbl.numberOfLines = 0
             let address = waypoint.title.characters.split{$0 == ","}.map(String.init)
-            waypointTitleLbl.text = address[0] + ",\n" + address[1] + "," + address[2]
+            //waypointTitleLbl.text = address[0] + ",\n" + address[1] + "," + address[2]
             waypointTitleLbl.textColor = UIColor.white
             waypointTitleLbl.textAlignment = .center
             
