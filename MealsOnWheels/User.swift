@@ -18,7 +18,6 @@ class User: NSObject {
     var route: Path?
     static var currentUser: User?
     static let ref = FIRDatabase.database().reference()
-
     
 
     

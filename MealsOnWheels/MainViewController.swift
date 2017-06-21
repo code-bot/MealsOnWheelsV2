@@ -69,8 +69,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (sender.currentTitle == "Back") {
             backPage(sender: sender)
         } else if (sender.currentTitle == "Sign Out") {
-            
-            present(LoginController(), animated: true, completion: nil)
+            do {
+                try FIRAuth.auth()?.signOut()
+                present(LoginController(), animated: true, completion: nil)
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
             
             
             

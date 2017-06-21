@@ -22,7 +22,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         loginView.loginBtn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         loginView.signUpBtn.addTarget(self, action: #selector(switchToSignIn), for: .touchUpInside)
         loginView.forgotPasswordBtn.addTarget(self, action: #selector(switchToForgotPassword), for: .touchUpInside)
-//        MapTasks.getDirections("803 N. Davis Albany GA", destination: "2308 Lamar St. Albany GA", waypointStrings: ["803 N. Davis Albany GA", "1406 N. Monroe apt. 4 Albany GA", "1406 N. Monroe apt. 21 Albany GA", "528 9th Albany GA", "716 9th Apt. B Albany GA"], travelMode: nil) { (str, success, route) in
+//        MapTasks.getDirections("1225 Maryland Apt. B Albany GA", destination: "1645 Maryland Albany GA Albany GA", waypointStrings: ["1225 Maryland Apt. B Albany GA", "1208 Eager Dr. apt. A Albany GA", "1645 Maryland Albany GA"], travelMode: nil) { (str, success, route) in
 //            print(route?.toDict())
 //            let x = route?.toDict()
 //            self.ref.child("routes").child(str).setValue(route?.toDict())
@@ -91,9 +91,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
                         SwiftLoader.hide()
                         self.present(MainViewController(), animated: true, completion: {
                         })
-                        //poppulate with an emty route
                     }
-                    //                    commented out section is used to manually poppulate testing data
                     
                                       }) { (error) in
                     print(error.localizedDescription)
