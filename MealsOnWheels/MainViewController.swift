@@ -20,6 +20,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var currentView: UIView!
     var routeStarted = false
+    var onCurrentRoute = true
     let myWaypointsController = WaypointsController()
     
     func configureButtons() {
@@ -86,6 +87,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func startRoute() {
         routeStarted = true
+        mainView.navBar.leftBtn.setTitle("Back", for: .normal)
         currentView = currentWayPointView
         User.currentUser?.route?.initWaypointQueue()
         nextWaypoint()
@@ -95,9 +97,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (mainView.navBar.leftBtn.title(for: .normal) == "") {
             return
         }
+        
+        if currentView == currentWayPointView {
+            currentView.removeFromSuperview()
+            currentRouteView.configureView()
+            currentView = currentRouteView
+            mainView.addSubview(currentRouteView)
+        } else if currentView == myWaypointsController.myWaypointsView {
+            currentView = myRoutesView
+            mainView.addSubview(myRoutesView)
+            myWaypointsController.myWaypointsView.removeFromSuperview()
+        }
         mainView.navBar.leftBtn.setTitle("", for: .normal)
-        mainView.addSubview(myRoutesView)
-        myWaypointsController.myWaypointsView.removeFromSuperview()
+        
     }
     
     func switchPage(_ sender: UIButton) {
@@ -105,11 +117,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if sender == mainView.tabView.currentRoute {
             mainView.tabView.currentPage = Page.currentRoute
             mainView.addSubview(currentView)
+            currentView = currentRouteView
             myRoutesView.removeFromSuperview()
         } else if sender == mainView.tabView.myRoutes {
             mainView.tabView.currentPage = Page.myRoutes
             mainView.addSubview(myRoutesView)
             currentView.removeFromSuperview()
+            currentView = myRoutesView
         }
     }
     
