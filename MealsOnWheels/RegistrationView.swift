@@ -19,6 +19,8 @@ class RegistrationView: UIView {
     //Text fields
     var emailTF = UITextField()
     var emailUnderlineLabel = UILabel()
+    var accessCodeTF = UITextField()
+    var accessCodeUnderlineLabel = UILabel()
     var passTF = UITextField()
     var passUnderlineLabel = UILabel()
     var passConfirmTF = UITextField()
@@ -43,18 +45,24 @@ class RegistrationView: UIView {
         //emailTF.becomeFirstResponder()
     
         emailTF.attributedPlaceholder = NSAttributedString(string: "Enter Email", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
-        
+        accessCodeTF.attributedPlaceholder = NSAttributedString(string: "Enter Access Code", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
         passTF.attributedPlaceholder = NSAttributedString(string: "Enter Password", attributes: [NSForegroundColorAttributeName: UIColor.lightText])
 
         passConfirmTF.attributedPlaceholder = NSAttributedString(string: "Re-enter Password", attributes: [NSForegroundColorAttributeName:UIColor.lightText])
         
         emailTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
+        accessCodeTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         passConfirmTF.font = UIFont(name: "Avenir-Medium", size: 15.0)
         
         emailTF.keyboardType = UIKeyboardType.emailAddress
         emailTF.returnKeyType = UIReturnKeyType.continue
         emailTF.textColor = UIColor.white
+        
+        accessCodeTF.keyboardType = UIKeyboardType.alphabet
+        accessCodeTF.returnKeyType = UIReturnKeyType.continue
+        accessCodeTF.textColor = UIColor.white
+        
         
         passTF.returnKeyType = UIReturnKeyType.continue
         passTF.textColor = UIColor.white
@@ -65,6 +73,7 @@ class RegistrationView: UIView {
         passConfirmTF.isSecureTextEntry = true
         
         emailTF.layer.cornerRadius = 8.0
+        accessCodeTF.layer.cornerRadius = 8.0
         passTF.layer.cornerRadius = 8.0
         passConfirmTF.layer.cornerRadius = 8.0
         
@@ -72,10 +81,12 @@ class RegistrationView: UIView {
     
     func configureLabels(){
         emailUnderlineLabel.textColor = UIColor.white
+        accessCodeUnderlineLabel.textColor = UIColor.white
         passUnderlineLabel.textColor = UIColor.white
         confirmUnderlineLabel.textColor = UIColor.white
         
         emailUnderlineLabel.text = emailUnderlineLabel.setUnderline()
+        accessCodeUnderlineLabel.text = accessCodeUnderlineLabel.setUnderline()
         passUnderlineLabel.text = passUnderlineLabel.setUnderline()
         confirmUnderlineLabel.text = confirmUnderlineLabel.setUnderline()
         
@@ -119,6 +130,7 @@ class RegistrationView: UIView {
         configureLabels()
         configureTextFields()
         textFieldDidBeginEditing(emailTF)
+        textFieldDidBeginEditing(accessCodeTF)
         textFieldDidBeginEditing(passTF)
         textFieldDidBeginEditing(passConfirmTF)
         //Auto Layout
@@ -127,6 +139,8 @@ class RegistrationView: UIView {
             //"back"          :   backButton,
             "emailTF"       :   emailTF,
             "emailLine"     :   emailUnderlineLabel,
+            "accessCodeTF"  :   accessCodeTF,
+            "accessCodeLine": accessCodeUnderlineLabel,
             "passTF"        :   passTF,
             "passLine"      :   passUnderlineLabel,
             "confirmTF"     :   passConfirmTF,
@@ -136,7 +150,7 @@ class RegistrationView: UIView {
         
         self.prepareViewsForAutoLayout(viewsDict as! [String : UIView])
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-30-[logo]-60-[emailTF]-1-[emailLine]-24-[passTF]-1-[passLine]-24-[confirmTF]-1-[confirmLine]-49-[nextBut]", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("V:|-30-[logo]-60-[emailTF]-1-[emailLine]-24-[accessCodeTF]-1-[accessCodeLine]-24-[passTF]-1-[passLine]-24-[confirmTF]-1-[confirmLine]-49-[nextBut]", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[logo]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
@@ -145,6 +159,9 @@ class RegistrationView: UIView {
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[emailTF]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[emailLine]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[accessCodeTF]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[accessCodeLine]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithSimpleFormat("H:|-\(String(describing: MWConstants.loginFieldsOffset))-[passTF]-\(String(describing: MWConstants.loginFieldsOffset))-|", views: viewsDict as [String : AnyObject]))
         
