@@ -187,6 +187,7 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         SwiftLoader.show(title: "Saving Data", animated: true)
         let name = registrationProfileView.firstNameTF.text! + " " + registrationProfileView.lastNameTF.text!
         User.currentUser?.name = name
+        self.ref.child("users").child(User.currentUser!.uid!).child("access_code").setValue(User.currentUser?.access_code)
         self.ref.child("users").child(User.currentUser!.uid!).child("name").setValue(name)
         self.ref.child("users").child(User.currentUser!.uid!).child("phone").setValue(registrationProfileView.phoneNumberTF.text)
         if ((image) != nil) {
@@ -197,7 +198,9 @@ class RegistrationProfileController : UIViewController, UIImagePickerControllerD
         self.ref.child("routes").observeSingleEvent(of: .value, with: {(snapshot) in
             let response = JSON(snapshot.value as! NSDictionary)
             for (_ , subJson) in response {
-                User.currentUser!.routes.append(Path(dict: subJson))
+                if subJson["access_code"].stringValue == User.currentUser?.access_code {
+                    User.currentUser!.routes.append(Path(dict: subJson))
+                }
             }
             User.currentUser?.route = User.currentUser?.routes.first
             SwiftLoader.hide()

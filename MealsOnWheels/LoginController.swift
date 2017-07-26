@@ -84,9 +84,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
         FIRAuth.auth()?.signIn(withEmail: loginView.emailTF.text!, password: loginView.passwordTF.text!) { (user, error) in
             if error == nil {
                 User.setCurrentUser()
-                self.ref.child("users").child(user!.uid).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                     if snapshot.exists() {
-                        User.currentUser?.name = snapshot.value as! String!
+                        let json_snapshot = JSON(snapshot.value as! NSDictionary)
+                        User.currentUser?.name = json_snapshot["name"].stringValue
+                        User.currentUser?.access_code = json_snapshot["access_code"].stringValue
                     } else {
                         SwiftLoader.hide()
                         self.present(MainViewController(), animated: true, completion: {
@@ -100,7 +102,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 self.ref.child("routes").observeSingleEvent(of: .value, with: {(snapshot) in
                     let response = JSON(snapshot.value as! NSDictionary)
                     for (_ , subJson) in response {
-                        User.currentUser!.routes.append(Path(dict: subJson))
+                        if subJson["access_code"].stringValue == User.currentUser?.access_code {
+                            User.currentUser!.routes.append(Path(dict: subJson))
+                        }
                     }
                     User.currentUser?.route = User.currentUser?.routes.first
                     SwiftLoader.hide()

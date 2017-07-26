@@ -68,18 +68,34 @@ class RegistrationController : UIViewController, UITextFieldDelegate {
             signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
             self.present(signUpAlert, animated: true, completion: nil)
         } else {
-            FIRAuth.auth()?.createUser(withEmail: registrationView.emailTF.text!, password: registrationView.passTF.text!) { (user, error) in
-                User.setCurrentUser()
-                SwiftLoader.hide()
-                if error == nil {
-                    _ = UIButton()
-                    self.present(RegistrationProfileController(), animated: true, completion: nil)
-                
+            ref.child("access_codes").observeSingleEvent(of: .value, with: { (snapshot) in
+                if (snapshot.value as! NSArray).contains(self.registrationView.accessCodeTF.text!) {
+                    FIRAuth.auth()?.createUser(withEmail: self.registrationView.emailTF.text!, password: self.registrationView.passTF.text!) { (user, error) in
+                        User.setCurrentUser()
+                        User.currentUser?.access_code = self.registrationView.accessCodeTF.text
+                        SwiftLoader.hide()
+                        if error == nil {
+                            _ = UIButton()
+                            self.present(RegistrationProfileController(), animated: true, completion: nil)
+                            
+                        } else {
+                            let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error?.localizedDescription, preferredStyle:  UIAlertControllerStyle.alert)
+                            signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+                            self.present(signUpAlert, animated: true, completion: nil)
+                        }
+                    }
                 } else {
-                    let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error?.localizedDescription, preferredStyle:  UIAlertControllerStyle.alert)
+                    SwiftLoader.hide()
+                    let signUpAlert = UIAlertController(title: "Failed Sign Up", message: "Invalid Acces Code", preferredStyle:  UIAlertControllerStyle.alert)
                     signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
                     self.present(signUpAlert, animated: true, completion: nil)
                 }
+            }) { (error) in
+                SwiftLoader.hide()
+                let signUpAlert = UIAlertController(title: "Failed Sign Up", message: error.localizedDescription, preferredStyle:  UIAlertControllerStyle.alert)
+                signUpAlert.addAction(UIAlertAction(title: "OK", style:UIAlertActionStyle.cancel,handler: nil))
+                self.present(signUpAlert, animated: true, completion: nil)
+
             }
         }
         

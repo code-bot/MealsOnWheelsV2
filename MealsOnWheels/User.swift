@@ -16,23 +16,25 @@ class User: NSObject {
     var name: String!
     var routes: Array<Path> = Array<Path>()
     var route: Path?
+    var access_code: String!
     static var currentUser: User?
     static let ref = FIRDatabase.database().reference()
     
 
     
-    init(email: String, uid: String, name: String) {
+    init(email: String, uid: String, name: String, access_code: String) {
         super.init()
         self.email = email
         self.uid = uid
         self.name = name
         self.routes = Array<Path>()
+        self.access_code = access_code
     }
     
     
     static func setCurrentUser() {
         let user = FIRAuth.auth()?.currentUser
-        User.currentUser = User(email: (user?.email!)!, uid: (user?.uid)!, name: "");
+        User.currentUser = User(email: (user?.email!)!, uid: (user?.uid)!, name: "", access_code: "");
         getUsers()
     }
     

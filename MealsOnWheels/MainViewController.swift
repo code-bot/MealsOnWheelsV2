@@ -116,9 +116,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         mainView.navBar.leftBtn.setTitle("", for: .normal)
         if sender == mainView.tabView.currentRoute {
             mainView.tabView.currentPage = Page.currentRoute
-            mainView.addSubview(currentView)
-            currentView = currentRouteView
+            mainView.addSubview(currentRouteView)
             myRoutesView.removeFromSuperview()
+            currentView = currentRouteView
         } else if sender == mainView.tabView.myRoutes {
             mainView.tabView.currentPage = Page.myRoutes
             mainView.addSubview(myRoutesView)
